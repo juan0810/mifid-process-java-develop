@@ -1,0 +1,571 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0026-fix-respuestas-conveniencia
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: "Respuestas de conveniencia con valores correctos según MiFID II"
+      changes:
+        # Borrar respuestas antiguas de preguntas 1-9
+        - delete:
+            tableName: MKTMRESPUESTAS
+            where: REPREGUNTAID IN (1,2,3,4,5,6,7,8,9,101,102,103,104,105,106,107,108,109,110,111)
+        # ============================================
+        # PREGUNTA 1: Nivel de estudios (4 opciones: A, B, C, D)
+        # ============================================
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column: { name: REPREGUNTAID, valueNumeric: 1 }
+              - column: { name: RETEXTO, value: "Estudios universitarios (o superiores) con un elevado componente técnico, matemático o relacionados con economía y finanzas" }
+              - column: { name: REVALOR, value: "A" }
+              - column: { name: RETEXTOLIBRE, valueBoolean: false }
+              - column: { name: RECORRECTA, valueBoolean: false }
+              - column: { name: REUSUALTA, value: "SISTEMA" }
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column: { name: REPREGUNTAID, valueNumeric: 1 }
+              - column: { name: RETEXTO, value: "Estudios universitarios (o superiores) distintos de los anteriores" }
+              - column: { name: REVALOR, value: "B" }
+              - column: { name: RETEXTOLIBRE, valueBoolean: false }
+              - column: { name: RECORRECTA, valueBoolean: false }
+              - column: { name: REUSUALTA, value: "SISTEMA" }
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column: { name: REPREGUNTAID, valueNumeric: 1 }
+              - column: { name: RETEXTO, value: "Formación profesional y/o bachillerato" }
+              - column: { name: REVALOR, value: "C" }
+              - column: { name: RETEXTOLIBRE, valueBoolean: false }
+              - column: { name: RECORRECTA, valueBoolean: false }
+              - column: { name: REUSUALTA, value: "SISTEMA" }
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column: { name: REPREGUNTAID, valueNumeric: 1 }
+              - column: { name: RETEXTO, value: "Graduado escolar o sin estudios" }
+              - column: { name: REVALOR, value: "D" }
+              - column: { name: RETEXTOLIBRE, valueBoolean: false }
+              - column: { name: RECORRECTA, valueBoolean: false }
+              - column: { name: REUSUALTA, value: "SISTEMA" }
+
+        # ============================================
+        # PREGUNTA 2: Experiencia profesional (4 opciones: A, B, C, D)
+        # ============================================
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column: { name: REPREGUNTAID, valueNumeric: 2 }
+              - column: { name: RETEXTO, value: "He trabajado (o trabajo) durante al menos un año en un cargo profesional en el sector financiero que requiera conocimientos sobre los servicios de inversión, incluyendo toma de decisiones" }
+              - column: { name: REVALOR, value: "A" }
+              - column: { name: RETEXTOLIBRE, valueBoolean: false }
+              - column: { name: RECORRECTA, valueBoolean: false }
+              - column: { name: REUSUALTA, value: "SISTEMA" }
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column: { name: REPREGUNTAID, valueNumeric: 2 }
+              - column: { name: RETEXTO, value: "He trabajado (o trabajo) en un puesto directamente relacionado con los mercados financieros durante al menos un año (incluyendo toma de decisiones de inversión)" }
+              - column: { name: REVALOR, value: "B" }
+              - column: { name: RETEXTOLIBRE, valueBoolean: false }
+              - column: { name: RECORRECTA, valueBoolean: false }
+              - column: { name: REUSUALTA, value: "SISTEMA" }
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column: { name: REPREGUNTAID, valueNumeric: 2 }
+              - column: { name: RETEXTO, value: "He trabajado en un puesto relacionado indirectamente con los mercados financieros, durante al menos un año (el cual no implica la toma de decisiones de inversión)" }
+              - column: { name: REVALOR, value: "C" }
+              - column: { name: RETEXTOLIBRE, valueBoolean: false }
+              - column: { name: RECORRECTA, valueBoolean: false }
+              - column: { name: REUSUALTA, value: "SISTEMA" }
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column: { name: REPREGUNTAID, valueNumeric: 2 }
+              - column: { name: RETEXTO, value: "Ninguna de las anteriores" }
+              - column: { name: REVALOR, value: "D" }
+              - column: { name: RETEXTOLIBRE, valueBoolean: false }
+              - column: { name: RECORRECTA, valueBoolean: false }
+              - column: { name: REUSUALTA, value: "SISTEMA" }
+
+        # ============================================
+        # PREGUNTA 3: Conocimientos generales (D es CORRECTA)
+        # ============================================
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column: { name: REPREGUNTAID, valueNumeric: 3 }
+              - column: { name: RETEXTO, value: "No sé la respuesta a la pregunta" }
+              - column: { name: REVALOR, value: "A" }
+              - column: { name: RETEXTOLIBRE, valueBoolean: false }
+              - column: { name: RECORRECTA, valueBoolean: false }
+              - column: { name: REUSUALTA, value: "SISTEMA" }
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column: { name: REPREGUNTAID, valueNumeric: 3 }
+              - column: { name: RETEXTO, value: "Es el listado de las 35 acciones más contratadas en bolsa" }
+              - column: { name: REVALOR, value: "B" }
+              - column: { name: RETEXTOLIBRE, valueBoolean: false }
+              - column: { name: RECORRECTA, valueBoolean: false }
+              - column: { name: REUSUALTA, value: "SISTEMA" }
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column: { name: REPREGUNTAID, valueNumeric: 3 }
+              - column: { name: RETEXTO, value: "Es el título académico que tiene la persona encargada de negociar las acciones en la bolsa" }
+              - column: { name: REVALOR, value: "C" }
+              - column: { name: RETEXTOLIBRE, valueBoolean: false }
+              - column: { name: RECORRECTA, valueBoolean: false }
+              - column: { name: REUSUALTA, value: "SISTEMA" }
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column: { name: REPREGUNTAID, valueNumeric: 3 }
+              - column: { name: RETEXTO, value: "Es un indicador de la bolsa de valores que sirve como referencia para conocer el movimiento mayoritario de las empresas de un mercado" }
+              - column: { name: REVALOR, value: "D" }
+              - column: { name: RETEXTOLIBRE, valueBoolean: false }
+              - column: { name: RECORRECTA, valueBoolean: true }
+              - column: { name: REUSUALTA, value: "SISTEMA" }
+
+        # ============================================
+        # PREGUNTA 4: Familia E (C es CORRECTA)
+        # ============================================
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column: { name: REPREGUNTAID, valueNumeric: 4 }
+              - column: { name: RETEXTO, value: "No sé la respuesta a la pregunta" }
+              - column: { name: REVALOR, value: "A" }
+              - column: { name: RETEXTOLIBRE, valueBoolean: false }
+              - column: { name: RECORRECTA, valueBoolean: false }
+              - column: { name: REUSUALTA, value: "SISTEMA" }
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column: { name: REPREGUNTAID, valueNumeric: 4 }
+              - column: { name: RETEXTO, value: "El tenedor del bono (sea inversor particular o institucional)" }
+              - column: { name: REVALOR, value: "B" }
+              - column: { name: RETEXTOLIBRE, valueBoolean: false }
+              - column: { name: RECORRECTA, valueBoolean: false }
+              - column: { name: REUSUALTA, value: "SISTEMA" }
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column: { name: REPREGUNTAID, valueNumeric: 4 }
+              - column: { name: RETEXTO, value: "La solvencia del emisor del bono" }
+              - column: { name: REVALOR, value: "C" }
+              - column: { name: RETEXTOLIBRE, valueBoolean: false }
+              - column: { name: RECORRECTA, valueBoolean: true }
+              - column: { name: REUSUALTA, value: "SISTEMA" }
+
+        # ============================================
+        # PREGUNTA 5: Familia F (B es CORRECTA)
+        # ============================================
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column: { name: REPREGUNTAID, valueNumeric: 5 }
+              - column: { name: RETEXTO, value: "No sé la respuesta a la pregunta" }
+              - column: { name: REVALOR, value: "A" }
+              - column: { name: RETEXTOLIBRE, valueBoolean: false }
+              - column: { name: RECORRECTA, valueBoolean: false }
+              - column: { name: REUSUALTA, value: "SISTEMA" }
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column: { name: REPREGUNTAID, valueNumeric: 5 }
+              - column: { name: RETEXTO, value: "Al invertir en notas o bonos estructurados" }
+              - column: { name: REVALOR, value: "B" }
+              - column: { name: RETEXTOLIBRE, valueBoolean: false }
+              - column: { name: RECORRECTA, valueBoolean: true }
+              - column: { name: REUSUALTA, value: "SISTEMA" }
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column: { name: REPREGUNTAID, valueNumeric: 5 }
+              - column: { name: RETEXTO, value: "Al invertir en ETFs (fondos cotizados)" }
+              - column: { name: REVALOR, value: "C" }
+              - column: { name: RETEXTOLIBRE, valueBoolean: false }
+              - column: { name: RECORRECTA, valueBoolean: false }
+              - column: { name: REUSUALTA, value: "SISTEMA" }
+
+        # ============================================
+        # PREGUNTA 6: Familia G (B es CORRECTA)
+        # ============================================
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column: { name: REPREGUNTAID, valueNumeric: 6 }
+              - column: { name: RETEXTO, value: "No sé la respuesta a la pregunta" }
+              - column: { name: REVALOR, value: "A" }
+              - column: { name: RETEXTOLIBRE, valueBoolean: false }
+              - column: { name: RECORRECTA, valueBoolean: false }
+              - column: { name: REUSUALTA, value: "SISTEMA" }
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column: { name: REPREGUNTAID, valueNumeric: 6 }
+              - column: { name: RETEXTO, value: "El riesgo de pérdida de capital es elevado al poder perder la totalidad del capital invertido" }
+              - column: { name: REVALOR, value: "B" }
+              - column: { name: RETEXTOLIBRE, valueBoolean: false }
+              - column: { name: RECORRECTA, valueBoolean: true }
+              - column: { name: REUSUALTA, value: "SISTEMA" }
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column: { name: REPREGUNTAID, valueNumeric: 6 }
+              - column: { name: RETEXTO, value: "Cotizan en bolsa, por tanto, su riesgo de liquidez es bajo y siempre es fácil deshacer la inversión" }
+              - column: { name: REVALOR, value: "C" }
+              - column: { name: RETEXTOLIBRE, valueBoolean: false }
+              - column: { name: RECORRECTA, valueBoolean: false }
+              - column: { name: REUSUALTA, value: "SISTEMA" }
+
+        # ============================================
+        # PREGUNTA 7: Familia H (D es CORRECTA)
+        # ============================================
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column: { name: REPREGUNTAID, valueNumeric: 7 }
+              - column: { name: RETEXTO, value: "No sé la respuesta a la pregunta" }
+              - column: { name: REVALOR, value: "A" }
+              - column: { name: RETEXTOLIBRE, valueBoolean: false }
+              - column: { name: RECORRECTA, valueBoolean: false }
+              - column: { name: REUSUALTA, value: "SISTEMA" }
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column: { name: REPREGUNTAID, valueNumeric: 7 }
+              - column: { name: RETEXTO, value: "Los inmuebles tienen un componente de iliquidez muy elevado que se transmite al instrumento" }
+              - column: { name: REVALOR, value: "B" }
+              - column: { name: RETEXTOLIBRE, valueBoolean: false }
+              - column: { name: RECORRECTA, valueBoolean: false }
+              - column: { name: REUSUALTA, value: "SISTEMA" }
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column: { name: REPREGUNTAID, valueNumeric: 7 }
+              - column: { name: RETEXTO, value: "Las valoraciones de los inmuebles tienen una estrecha relación con los tipos de interés, el tipo de inmueble, la oferta y la demanda" }
+              - column: { name: REVALOR, value: "C" }
+              - column: { name: RETEXTOLIBRE, valueBoolean: false }
+              - column: { name: RECORRECTA, valueBoolean: false }
+              - column: { name: REUSUALTA, value: "SISTEMA" }
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column: { name: REPREGUNTAID, valueNumeric: 7 }
+              - column: { name: RETEXTO, value: "Ambas respuestas (B y C) son correctas" }
+              - column: { name: REVALOR, value: "D" }
+              - column: { name: RETEXTOLIBRE, valueBoolean: false }
+              - column: { name: RECORRECTA, valueBoolean: true }
+              - column: { name: REUSUALTA, value: "SISTEMA" }
+
+        # ============================================
+        # PREGUNTA 8: Familia I (B es CORRECTA)
+        # ============================================
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column: { name: REPREGUNTAID, valueNumeric: 8 }
+              - column: { name: RETEXTO, value: "No sé la respuesta a la pregunta" }
+              - column: { name: REVALOR, value: "A" }
+              - column: { name: RETEXTOLIBRE, valueBoolean: false }
+              - column: { name: RECORRECTA, valueBoolean: false }
+              - column: { name: REUSUALTA, value: "SISTEMA" }
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column: { name: REPREGUNTAID, valueNumeric: 8 }
+              - column: { name: RETEXTO, value: "La inversión del fondo puede realizarse tanto en otros fondos de capital riesgo como directamente en compañías que desarrollan una actividad real" }
+              - column: { name: REVALOR, value: "B" }
+              - column: { name: RETEXTOLIBRE, valueBoolean: false }
+              - column: { name: RECORRECTA, valueBoolean: true }
+              - column: { name: REUSUALTA, value: "SISTEMA" }
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column: { name: REPREGUNTAID, valueNumeric: 8 }
+              - column: { name: RETEXTO, value: "El importe mínimo de mi inversión siempre estará garantizado" }
+              - column: { name: REVALOR, value: "C" }
+              - column: { name: RETEXTOLIBRE, valueBoolean: false }
+              - column: { name: RECORRECTA, valueBoolean: false }
+              - column: { name: REUSUALTA, value: "SISTEMA" }
+
+        # ============================================
+        # PREGUNTA 9: Familias J, K (C es CORRECTA)
+        # ============================================
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column: { name: REPREGUNTAID, valueNumeric: 9 }
+              - column: { name: RETEXTO, value: "No sé la respuesta a la pregunta" }
+              - column: { name: REVALOR, value: "A" }
+              - column: { name: RETEXTOLIBRE, valueBoolean: false }
+              - column: { name: RECORRECTA, valueBoolean: false }
+              - column: { name: REUSUALTA, value: "SISTEMA" }
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column: { name: REPREGUNTAID, valueNumeric: 9 }
+              - column: { name: RETEXTO, value: "Este producto no es complejo y no conlleva ningún riesgo de pérdida de capital" }
+              - column: { name: REVALOR, value: "B" }
+              - column: { name: RETEXTOLIBRE, valueBoolean: false }
+              - column: { name: RECORRECTA, valueBoolean: false }
+              - column: { name: REUSUALTA, value: "SISTEMA" }
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column: { name: REPREGUNTAID, valueNumeric: 9 }
+              - column: { name: RETEXTO, value: "Este tipo de producto puede llegar a generar pérdidas superiores a la inversión realizada" }
+              - column: { name: REVALOR, value: "C" }
+              - column: { name: RETEXTOLIBRE, valueBoolean: false }
+              - column: { name: RECORRECTA, valueBoolean: true }
+              - column: { name: REUSUALTA, value: "SISTEMA" }
+
+        # ============================================
+        # PREGUNTA 10 FAMILIAS: Q101-Q111 (2 opciones cada una)
+        # ============================================
+
+        # Familia A (Q101)
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column: { name: REPREGUNTAID, valueNumeric: 101 }
+              - column: { name: RETEXTO, value: "Dos o más" }
+              - column: { name: REVALOR, value: "A" }
+              - column: { name: RETEXTOLIBRE, valueBoolean: false }
+              - column: { name: RECORRECTA, valueBoolean: false }
+              - column: { name: REUSUALTA, value: "SISTEMA" }
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column: { name: REPREGUNTAID, valueNumeric: 101 }
+              - column: { name: RETEXTO, value: "Una o ninguna" }
+              - column: { name: REVALOR, value: "B" }
+              - column: { name: RETEXTOLIBRE, valueBoolean: false }
+              - column: { name: RECORRECTA, valueBoolean: false }
+              - column: { name: REUSUALTA, value: "SISTEMA" }
+
+        # Familia B (Q102)
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column: { name: REPREGUNTAID, valueNumeric: 102 }
+              - column: { name: RETEXTO, value: "Dos o más" }
+              - column: { name: REVALOR, value: "A" }
+              - column: { name: RETEXTOLIBRE, valueBoolean: false }
+              - column: { name: RECORRECTA, valueBoolean: false }
+              - column: { name: REUSUALTA, value: "SISTEMA" }
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column: { name: REPREGUNTAID, valueNumeric: 102 }
+              - column: { name: RETEXTO, value: "Una o ninguna" }
+              - column: { name: REVALOR, value: "B" }
+              - column: { name: RETEXTOLIBRE, valueBoolean: false }
+              - column: { name: RECORRECTA, valueBoolean: false }
+              - column: { name: REUSUALTA, value: "SISTEMA" }
+
+        # Familia C (Q103)
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column: { name: REPREGUNTAID, valueNumeric: 103 }
+              - column: { name: RETEXTO, value: "Dos o más" }
+              - column: { name: REVALOR, value: "A" }
+              - column: { name: RETEXTOLIBRE, valueBoolean: false }
+              - column: { name: RECORRECTA, valueBoolean: false }
+              - column: { name: REUSUALTA, value: "SISTEMA" }
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column: { name: REPREGUNTAID, valueNumeric: 103 }
+              - column: { name: RETEXTO, value: "Una o ninguna" }
+              - column: { name: REVALOR, value: "B" }
+              - column: { name: RETEXTOLIBRE, valueBoolean: false }
+              - column: { name: RECORRECTA, valueBoolean: false }
+              - column: { name: REUSUALTA, value: "SISTEMA" }
+
+        # Familia D (Q104)
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column: { name: REPREGUNTAID, valueNumeric: 104 }
+              - column: { name: RETEXTO, value: "Dos o más" }
+              - column: { name: REVALOR, value: "A" }
+              - column: { name: RETEXTOLIBRE, valueBoolean: false }
+              - column: { name: RECORRECTA, valueBoolean: false }
+              - column: { name: REUSUALTA, value: "SISTEMA" }
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column: { name: REPREGUNTAID, valueNumeric: 104 }
+              - column: { name: RETEXTO, value: "Una o ninguna" }
+              - column: { name: REVALOR, value: "B" }
+              - column: { name: RETEXTOLIBRE, valueBoolean: false }
+              - column: { name: RECORRECTA, valueBoolean: false }
+              - column: { name: REUSUALTA, value: "SISTEMA" }
+
+        # Familia E (Q105)
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column: { name: REPREGUNTAID, valueNumeric: 105 }
+              - column: { name: RETEXTO, value: "Dos o más" }
+              - column: { name: REVALOR, value: "A" }
+              - column: { name: RETEXTOLIBRE, valueBoolean: false }
+              - column: { name: RECORRECTA, valueBoolean: false }
+              - column: { name: REUSUALTA, value: "SISTEMA" }
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column: { name: REPREGUNTAID, valueNumeric: 105 }
+              - column: { name: RETEXTO, value: "Una o ninguna" }
+              - column: { name: REVALOR, value: "B" }
+              - column: { name: RETEXTOLIBRE, valueBoolean: false }
+              - column: { name: RECORRECTA, valueBoolean: false }
+              - column: { name: REUSUALTA, value: "SISTEMA" }
+
+        # Familia F (Q106)
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column: { name: REPREGUNTAID, valueNumeric: 106 }
+              - column: { name: RETEXTO, value: "Dos o más" }
+              - column: { name: REVALOR, value: "A" }
+              - column: { name: RETEXTOLIBRE, valueBoolean: false }
+              - column: { name: RECORRECTA, valueBoolean: false }
+              - column: { name: REUSUALTA, value: "SISTEMA" }
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column: { name: REPREGUNTAID, valueNumeric: 106 }
+              - column: { name: RETEXTO, value: "Una o ninguna" }
+              - column: { name: REVALOR, value: "B" }
+              - column: { name: RETEXTOLIBRE, valueBoolean: false }
+              - column: { name: RECORRECTA, valueBoolean: false }
+              - column: { name: REUSUALTA, value: "SISTEMA" }
+
+        # Familia G (Q107)
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column: { name: REPREGUNTAID, valueNumeric: 107 }
+              - column: { name: RETEXTO, value: "Dos o más" }
+              - column: { name: REVALOR, value: "A" }
+              - column: { name: RETEXTOLIBRE, valueBoolean: false }
+              - column: { name: RECORRECTA, valueBoolean: false }
+              - column: { name: REUSUALTA, value: "SISTEMA" }
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column: { name: REPREGUNTAID, valueNumeric: 107 }
+              - column: { name: RETEXTO, value: "Una o ninguna" }
+              - column: { name: REVALOR, value: "B" }
+              - column: { name: RETEXTOLIBRE, valueBoolean: false }
+              - column: { name: RECORRECTA, valueBoolean: false }
+              - column: { name: REUSUALTA, value: "SISTEMA" }
+
+        # Familia H (Q108)
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column: { name: REPREGUNTAID, valueNumeric: 108 }
+              - column: { name: RETEXTO, value: "Dos o más" }
+              - column: { name: REVALOR, value: "A" }
+              - column: { name: RETEXTOLIBRE, valueBoolean: false }
+              - column: { name: RECORRECTA, valueBoolean: false }
+              - column: { name: REUSUALTA, value: "SISTEMA" }
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column: { name: REPREGUNTAID, valueNumeric: 108 }
+              - column: { name: RETEXTO, value: "Una o ninguna" }
+              - column: { name: REVALOR, value: "B" }
+              - column: { name: RETEXTOLIBRE, valueBoolean: false }
+              - column: { name: RECORRECTA, valueBoolean: false }
+              - column: { name: REUSUALTA, value: "SISTEMA" }
+
+        # Familia I (Q109)
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column: { name: REPREGUNTAID, valueNumeric: 109 }
+              - column: { name: RETEXTO, value: "Dos o más" }
+              - column: { name: REVALOR, value: "A" }
+              - column: { name: RETEXTOLIBRE, valueBoolean: false }
+              - column: { name: RECORRECTA, valueBoolean: false }
+              - column: { name: REUSUALTA, value: "SISTEMA" }
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column: { name: REPREGUNTAID, valueNumeric: 109 }
+              - column: { name: RETEXTO, value: "Una o ninguna" }
+              - column: { name: REVALOR, value: "B" }
+              - column: { name: RETEXTOLIBRE, valueBoolean: false }
+              - column: { name: RECORRECTA, valueBoolean: false }
+              - column: { name: REUSUALTA, value: "SISTEMA" }
+
+        # Familia J (Q110)
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column: { name: REPREGUNTAID, valueNumeric: 110 }
+              - column: { name: RETEXTO, value: "Dos o más" }
+              - column: { name: REVALOR, value: "A" }
+              - column: { name: RETEXTOLIBRE, valueBoolean: false }
+              - column: { name: RECORRECTA, valueBoolean: false }
+              - column: { name: REUSUALTA, value: "SISTEMA" }
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column: { name: REPREGUNTAID, valueNumeric: 110 }
+              - column: { name: RETEXTO, value: "Una o ninguna" }
+              - column: { name: REVALOR, value: "B" }
+              - column: { name: RETEXTOLIBRE, valueBoolean: false }
+              - column: { name: RECORRECTA, valueBoolean: false }
+              - column: { name: REUSUALTA, value: "SISTEMA" }
+
+        # Familia K (Q111)
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column: { name: REPREGUNTAID, valueNumeric: 111 }
+              - column: { name: RETEXTO, value: "Dos o más" }
+              - column: { name: REVALOR, value: "A" }
+              - column: { name: RETEXTOLIBRE, valueBoolean: false }
+              - column: { name: RECORRECTA, valueBoolean: false }
+              - column: { name: REUSUALTA, value: "SISTEMA" }
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column: { name: REPREGUNTAID, valueNumeric: 111 }
+              - column: { name: RETEXTO, value: "Una o ninguna" }
+              - column: { name: REVALOR, value: "B" }
+              - column: { name: RETEXTOLIBRE, valueBoolean: false }
+              - column: { name: RECORRECTA, valueBoolean: false }
+              - column: { name: REUSUALTA, value: "SISTEMA" }

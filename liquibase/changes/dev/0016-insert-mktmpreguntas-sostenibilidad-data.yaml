@@ -1,0 +1,223 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0016-preguntas-sostenibilidad
+      author: Sistema MiFID <mifid@singularbank.com>
+      context: dev
+      changes:
+        # Cabecera "Señálenos sus preferencias de sostenibilidad:"
+        - insert:
+            tableName: MKTMPREGUNTAS
+            columns:
+              - column:
+                  name: PRID
+                  value: 22
+              - column:
+                  name: PRTIPOID
+                  value: 1  # CABECERA
+              - column:
+                  name: PRTEXTO
+                  value: "Señálenos sus preferencias de sostenibilidad:"
+              - column:
+                  name: PRORDEN
+                  value: 1
+              - column:
+                  name: PRTIPOTEST
+                  value: "S"
+              - column:
+                  name: PRRESPUESTACORRECTA
+                  value: false
+              - column:
+                  name: PRFECINICIO
+                  valueDate: "2025-01-01"
+              - column:
+                  name: PRUSUALTA
+                  value: "SISTEMA"
+
+        # Pregunta 1 - Preferencia general de sostenibilidad
+        - insert:
+            tableName: MKTMPREGUNTAS
+            columns:
+              - column:
+                  name: PRID
+                  value: 17
+              - column:
+                  name: PRTIPOID
+                  value: 2  # RESPUESTA_UNICA
+              - column:
+                  name: PRTEXTO
+                  value: "¿Quiere que se tenga en cuenta la sostenibilidad a la hora de plantearle alternativas de inversión?"
+              - column:
+                  name: PRORDEN
+                  value: 2
+              - column:
+                  name: PRTIPOTEST
+                  value: "S"
+              - column:
+                  name: PRRESPUESTACORRECTA
+                  value: false
+              - column:
+                  name: PRFECINICIO
+                  valueDate: "2025-01-01"
+              - column:
+                  name: PRUSUALTA
+                  value: "SISTEMA"
+
+        # Cabecera condicional para preguntas 2-5
+        - insert:
+            tableName: MKTMPREGUNTAS
+            columns:
+              - column:
+                  name: PRID
+                  value: 23
+              - column:
+                  name: PRDEPENDEDE
+                  value: 17  # Depende de la pregunta 1
+              - column:
+                  name: PRTIPOID
+                  value: 1  # CABECERA
+              - column:
+                  name: PRTEXTO
+                  value: "Seleccione sus Preferencias de sostenibilidad (sólo en caso de haber respondido \"B)\" a la pregunta anterior, en caso contrario el cuestionario ha concluido).\n\nLa entidad le recomendará o incorporará a sus carteras productos financieros que cumplan con al menos una preferencia de sostenibilidad de las que elija a continuación:"
+              - column:
+                  name: PRORDEN
+                  value: 3
+              - column:
+                  name: PRTIPOTEST
+                  value: "S"
+              - column:
+                  name: PRRESPUESTACORRECTA
+                  value: false
+              - column:
+                  name: PRFECINICIO
+                  valueDate: "2025-01-01"
+              - column:
+                  name: PRUSUALTA
+                  value: "SISTEMA"
+
+        # Pregunta 2 - Productos con inversiones sostenibles
+        - insert:
+            tableName: MKTMPREGUNTAS
+            columns:
+              - column:
+                  name: PRID
+                  value: 18
+              - column:
+                  name: PRDEPENDEDE
+                  value: 17  # Depende de la pregunta 1
+              - column:
+                  name: PRTIPOID
+                  value: 2  # RESPUESTA_UNICA
+              - column:
+                  name: PRTEXTO
+                  value: "Productos con inversiones sostenibles de acuerdo con el punto 1) de las Definiciones"
+              - column:
+                  name: PRORDEN
+                  value: 4
+              - column:
+                  name: PRTIPOTEST
+                  value: "S"
+              - column:
+                  name: PRRESPUESTACORRECTA
+                  value: false
+              - column:
+                  name: PRFECINICIO
+                  valueDate: "2025-01-01"
+              - column:
+                  name: PRUSUALTA
+                  value: "SISTEMA"
+
+        # Pregunta 3 - Productos medioambientalmente sostenibles
+        - insert:
+            tableName: MKTMPREGUNTAS
+            columns:
+              - column:
+                  name: PRID
+                  value: 19
+              - column:
+                  name: PRDEPENDEDE
+                  value: 17  # Depende de la pregunta 1
+              - column:
+                  name: PRTIPOID
+                  value: 2  # RESPUESTA_UNICA
+              - column:
+                  name: PRTEXTO
+                  value: "Productos con inversiones medioambientalmente sostenibles de acuerdo con el punto 2) de las Definiciones."
+              - column:
+                  name: PRORDEN
+                  value: 5
+              - column:
+                  name: PRTIPOTEST
+                  value: "S"
+              - column:
+                  name: PRRESPUESTACORRECTA
+                  value: false
+              - column:
+                  name: PRFECINICIO
+                  valueDate: "2025-01-01"
+              - column:
+                  name: PRUSUALTA
+                  value: "SISTEMA"
+
+        # Pregunta 4 - Principales Incidencias Adversas (PIAs)
+        - insert:
+            tableName: MKTMPREGUNTAS
+            columns:
+              - column:
+                  name: PRID
+                  value: 20
+              - column:
+                  name: PRDEPENDEDE
+                  value: 17  # Depende de la pregunta 1
+              - column:
+                  name: PRTIPOID
+                  value: 2  # RESPUESTA_UNICA
+              - column:
+                  name: PRTEXTO
+                  value: "A continuación, seleccione las Principales Incidencias Adversas (PIAS) que quiere que se tengan en cuenta para prevenirlas en los productos de inversión de acuerdo con el punto 3) de las definiciones:"
+              - column:
+                  name: PRORDEN
+                  value: 6
+              - column:
+                  name: PRTIPOTEST
+                  value: "S"
+              - column:
+                  name: PRRESPUESTACORRECTA
+                  value: false
+              - column:
+                  name: PRFECINICIO
+                  valueDate: "2025-01-01"
+              - column:
+                  name: PRUSUALTA
+                  value: "SISTEMA"
+
+        # Pregunta 5 - Porcentaje de cartera en productos ASG
+        - insert:
+            tableName: MKTMPREGUNTAS
+            columns:
+              - column:
+                  name: PRID
+                  value: 21
+              - column:
+                  name: PRDEPENDEDE
+                  value: 17  # Depende de la pregunta 1
+              - column:
+                  name: PRTIPOID
+                  value: 2  # RESPUESTA_UNICA
+              - column:
+                  name: PRTEXTO
+                  value: "Teniendo en cuenta sus preferencias de sostenibilidad, ¿Qué porcentaje del total de sus carteras desea que se destine a productos financieros sostenibles/ASG?"
+              - column:
+                  name: PRORDEN
+                  value: 7
+              - column:
+                  name: PRTIPOTEST
+                  value: "S"
+              - column:
+                  name: PRRESPUESTACORRECTA
+                  value: false
+              - column:
+                  name: PRFECINICIO
+                  valueDate: "2025-01-01"
+              - column:
+                  name: PRUSUALTA
+                  value: "SISTEMA"

@@ -1,0 +1,264 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0032-create-unified-model-tables
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: "Crear tablas del modelo unificado MiFID: MKTMITEMS, MKTMCOMBINACIONESRESPUESTAS, MKTMRELCOMBINACIONITEM, MKTMRELRESPUESTACOMBINACION"
+      changes:
+        # 1. MKTMITEMS - Tabla unificada de preguntas y respuestas
+        - createTable:
+            tableName: MKTMITEMS
+            columns:
+              - column:
+                  name: ITID
+                  type: integer
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: ITTIPOITEM
+                  type: char(2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ITTIPOPREGUNTAID
+                  type: smallint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ITDEPENDEDE
+                  type: integer
+              - column:
+                  name: ITTEXTO
+                  type: varchar(500)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ITORDEN
+                  type: smallint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ITVALOR
+                  type: varchar(500)
+              - column:
+                  name: ITTEXTOLIBRE
+                  type: smallint
+                  defaultValueNumeric: 0
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ITTIPOTEST
+                  type: char(2)
+              - column:
+                  name: ITFAMILIAS
+                  type: varchar(50)
+              - column:
+                  name: ITTIENERESPCORRECTA
+                  type: smallint
+                  defaultValueNumeric: 0
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ITESCORRECTA
+                  type: smallint
+                  defaultValueNumeric: 0
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ITFECINICIO
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ITFECFIN
+                  type: date
+              - column:
+                  name: ITFECALTA
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ITFECMOD
+                  type: timestamp
+              - column:
+                  name: ITUSUALTA
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ITUSUMOD
+                  type: varchar(50)
+
+        - addForeignKeyConstraint:
+            baseTableName: MKTMITEMS
+            baseColumnNames: ITTIPOPREGUNTAID
+            referencedTableName: MKTMPREGUNTASTIPO
+            referencedColumnNames: PTID
+            constraintName: fk_mktmitems_tipo
+
+        - addForeignKeyConstraint:
+            baseTableName: MKTMITEMS
+            baseColumnNames: ITDEPENDEDE
+            referencedTableName: MKTMITEMS
+            referencedColumnNames: ITID
+            constraintName: fk_mktmitems_dependede
+
+        # 2. MKTMCOMBINACIONESRESPUESTAS
+        - createTable:
+            tableName: MKTMCOMBINACIONESRESPUESTAS
+            columns:
+              - column:
+                  name: CRID
+                  type: integer
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: CRRESULTADO
+                  type: char(2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: CRDESCRIPCION
+                  type: varchar(255)
+              - column:
+                  name: CRJUSTIFICACION
+                  type: varchar(900)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: CRMENSAJE
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: CRFECALTA
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: CRFECMOD
+                  type: timestamp
+              - column:
+                  name: CRUSUALTA
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: CRUSUMOD
+                  type: varchar(50)
+
+        # 3. MKTMRELCOMBINACIONITEM
+        - createTable:
+            tableName: MKTMRELCOMBINACIONITEM
+            columns:
+              - column:
+                  name: CIID
+                  type: integer
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: CIIDCOMBINACION
+                  type: integer
+                  constraints:
+                    nullable: false
+              - column:
+                  name: CIIDITEM
+                  type: integer
+                  constraints:
+                    nullable: false
+              - column:
+                  name: CIFECALTA
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: CIFECMOD
+                  type: timestamp
+              - column:
+                  name: CIUSUALTA
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: CIUSUMOD
+                  type: varchar(50)
+
+        - addForeignKeyConstraint:
+            baseTableName: MKTMRELCOMBINACIONITEM
+            baseColumnNames: CIIDCOMBINACION
+            referencedTableName: MKTMCOMBINACIONESRESPUESTAS
+            referencedColumnNames: CRID
+            constraintName: fk_relcombi_combinacion
+
+        - addForeignKeyConstraint:
+            baseTableName: MKTMRELCOMBINACIONITEM
+            baseColumnNames: CIIDITEM
+            referencedTableName: MKTMITEMS
+            referencedColumnNames: ITID
+            constraintName: fk_relcombi_item
+
+        # 4. MKTMRELRESPUESTACOMBINACION
+        - createTable:
+            tableName: MKTMRELRESPUESTACOMBINACION
+            columns:
+              - column:
+                  name: RRID
+                  type: integer
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: RRIDRESPUESTA
+                  type: integer
+                  constraints:
+                    nullable: false
+              - column:
+                  name: RRIDCOMBINACION
+                  type: integer
+                  constraints:
+                    nullable: false
+              - column:
+                  name: RRFECALTA
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: RRUSUALTA
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+
+        - addForeignKeyConstraint:
+            baseTableName: MKTMRELRESPUESTACOMBINACION
+            baseColumnNames: RRIDRESPUESTA
+            referencedTableName: MKTMRESPUESTACLIENTE
+            referencedColumnNames: RCID
+            constraintName: fk_relresp_respuesta
+
+        - addForeignKeyConstraint:
+            baseTableName: MKTMRELRESPUESTACOMBINACION
+            baseColumnNames: RRIDCOMBINACION
+            referencedTableName: MKTMCOMBINACIONESRESPUESTAS
+            referencedColumnNames: CRID
+            constraintName: fk_relresp_combinacion
+
+      rollback:
+        - dropTable:
+            tableName: MKTMRELRESPUESTACOMBINACION
+        - dropTable:
+            tableName: MKTMRELCOMBINACIONITEM
+        - dropTable:
+            tableName: MKTMCOMBINACIONESRESPUESTAS
+        - dropTable:
+            tableName: MKTMITEMS

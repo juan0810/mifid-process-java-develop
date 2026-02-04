@@ -1,0 +1,1360 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0025-insert-mktmrespuestacliente-test-data
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      changes:
+        # ==========================================
+        # FILA 1: 00223332W (fecha 45891 = 2025-09-14)
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "00223332W" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C,D,E" }
+              - column: { name: RCFECALTA, valueDate: "2025-09-14" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2025-09-14" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "00223332W" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Arriesgado" }
+              - column: { name: RCFECALTA, valueDate: "2025-09-14" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2025-09-14" }
+
+        # ==========================================
+        # FILA 2: 00402489N (fecha 45618 = 2024-12-15)
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "00402489N" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C,D,E,F" }
+              - column: { name: RCFECALTA, valueDate: "2024-12-15" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-12-15" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "00402489N" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Moderado" }
+              - column: { name: RCFECALTA, valueDate: "2024-12-15" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-12-15" }
+
+        # ==========================================
+        # FILA 3: 00410412T (fecha 45983 = 2025-12-14)
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "00410412T" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C,D,E,F,G,H,I,J" }
+              - column: { name: RCFECALTA, valueDate: "2025-12-14" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2025-12-14" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "00410412T" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Decidido" }
+              - column: { name: RCFECALTA, valueDate: "2025-12-14" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2025-12-14" }
+
+        # ==========================================
+        # FILA 4: 00443424F (fecha 45604 = 2024-12-01)
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "00443424F" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C,D,E,F,G" }
+              - column: { name: RCFECALTA, valueDate: "2024-12-01" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-12-01" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "00443424F" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Arriesgado" }
+              - column: { name: RCFECALTA, valueDate: "2024-12-01" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-12-01" }
+
+        # ==========================================
+        # FILA 5: 71544007T (fecha 45470 = 2024-07-20)
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "71544007T" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C" }
+              - column: { name: RCFECALTA, valueDate: "2024-07-20" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-07-20" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "71544007T" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Conservador" }
+              - column: { name: RCFECALTA, valueDate: "2024-07-20" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-07-20" }
+
+        # ==========================================
+        # FILA 6: Y4381181V (fecha 45562 = 2024-10-20)
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "Y4381181V" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C,D,E,F,G,H,I,J" }
+              - column: { name: RCFECALTA, valueDate: "2024-10-20" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-10-20" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "Y4381181V" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Arriesgado" }
+              - column: { name: RCFECALTA, valueDate: "2024-10-20" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-10-20" }
+
+        # ==========================================
+        # FILA 7: Y6320673B (fecha 44323 = 2021-05-07)
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "Y6320673B" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C,D,E,F,G,H" }
+              - column: { name: RCFECALTA, valueDate: "2021-05-07" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2021-05-07" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "Y6320673B" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Arriesgado" }
+              - column: { name: RCFECALTA, valueDate: "2021-05-07" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2021-05-07" }
+
+        # ==========================================
+        # FILA 8: Z0553299Q (fecha 45765 = 2025-05-11) - EXPIRED
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "Z0553299Q" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C,D,E,F,G,H,I,J" }
+              - column: { name: RCFECALTA, valueDate: "2025-05-11" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2025-05-11" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "Z0553299Q" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Conservador" }
+              - column: { name: RCFECALTA, valueDate: "2025-05-11" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2025-05-11" }
+
+        # ==========================================
+        # FILA 9: 19498741P (fecha 45891 = 2025-09-14)
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "19498741P" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C,D,E" }
+              - column: { name: RCFECALTA, valueDate: "2025-09-14" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2025-09-14" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "19498741P" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Arriesgado" }
+              - column: { name: RCFECALTA, valueDate: "2025-09-14" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2025-09-14" }
+
+        # ==========================================
+        # FILA 10: 02644871D (fecha 45618 = 2024-12-15)
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "02644871D" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C,D,E,F" }
+              - column: { name: RCFECALTA, valueDate: "2024-12-15" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-12-15" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "02644871D" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Moderado" }
+              - column: { name: RCFECALTA, valueDate: "2024-12-15" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-12-15" }
+
+        # ==========================================
+        # FILA 11: 46591811K (fecha 45983 = 2025-12-14)
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "46591811K" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C,D,E,F,G,H,I,J" }
+              - column: { name: RCFECALTA, valueDate: "2025-12-14" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2025-12-14" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "46591811K" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Decidido" }
+              - column: { name: RCFECALTA, valueDate: "2025-12-14" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2025-12-14" }
+
+        # ==========================================
+        # FILA 12: 09775525L (fecha 45604 = 2024-12-01)
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "09775525L" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C,D,E,F,G" }
+              - column: { name: RCFECALTA, valueDate: "2024-12-01" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-12-01" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "09775525L" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Arriesgado" }
+              - column: { name: RCFECALTA, valueDate: "2024-12-01" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-12-01" }
+
+        # ==========================================
+        # FILA 13: 73077420A (fecha 45470 = 2024-07-20)
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "73077420A" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C" }
+              - column: { name: RCFECALTA, valueDate: "2024-07-20" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-07-20" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "73077420A" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Conservador" }
+              - column: { name: RCFECALTA, valueDate: "2024-07-20" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-07-20" }
+
+        # ==========================================
+        # FILA 14: 51178881V (fecha 45562 = 2024-10-20)
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "51178881V" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C,D,E,F,G,H,I,J" }
+              - column: { name: RCFECALTA, valueDate: "2024-10-20" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-10-20" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "51178881V" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Arriesgado" }
+              - column: { name: RCFECALTA, valueDate: "2024-10-20" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-10-20" }
+
+        # ==========================================
+        # FILA 15: 71448558R (fecha 44323 = 2021-05-07)
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "71448558R" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C,D,E,F,G,H" }
+              - column: { name: RCFECALTA, valueDate: "2021-05-07" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2021-05-07" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "71448558R" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Arriesgado" }
+              - column: { name: RCFECALTA, valueDate: "2021-05-07" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2021-05-07" }
+
+        # ==========================================
+        # FILA 16: 09775525L (fecha 45765 = 2025-05-11) - EXPIRED - DUPLICADO
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "09775525L" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C,D,E,F,G,H,I,J" }
+              - column: { name: RCFECALTA, valueDate: "2025-05-11" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2025-05-11" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "09775525L" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Conservador" }
+              - column: { name: RCFECALTA, valueDate: "2025-05-11" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2025-05-11" }
+
+        # ==========================================
+        # FILA 17: B21922273 (fecha 45488 = 2024-08-07)
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "B21922273" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C" }
+              - column: { name: RCFECALTA, valueDate: "2024-08-07" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-08-07" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "B21922273" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Conservador" }
+              - column: { name: RCFECALTA, valueDate: "2024-08-07" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-08-07" }
+
+        # ==========================================
+        # FILA 18: 46591811K (fecha 45407 = 2024-05-17) - DUPLICADO
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "46591811K" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C,D,E,F,G,H,I,J" }
+              - column: { name: RCFECALTA, valueDate: "2024-05-17" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-05-17" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "46591811K" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Arriesgado" }
+              - column: { name: RCFECALTA, valueDate: "2024-05-17" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-05-17" }
+
+        # ==========================================
+        # FILA 19: 14099755L (fecha 45330 = 2024-03-01)
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "14099755L" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C,D,E,F,G,H,I,J,K" }
+              - column: { name: RCFECALTA, valueDate: "2024-03-01" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-03-01" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "14099755L" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Moderado" }
+              - column: { name: RCFECALTA, valueDate: "2024-03-01" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-03-01" }
+
+        # ==========================================
+        # FILA 20: 16035622E (fecha 45544 = 2024-10-02)
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "16035622E" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C,D,E,F,G,H,I,J" }
+              - column: { name: RCFECALTA, valueDate: "2024-10-02" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-10-02" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "16035622E" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Arriesgado" }
+              - column: { name: RCFECALTA, valueDate: "2024-10-02" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-10-02" }
+
+        # ==========================================
+        # FILA 21: V95952644 (NULL dates) - No perfilado
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "V95952644" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "" }
+              - column: { name: RCFECALTA, valueDate: "2024-01-01" }
+
+        # ==========================================
+        # FILA 22: B87446720 (fecha 45296 = 2024-01-28)
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "B87446720" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C,D,E,F" }
+              - column: { name: RCFECALTA, valueDate: "2024-01-28" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-01-28" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "B87446720" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Arriesgado" }
+              - column: { name: RCFECALTA, valueDate: "2024-01-28" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-01-28" }
+
+        # ==========================================
+        # FILA 23: B38799680 (fecha 45587 = 2024-11-14)
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "B38799680" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C,D,E,F" }
+              - column: { name: RCFECALTA, valueDate: "2024-11-14" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-11-14" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "B38799680" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Flexible" }
+              - column: { name: RCFECALTA, valueDate: "2024-11-14" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-11-14" }
+
+        # ==========================================
+        # FILA 24: 78405698D (fecha 45838 = 2025-07-23)
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "78405698D" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C" }
+              - column: { name: RCFECALTA, valueDate: "2025-07-23" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2025-07-23" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "78405698D" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Arriesgado" }
+              - column: { name: RCFECALTA, valueDate: "2025-07-23" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2025-07-23" }
+
+        # ==========================================
+        # FILA 25: B24673360 (fecha 45574 = 2024-11-01)
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "B24673360" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C,D,E,F,G,H,I,J,K" }
+              - column: { name: RCFECALTA, valueDate: "2024-11-01" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-11-01" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "B24673360" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Arriesgado" }
+              - column: { name: RCFECALTA, valueDate: "2024-11-01" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-11-01" }
+
+        # ==========================================
+        # FILA 26: 09780382T (fecha 45841 = 2025-07-26)
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "09780382T" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C,D,E,F,G,H,I,J,K" }
+              - column: { name: RCFECALTA, valueDate: "2025-07-26" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2025-07-26" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "09780382T" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Arriesgado" }
+              - column: { name: RCFECALTA, valueDate: "2025-07-26" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2025-07-26" }
+
+        # ==========================================
+        # FILA 27: 60131863L (NULL dates) - No perfilado
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "60131863L" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "" }
+              - column: { name: RCFECALTA, valueDate: "2024-01-01" }
+
+        # ==========================================
+        # FILA 28: B82668146 (fecha 45583 = 2024-11-10)
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "B82668146" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C,D,E,F,G,H,I,J,K" }
+              - column: { name: RCFECALTA, valueDate: "2024-11-10" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-11-10" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "B82668146" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Arriesgado" }
+              - column: { name: RCFECALTA, valueDate: "2024-11-10" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-11-10" }
+
+        # ==========================================
+        # FILA 29: A87717286 (fecha 45371 = 2024-04-12)
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "A87717286" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C" }
+              - column: { name: RCFECALTA, valueDate: "2024-04-12" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-04-12" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "A87717286" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Decidido" }
+              - column: { name: RCFECALTA, valueDate: "2024-04-12" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-04-12" }
+
+        # ==========================================
+        # FILA 30: 42982336M (fecha 45863 = 2025-08-17)
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "42982336M" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C,D,E,F,G,H,I,J" }
+              - column: { name: RCFECALTA, valueDate: "2025-08-17" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2025-08-17" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "42982336M" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Decidido" }
+              - column: { name: RCFECALTA, valueDate: "2025-08-17" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2025-08-17" }
+
+        # ==========================================
+        # FILA 31: 05319569Z (fecha 45671 = 2025-02-17)
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "05319569Z" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C,D,E,F,G,H,I,J,K" }
+              - column: { name: RCFECALTA, valueDate: "2025-02-17" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2025-02-17" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "05319569Z" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Moderado" }
+              - column: { name: RCFECALTA, valueDate: "2025-02-17" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2025-02-17" }
+
+        # ==========================================
+        # FILA 32: 05202785R (fecha 45426 = 2024-06-06)
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "05202785R" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C,D,E,F,G,H,I,J,K" }
+              - column: { name: RCFECALTA, valueDate: "2024-06-06" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-06-06" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "05202785R" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Conservador" }
+              - column: { name: RCFECALTA, valueDate: "2024-06-06" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-06-06" }
+
+        # ==========================================
+        # FILA 33: 00129907A (NULL dates)
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "00129907A" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C,D,E,F,G,H,I,J,K" }
+              - column: { name: RCFECALTA, valueDate: "2024-01-01" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "00129907A" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Arriesgado" }
+              - column: { name: RCFECALTA, valueDate: "2024-01-01" }
+
+        # ==========================================
+        # FILA 34: 00402489N (fecha 45583 = 2024-11-10) - DUPLICADO
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "00402489N" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C,D" }
+              - column: { name: RCFECALTA, valueDate: "2024-11-10" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-11-10" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "00402489N" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Decidido" }
+              - column: { name: RCFECALTA, valueDate: "2024-11-10" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-11-10" }
+
+        # ==========================================
+        # FILA 35: 00410412T (fecha 45371 = 2024-04-12) - DUPLICADO
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "00410412T" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C,D" }
+              - column: { name: RCFECALTA, valueDate: "2024-04-12" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-04-12" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "00410412T" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Decidido" }
+              - column: { name: RCFECALTA, valueDate: "2024-04-12" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-04-12" }
+
+        # ==========================================
+        # FILA 36: 00443424F (fecha 45863 = 2025-08-17) - DUPLICADO
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "00443424F" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C,D,E" }
+              - column: { name: RCFECALTA, valueDate: "2025-08-17" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2025-08-17" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "00443424F" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Arriesgado" }
+              - column: { name: RCFECALTA, valueDate: "2025-08-17" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2025-08-17" }
+
+        # ==========================================
+        # FILA 37: 00831611T (fecha 45671 = 2025-02-17)
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "00831611T" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C,D,E,F" }
+              - column: { name: RCFECALTA, valueDate: "2025-02-17" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2025-02-17" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "00831611T" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Moderado" }
+              - column: { name: RCFECALTA, valueDate: "2025-02-17" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2025-02-17" }
+
+        # ==========================================
+        # FILA 38: 05219145P (fecha 45426 = 2024-06-06)
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "05219145P" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C,D,E,F,G,H,I,J" }
+              - column: { name: RCFECALTA, valueDate: "2024-06-06" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-06-06" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "05219145P" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Decidido" }
+              - column: { name: RCFECALTA, valueDate: "2024-06-06" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-06-06" }
+
+        # ==========================================
+        # FILA 39: 05336805T (fecha 45217 = 2023-11-09) - EXPIRED
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "05336805T" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C,D,E,F,G" }
+              - column: { name: RCFECALTA, valueDate: "2023-11-09" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2023-11-09" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "05336805T" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Arriesgado" }
+              - column: { name: RCFECALTA, valueDate: "2023-11-09" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2023-11-09" }
+
+        # ==========================================
+        # FILA 40: 09754617H (fecha 45583 = 2024-11-10)
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "09754617H" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C,D,E,F,G,H" }
+              - column: { name: RCFECALTA, valueDate: "2024-11-10" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-11-10" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "09754617H" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Decidido" }
+              - column: { name: RCFECALTA, valueDate: "2024-11-10" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-11-10" }
+
+        # ==========================================
+        # FILA 41: 10197793F (fecha 45371 = 2024-04-12) - No perfilado
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "10197793F" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C,D,E,F,G,H,I" }
+              - column: { name: RCFECALTA, valueDate: "2024-04-12" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-04-12" }
+
+        # ==========================================
+        # FILA 42: 15792476D (fecha 45863 = 2025-08-17)
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "15792476D" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C,D,E,F,G,H,I,J,K" }
+              - column: { name: RCFECALTA, valueDate: "2025-08-17" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2025-08-17" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "15792476D" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Decidido" }
+              - column: { name: RCFECALTA, valueDate: "2025-08-17" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2025-08-17" }
+
+        # ==========================================
+        # FILA 43: 16036996Q (fecha 45671 = 2025-02-17) - No perfilado
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "16036996Q" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C,D,E,F,G,H,I,J" }
+              - column: { name: RCFECALTA, valueDate: "2025-02-17" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2025-02-17" }
+
+        # ==========================================
+        # FILA 44: 17856108N (fecha 45426 = 2024-06-06)
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "17856108N" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C,D,E,F,G,H,I,J,K" }
+              - column: { name: RCFECALTA, valueDate: "2024-06-06" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-06-06" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "17856108N" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Decidido" }
+              - column: { name: RCFECALTA, valueDate: "2024-06-06" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-06-06" }
+
+        # ==========================================
+        # FILA 45: 22447542W (fecha 45217 = 2023-11-09) - EXPIRED
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "22447542W" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C,D,E,F,G,H,I,J" }
+              - column: { name: RCFECALTA, valueDate: "2023-11-09" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2023-11-09" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "22447542W" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Decidido" }
+              - column: { name: RCFECALTA, valueDate: "2023-11-09" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2023-11-09" }
+
+        # ==========================================
+        # FILA 46: 25403793V (fecha 45583 = 2024-11-10)
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "25403793V" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C,D,E,F,G,H,I,J,K" }
+              - column: { name: RCFECALTA, valueDate: "2024-11-10" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-11-10" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "25403793V" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Arriesgado" }
+              - column: { name: RCFECALTA, valueDate: "2024-11-10" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-11-10" }
+
+        # ==========================================
+        # FILA 47: 36168341J (fecha 45371 = 2024-04-12)
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "36168341J" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C" }
+              - column: { name: RCFECALTA, valueDate: "2024-04-12" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-04-12" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "36168341J" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Moderado" }
+              - column: { name: RCFECALTA, valueDate: "2024-04-12" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-04-12" }
+
+        # ==========================================
+        # FILA 48: 37349860E (fecha 45863 = 2025-08-17)
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "37349860E" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C" }
+              - column: { name: RCFECALTA, valueDate: "2025-08-17" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2025-08-17" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "37349860E" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Flexible" }
+              - column: { name: RCFECALTA, valueDate: "2025-08-17" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2025-08-17" }
+
+        # ==========================================
+        # FILA 49: 45087831B (fecha 45671 = 2025-02-17)
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "45087831B" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C,D,E,F,G,H,I,J,K" }
+              - column: { name: RCFECALTA, valueDate: "2025-02-17" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2025-02-17" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "45087831B" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Arriesgado" }
+              - column: { name: RCFECALTA, valueDate: "2025-02-17" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2025-02-17" }
+
+        # ==========================================
+        # FILA 50: 47358332K (fecha 45426 = 2024-06-06)
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "47358332K" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C" }
+              - column: { name: RCFECALTA, valueDate: "2024-06-06" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-06-06" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "47358332K" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Flexible" }
+              - column: { name: RCFECALTA, valueDate: "2024-06-06" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-06-06" }
+
+        # ==========================================
+        # FILA 51: 50762470K (NULL dates)
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "50762470K" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C,D,E,F,G,H,I,J" }
+              - column: { name: RCFECALTA, valueDate: "2024-01-01" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "50762470K" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Flexible" }
+              - column: { name: RCFECALTA, valueDate: "2024-01-01" }
+
+        # ==========================================
+        # FILA 52: 50812947J (fecha 45217 = 2023-11-09) - EXPIRED
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "50812947J" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C,D,E,F" }
+              - column: { name: RCFECALTA, valueDate: "2023-11-09" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2023-11-09" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "50812947J" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Arriesgado" }
+              - column: { name: RCFECALTA, valueDate: "2023-11-09" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2023-11-09" }
+
+        # ==========================================
+        # FILA 53: 50835529D (fecha 45371 = 2024-04-12)
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "50835529D" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C,D,E,F" }
+              - column: { name: RCFECALTA, valueDate: "2024-04-12" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-04-12" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "50835529D" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Flexible" }
+              - column: { name: RCFECALTA, valueDate: "2024-04-12" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-04-12" }
+
+        # ==========================================
+        # FILA 54: 51414663A (fecha 45863 = 2025-08-17)
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "51414663A" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C" }
+              - column: { name: RCFECALTA, valueDate: "2025-08-17" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2025-08-17" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "51414663A" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Conservador" }
+              - column: { name: RCFECALTA, valueDate: "2025-08-17" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2025-08-17" }
+
+        # ==========================================
+        # FILA 55: 71544007T (fecha 45671 = 2025-02-17) - DUPLICADO
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "71544007T" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C,D,E,F,G,H,I,J" }
+              - column: { name: RCFECALTA, valueDate: "2025-02-17" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2025-02-17" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "71544007T" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Arriesgado" }
+              - column: { name: RCFECALTA, valueDate: "2025-02-17" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2025-02-17" }
+
+        # ==========================================
+        # FILA 56: X0691717S (fecha 45426 = 2024-06-06)
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "X0691717S" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C,D,E,F,G,H,I,J,K" }
+              - column: { name: RCFECALTA, valueDate: "2024-06-06" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-06-06" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "X0691717S" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Moderado" }
+              - column: { name: RCFECALTA, valueDate: "2024-06-06" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-06-06" }
+
+        # ==========================================
+        # FILA 57: Y4381181V (NULL dates) - DUPLICADO
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "Y4381181V" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C,D,E,F,G,H,I,J" }
+              - column: { name: RCFECALTA, valueDate: "2024-01-01" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "Y4381181V" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Arriesgado" }
+              - column: { name: RCFECALTA, valueDate: "2024-01-01" }
+
+        # ==========================================
+        # FILA 58: Y6320673B (fecha 45583 = 2024-11-10) - DUPLICADO - No perfilado
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "Y6320673B" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "" }
+              - column: { name: RCFECALTA, valueDate: "2024-11-10" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-11-10" }
+
+        # ==========================================
+        # FILA 59: Z0553299Q (fecha 45371 = 2024-04-12) - DUPLICADO
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "Z0553299Q" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C,D,E,F" }
+              - column: { name: RCFECALTA, valueDate: "2024-04-12" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-04-12" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "Z0553299Q" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Arriesgado" }
+              - column: { name: RCFECALTA, valueDate: "2024-04-12" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-04-12" }
+
+        # ==========================================
+        # FILA 60: Z0717178C (fecha 45863 = 2025-08-17)
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "Z0717178C" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C,D,E,F" }
+              - column: { name: RCFECALTA, valueDate: "2025-08-17" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2025-08-17" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "Z0717178C" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Flexible" }
+              - column: { name: RCFECALTA, valueDate: "2025-08-17" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2025-08-17" }
+
+        # ==========================================
+        # FILA 61: 00223332W (fecha 45671 = 2025-02-17) - DUPLICADO
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "00223332W" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C" }
+              - column: { name: RCFECALTA, valueDate: "2025-02-17" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2025-02-17" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "00223332W" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Arriesgado" }
+              - column: { name: RCFECALTA, valueDate: "2025-02-17" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2025-02-17" }
+
+        # ==========================================
+        # FILA 62: 18980250Y (fecha 45426 = 2024-06-06)
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "18980250Y" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C,D,E,F,G,H,I,J,K" }
+              - column: { name: RCFECALTA, valueDate: "2024-06-06" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-06-06" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "18980250Y" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Arriesgado" }
+              - column: { name: RCFECALTA, valueDate: "2024-06-06" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-06-06" }
+
+        # ==========================================
+        # FILA 63: Z1285202J (fecha 45371 = 2024-04-12)
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "Z1285202J" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "A,B,C,D,E,F,G,H,I,J,K" }
+              - column: { name: RCFECALTA, valueDate: "2024-04-12" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-04-12" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "Z1285202J" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Arriesgado" }
+              - column: { name: RCFECALTA, valueDate: "2024-04-12" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2024-04-12" }
+
+        # ==========================================
+        # FILA 64: 00218852F (fecha 45863 = 2025-08-17) - Sin conveniencia
+        # ==========================================
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "00218852F" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESCONVENIENCIA, value: "" }
+              - column: { name: RCFECALTA, valueDate: "2025-08-17" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2025-08-17" }
+        - insert:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column: { name: RCVERSIONID, valueNumeric: 1 }
+              - column: { name: RCIDENTITY, value: "00218852F" }
+              - column: { name: RCESTADO, valueNumeric: 1 }
+              - column: { name: RCRESIDONEIDAD, value: "Decidido" }
+              - column: { name: RCFECALTA, valueDate: "2025-08-17" }
+              - column: { name: RCFECMODIFICACION, valueDate: "2025-08-17" }

@@ -1,0 +1,31 @@
+trigger:
+  tags:
+    include:
+      - v*
+
+pr: none
+
+pool:
+  vmImage: "ubuntu-24.04"
+
+variables:
+  - group: "SB_ADO_ECR_CREDENTIALS"
+  - name: IMAGE_TAG
+    value: $[replace(variables['Build.SourceBranch'], 'refs/tags/', '')]
+  - name: ECR_REGISTRY
+    value: "779340199781.dkr.ecr.eu-west-3.amazonaws.com"
+
+resources:
+  repositories:
+    - repository: templates
+      type: github
+      name: Singular-Bank/ops-devtools-pipelines
+      ref: refs/heads/main
+      endpoint: Singular-Bank
+
+stages:
+  - template: templateBuildJavaSpring.yaml@templates
+    parameters:
+      imageTag: $(IMAGE_TAG)
+      imageRegistry: $(ECR_REGISTRY)
+      sonarQubeServiceConnection: "SonarQube UAT"

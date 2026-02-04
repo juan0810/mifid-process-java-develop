@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0009
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      changes:
+        - createSequence:
+            sequenceName: MKTMRESPUESTACLIENTEDETALLE_RDID_SEQ
+            startValue: 1
+            incrementBy: 1
+      rollback:
+        - dropSequence:
+            sequenceName: MKTMRESPUESTACLIENTEDETALLE_RDID_SEQ

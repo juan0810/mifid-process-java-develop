@@ -1,0 +1,55 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0002
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      changes:
+        - createTable:
+            tableName: MKTMSERVICIOS
+            columns:
+              - column:
+                  name: SEID
+                  type: smallint
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: SENOMBRE
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: SEDESCRIPCION
+                  type: varchar(250)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: SETIPOSTEST
+                  type: varchar(10)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: SEFAMILIAS
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: SEFECALTA
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: SEFECMOD
+                  type: timestamp
+              - column:
+                  name: SEUSUALTA
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: SEUSUMOD
+                  type: varchar(50)
+      rollback:
+        - dropTable:
+            tableName: MKTMSERVICIOS

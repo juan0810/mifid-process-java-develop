@@ -1,0 +1,64 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0005
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      changes:
+        - createTable:
+            tableName: MKTMRELVERSIONPREGUNTA
+            columns:
+              - column:
+                  name: VPID
+                  type: integer
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: VPVERSIONID
+                  type: smallint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: VPPREGUNTAID
+                  type: integer
+                  constraints:
+                    nullable: false
+              - column:
+                  name: VPFECALTA
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: VPUSUALTA
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+        - addUniqueConstraint:
+            tableName: MKTMRELVERSIONPREGUNTA
+            columnNames: VPVERSIONID, VPPREGUNTAID
+            constraintName: uk_version_pregunta
+        - addForeignKeyConstraint:
+            baseTableName: MKTMRELVERSIONPREGUNTA
+            baseColumnNames: VPPREGUNTAID
+            referencedTableName: MKTMPREGUNTAS
+            referencedColumnNames: PRID
+            constraintName: fk_mktmrelversionpregunta_pregunta
+        - addForeignKeyConstraint:
+            baseTableName: MKTMRELVERSIONPREGUNTA
+            baseColumnNames: VPVERSIONID
+            referencedTableName: MKTMVERSIONES
+            referencedColumnNames: VEID
+            constraintName: fk_mktmrelversionpregunta_version
+      rollback:
+        - dropForeignKeyConstraint:
+            baseTableName: MKTMRELVERSIONPREGUNTA
+            constraintName: fk_mktmrelversionpregunta_pregunta
+        - dropForeignKeyConstraint:
+            baseTableName: MKTMRELVERSIONPREGUNTA
+            constraintName: fk_mktmrelversionpregunta_version
+        - dropUniqueConstraint:
+            tableName: MKTMRELVERSIONPREGUNTA
+            constraintName: uk_version_pregunta
+        - dropTable:
+            tableName: MKTMRELVERSIONPREGUNTA

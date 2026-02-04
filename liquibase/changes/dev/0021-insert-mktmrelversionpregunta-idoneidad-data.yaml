@@ -1,0 +1,87 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0021-relacion-version-preguntas-idoneidad
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      changes:
+        # Sub-preguntas de la pregunta 12 (Porcentaje inversión)
+        - insert:
+            tableName: MKTMRELVERSIONPREGUNTA
+            columns:
+              - column:
+                  name: VPID
+                  value: 28
+              - column:
+                  name: VPVERSIONID
+                  value: 1
+              - column:
+                  name: VPPREGUNTAID
+                  value: 121  # Inversión en SB (%)
+              - column:
+                  name: VPUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRELVERSIONPREGUNTA
+            columns:
+              - column:
+                  name: VPID
+                  value: 29
+              - column:
+                  name: VPVERSIONID
+                  value: 1
+              - column:
+                  name: VPPREGUNTAID
+                  value: 122  # Inversión total (%)
+              - column:
+                  name: VPUSUALTA
+                  value: "SISTEMA"
+
+        # Sub-preguntas de la pregunta 16 (Pérdidas por período)
+        - insert:
+            tableName: MKTMRELVERSIONPREGUNTA
+            columns:
+              - column:
+                  name: VPID
+                  value: 30
+              - column:
+                  name: VPVERSIONID
+                  value: 1
+              - column:
+                  name: VPPREGUNTAID
+                  value: 161  # Un mes
+              - column:
+                  name: VPUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRELVERSIONPREGUNTA
+            columns:
+              - column:
+                  name: VPID
+                  value: 31
+              - column:
+                  name: VPVERSIONID
+                  value: 1
+              - column:
+                  name: VPPREGUNTAID
+                  value: 162  # Un año
+              - column:
+                  name: VPUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRELVERSIONPREGUNTA
+            columns:
+              - column:
+                  name: VPID
+                  value: 32
+              - column:
+                  name: VPVERSIONID
+                  value: 1
+              - column:
+                  name: VPPREGUNTAID
+                  value: 163  # Tres años
+              - column:
+                  name: VPUSUALTA
+                  value: "SISTEMA"

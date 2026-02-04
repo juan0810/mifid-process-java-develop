@@ -1,0 +1,1084 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0017-respuestas-conveniencia
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      changes:
+        # Respuestas Pregunta 1 - Nivel de estudios
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 1
+              - column:
+                  name: RETEXTO
+                  value: "Estudios universitarios (o superiores) con un elevado componente técnico, matemático o relacionados con economía y finanzas"
+              - column:
+                  name: REVALOR
+                  value: "A"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 1
+              - column:
+                  name: RETEXTO
+                  value: "Otro tipo de estudios universitarios (o superiores)"
+              - column:
+                  name: REVALOR
+                  value: "B"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 1
+              - column:
+                  name: RETEXTO
+                  value: "Otros estudios"
+              - column:
+                  name: REVALOR
+                  value: "C"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        # Respuestas Pregunta 2 - Experiencia laboral
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 2
+              - column:
+                  name: RETEXTO
+                  value: "Desarrollo, durante más de un año, actividad laboral/profesional relacionada con el asesoramiento a empresas en el área financiera, análisis o emisión de informes de inversión, análisis financiero o actividades similares"
+              - column:
+                  name: REVALOR
+                  value: "A"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 2
+              - column:
+                  name: RETEXTO
+                  value: "Otra actividad profesional no relacionada"
+              - column:
+                  name: REVALOR
+                  value: "B"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        # Respuestas Pregunta 3 - Índice bursátil (con respuesta correcta)
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 3
+              - column:
+                  name: RETEXTO
+                  value: "Es un indicador de la bolsa de valores que sirve como referencia para conocer el movimiento mayoritario de las empresas de un mercado"
+              - column:
+                  name: REVALOR
+                  value: "A"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 1  # Respuesta correcta
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 3
+              - column:
+                  name: RETEXTO
+                  value: "Es el listado de las 35 acciones más contratadas en bolsa"
+              - column:
+                  name: REVALOR
+                  value: "B"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 3
+              - column:
+                  name: RETEXTO
+                  value: "No lo sé"
+              - column:
+                  name: REVALOR
+                  value: "C"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        # Respuestas Pregunta 4 - Bonos con opción (Familia E)
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 4
+              - column:
+                  name: RETEXTO
+                  value: "La posibilidad de que el emisor o el inversor la ejerciten antes de la fecha de vencimiento y del rendimiento que se pueda obtener con la reinversión"
+              - column:
+                  name: REVALOR
+                  value: "A"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 1  # Respuesta correcta
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 4
+              - column:
+                  name: RETEXTO
+                  value: "La calidad crediticia del emisor"
+              - column:
+                  name: REVALOR
+                  value: "B"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 4
+              - column:
+                  name: RETEXTO
+                  value: "No lo sé"
+              - column:
+                  name: REVALOR
+                  value: "C"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        # Respuestas Pregunta 5 - Producto estructurado (Familia F)
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 5
+              - column:
+                  name: RETEXTO
+                  value: "El valor del subyacente en la fecha de observación final establecida para la liquidación del producto"
+              - column:
+                  name: REVALOR
+                  value: "A"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 1  # Respuesta correcta
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 5
+              - column:
+                  name: RETEXTO
+                  value: "El mayor valor alcanzado por el subyacente hasta el vencimiento del producto"
+              - column:
+                  name: REVALOR
+                  value: "B"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 5
+              - column:
+                  name: RETEXTO
+                  value: "No lo sé"
+              - column:
+                  name: REVALOR
+                  value: "C"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        # Respuestas Pregunta 6 - Participaciones preferentes (Familia G)
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 6
+              - column:
+                  name: RETEXTO
+                  value: "Valores que no otorgan participación en el capital ni derecho de voto, con remuneración no garantizada, de duración perpetua y, en caso de liquidación o quiebra del emisor, se sitúan en orden de prelación tras todos los acreedores (subordinados o no)"
+              - column:
+                  name: REVALOR
+                  value: "A"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 1  # Respuesta correcta
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 6
+              - column:
+                  name: RETEXTO
+                  value: "Acciones preferentes"
+              - column:
+                  name: REVALOR
+                  value: "B"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 6
+              - column:
+                  name: RETEXTO
+                  value: "No lo sé"
+              - column:
+                  name: REVALOR
+                  value: "C"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        # Respuestas Pregunta 7 - Fondo inmobiliario (Familia H)
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 7
+              - column:
+                  name: RETEXTO
+                  value: "Mayoritariamente en bienes inmuebles, aunque también pueden incluir valores u otros activos líquidos"
+              - column:
+                  name: REVALOR
+                  value: "A"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 1  # Respuesta correcta
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 7
+              - column:
+                  name: RETEXTO
+                  value: "Valores de sociedades inmobiliarias"
+              - column:
+                  name: REVALOR
+                  value: "B"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 7
+              - column:
+                  name: RETEXTO
+                  value: "No lo sé"
+              - column:
+                  name: REVALOR
+                  value: "C"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        # Respuestas Pregunta 8 - Capital riesgo (Familia I)
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 8
+              - column:
+                  name: RETEXTO
+                  value: "Empresas no cotizadas"
+              - column:
+                  name: REVALOR
+                  value: "A"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 1  # Respuesta correcta
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 8
+              - column:
+                  name: RETEXTO
+                  value: "Empresas de cualquier tipo con mayores riesgos"
+              - column:
+                  name: REVALOR
+                  value: "B"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 8
+              - column:
+                  name: RETEXTO
+                  value: "No lo sé"
+              - column:
+                  name: REVALOR
+                  value: "C"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        # Respuestas Pregunta 9 - Derivados (Familias J,K)
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 9
+              - column:
+                  name: RETEXTO
+                  value: "Gestionar riesgos o para realizar inversiones especulativas con apalancamiento"
+              - column:
+                  name: REVALOR
+                  value: "A"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 1  # Respuesta correcta
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 9
+              - column:
+                  name: RETEXTO
+                  value: "Para invertir mayores volúmenes a menor precio"
+              - column:
+                  name: REVALOR
+                  value: "B"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 9
+              - column:
+                  name: RETEXTO
+                  value: "No lo sé"
+              - column:
+                  name: REVALOR
+                  value: "C"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        # Pregunta 10 es CABECERA - No tiene respuestas
+
+        # Respuestas para subpreguntas 101-111 (todas tienen las mismas opciones)
+        # Subpregunta 101 - Familia A
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 101
+              - column:
+                  name: RETEXTO
+                  value: "Dos o más"
+              - column:
+                  name: REVALOR
+                  value: "A"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 101
+              - column:
+                  name: RETEXTO
+                  value: "Una o ninguna"
+              - column:
+                  name: REVALOR
+                  value: "B"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        # Subpregunta 102 - Familia B
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 102
+              - column:
+                  name: RETEXTO
+                  value: "Dos o más"
+              - column:
+                  name: REVALOR
+                  value: "A"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 102
+              - column:
+                  name: RETEXTO
+                  value: "Una o ninguna"
+              - column:
+                  name: REVALOR
+                  value: "B"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        # Subpregunta 103 - Familia C
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 103
+              - column:
+                  name: RETEXTO
+                  value: "Dos o más"
+              - column:
+                  name: REVALOR
+                  value: "A"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 103
+              - column:
+                  name: RETEXTO
+                  value: "Una o ninguna"
+              - column:
+                  name: REVALOR
+                  value: "B"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        # Subpregunta 104 - Familia D
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 104
+              - column:
+                  name: RETEXTO
+                  value: "Dos o más"
+              - column:
+                  name: REVALOR
+                  value: "A"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 104
+              - column:
+                  name: RETEXTO
+                  value: "Una o ninguna"
+              - column:
+                  name: REVALOR
+                  value: "B"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        # Subpregunta 105 - Familia E
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 105
+              - column:
+                  name: RETEXTO
+                  value: "Dos o más"
+              - column:
+                  name: REVALOR
+                  value: "A"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 105
+              - column:
+                  name: RETEXTO
+                  value: "Una o ninguna"
+              - column:
+                  name: REVALOR
+                  value: "B"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        # Subpregunta 106 - Familia F
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 106
+              - column:
+                  name: RETEXTO
+                  value: "Dos o más"
+              - column:
+                  name: REVALOR
+                  value: "A"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 106
+              - column:
+                  name: RETEXTO
+                  value: "Una o ninguna"
+              - column:
+                  name: REVALOR
+                  value: "B"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        # Subpregunta 107 - Familia G
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 107
+              - column:
+                  name: RETEXTO
+                  value: "Dos o más"
+              - column:
+                  name: REVALOR
+                  value: "A"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 107
+              - column:
+                  name: RETEXTO
+                  value: "Una o ninguna"
+              - column:
+                  name: REVALOR
+                  value: "B"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        # Subpregunta 108 - Familia H
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 108
+              - column:
+                  name: RETEXTO
+                  value: "Dos o más"
+              - column:
+                  name: REVALOR
+                  value: "A"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 108
+              - column:
+                  name: RETEXTO
+                  value: "Una o ninguna"
+              - column:
+                  name: REVALOR
+                  value: "B"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        # Subpregunta 109 - Familia I
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 109
+              - column:
+                  name: RETEXTO
+                  value: "Dos o más"
+              - column:
+                  name: REVALOR
+                  value: "A"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 109
+              - column:
+                  name: RETEXTO
+                  value: "Una o ninguna"
+              - column:
+                  name: REVALOR
+                  value: "B"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        # Subpregunta 110 - Familia J
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 110
+              - column:
+                  name: RETEXTO
+                  value: "Dos o más"
+              - column:
+                  name: REVALOR
+                  value: "A"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 110
+              - column:
+                  name: RETEXTO
+                  value: "Una o ninguna"
+              - column:
+                  name: REVALOR
+                  value: "B"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        # Subpregunta 111 - Familia K
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 111
+              - column:
+                  name: RETEXTO
+                  value: "Dos o más"
+              - column:
+                  name: REVALOR
+                  value: "A"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 111
+              - column:
+                  name: RETEXTO
+                  value: "Una o ninguna"
+              - column:
+                  name: REVALOR
+                  value: "B"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"

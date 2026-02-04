@@ -1,0 +1,177 @@
+# Application configuration
+app:
+  environment: default
+  api:
+    timeout: 5000
+
+# Security configuration
+security:
+  enabled: false  # Set to true to enable JWT authentication
+
+spring:
+  application:
+    name: svc-mifid-process-java
+  autoconfigure:
+    exclude: com.singularbank.lib.jwt.security.config.JwtSecurityAutoConfiguration
+  threads:
+    virtual:
+      enabled: true
+  cache:
+    type: caffeine
+    cache-names:
+      - convenienceQuestionsCache
+    caffeine:
+      spec: maximumSize=1000,expireAfterWrite=3600s
+  datasource:
+    url: ${DB_CONNECTION_STRING}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      data-source-properties:
+        reWriteBatchedInserts: true
+  liquibase:
+    change-log: classpath:liquibase/changes/changelog-master.yaml
+    enabled: false
+    contexts: ${LIQUIBASE_CONTEXTS:dev}
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        id:
+          optimizer:
+            pooled:
+              preferred: pooled-lo
+        order_updates: true
+        order_inserts: true
+        jdbc:
+          lob:
+            non_contextual_creation: true
+          batch_versioned_data: true
+          batch_size: 50
+  sql:
+    init:
+      mode: never
+
+# Cache
+cache:
+  enabled: true
+  initialCapacity: 100
+  maximumSize: 500
+  duration:
+    ofMinutes: 10
+
+springdoc:
+  show-actuator: true
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+    config-url: /v3/api-docs/swagger-config
+    url: /v3/api-docs
+    disable-swagger-default-url: true
+
+# Server configuration
+server:
+  port: ${SERVER_PORT:8080}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: liveness, readiness
+      base-path: /health
+  endpoint:
+    health:
+      show-details: always
+      access: unrestricted
+  info:
+    env:
+      enabled: true
+  prometheus:
+    access: UNRESTRICTED
+    metrics:
+      export:
+        enabled: true
+  metrics:
+    enable:
+      all: true
+    distribution:
+      percentiles-histogram:
+        http:
+          server:
+            requests: true
+
+# Health check configuration
+health:
+  readiness:
+    database:
+      timeout: 10
+
+otel:
+  sdk:
+    disabled: true
+  service:
+    name: ${spring.application.name}
+  resource:
+    attributes:
+      service:
+        version: 1.5.0
+  metrics:
+    exporter: none
+  traces:
+    sampler: always_on
+  logs:
+    exporter: none
+  bsp:
+    schedule:
+      delay: 500ms
+    max:
+      export:
+        batch:
+          size: 10
+      queue:
+        size: 512
+    export:
+      timeout: 5s
+  exporter:
+    otlp:
+      traces:
+        compression: none
+
+# Logging configuration
+logging:
+  level:
+    root: INFO
+    com:
+      singularbank: INFO
+    io:
+      opentelemetry:
+        sdk:
+          trace:
+            export: INFO
+        exporter:
+          otlp: INFO
+          sender: WARN
+
+rest:
+  external-service:
+    services:
+      pdf-generator:
+        base-url: ${PDF_GENERATOR_BASE_URL:https://pdf-generator.svcdev.sbtech.es}
+        oauth:
+          enabled: true
+          client_id: ${PDF_GENERATOR_CLIENT_ID}
+          client_secret: ${PDF_GENERATOR_CLIENT_SECRET}
+          grant_type: client_credentials
+          token-url: ${PDF_GENERATOR_TOKEN_URL}
+          scope: ""
+        endpoints:
+          generate-pdf:
+            path: /generate-pdf
+            method: POST
+            headers:
+              Content-Type: application/json
+            requires-auth: true

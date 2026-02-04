@@ -1,0 +1,34 @@
+volumes:
+  postgres_data:
+    driver: local
+
+services:
+# --- Postgres ----------------------------------------------------------------------------------------------------
+  postgres:
+    image: postgres:15.13
+    container_name: singularbankdb
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: sb_analytics
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+          cpus: '2.0'
+        reservations:
+          memory: 1G
+          cpus: '1.0'
+    volumes:
+      - postgres_data:/var/lib/postgresql/datanew
+    networks:
+      - singularbank
+
+networks:
+  singularbank:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.35.0.0/24

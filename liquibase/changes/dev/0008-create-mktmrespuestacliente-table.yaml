@@ -1,0 +1,66 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0008
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      changes:
+        - createTable:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column:
+                  name: RCID
+                  type: integer
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: RCVERSIONID
+                  type: smallint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: RCIDENTITY
+                  type: varchar(9)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: RCESTADO
+                  type: smallint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: RCRESCONVENIENCIA
+                  type: varchar(50)
+              - column:
+                  name: RCRESIDONEIDAD
+                  type: varchar(50)
+              - column:
+                  name: RCFECALTA
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: RCFECMODIFICACION
+                  type: timestamp
+        - addForeignKeyConstraint:
+            baseTableName: MKTMRESPUESTACLIENTE
+            baseColumnNames: RCVERSIONID
+            referencedTableName: MKTMVERSIONES
+            referencedColumnNames: VEID
+            constraintName: FK__OPE_ENC_R__id_en__3BE18262
+        - createIndex:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column:
+                  name: RCIDENTITY
+            indexName: IDX_RESPUESTACLIENTE_IDENTITY
+      rollback:
+        - dropIndex:
+            tableName: MKTMRESPUESTACLIENTE
+            indexName: IDX_RESPUESTACLIENTE_IDENTITY
+        - dropForeignKeyConstraint:
+            baseTableName: MKTMRESPUESTACLIENTE
+            constraintName: FK__OPE_ENC_R__id_en__3BE18262
+        - dropTable:
+            tableName: MKTMRESPUESTACLIENTE

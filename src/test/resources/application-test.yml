@@ -1,0 +1,21 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  liquibase:
+    change-log: classpath:liquibase/changelog-test-master.yaml
+    enabled: true
+    contexts: dev
+
+app:
+  environment: test
+
+security:
+  enabled: false
+
+rest:
+  external-service:
+    services:
+      pdf-generator:
+        base-url: http://localhost:9999
+        oauth:
+          enabled: false

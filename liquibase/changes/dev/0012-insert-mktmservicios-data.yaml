@@ -1,0 +1,28 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0012
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      changes:
+        # Insertar servicio para test completo
+        - insert:
+            tableName: MKTMSERVICIOS
+            columns:
+              - column:
+                  name: SEID
+                  value: 1
+              - column:
+                  name: SENOMBRE
+                  value: "ONBOARDING"
+              - column:
+                  name: SEDESCRIPCION
+                  value: "Aplicación de Onboarding para realizar los Tests MIFID"
+              - column:
+                  name: SETIPOSTEST
+                  value: "C,I,S"
+              - column:
+                  name: SEFAMILIAS
+                  value: "A,B,C,D,E,F,G,H,I,J,K"
+              - column:
+                  name: SEUSUALTA
+                  value: "SISTEMA"

@@ -1,0 +1,18 @@
+databaseChangeLog:
+  - includeAll:
+      path: dev
+      relativeToChangelogFile: true
+      context: dev
+      endsWithFilter: .yaml
+
+  - includeAll:
+      path: uat
+      relativeToChangelogFile: true
+      context: uat
+      endsWithFilter: .yaml
+
+  - includeAll:
+      path: prod
+      relativeToChangelogFile: true
+      context: prod
+      endsWithFilter: .yaml

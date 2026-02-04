@@ -1,0 +1,16 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0031-fix-expired-and-delete-no-profile
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      changes:
+        - sql:
+            sql: |
+              -- Eliminar registros No perfilado
+              DELETE FROM mktmrespuestaclientedetalle WHERE rdrespuestaclienteid IN (SELECT rcid FROM mktmrespuestacliente WHERE rcidentity IN ('V95952644', '60131863L', '00129907A'));
+              DELETE FROM mktmrespuestacliente WHERE rcidentity IN ('V95952644', '60131863L', '00129907A');
+              
+              -- Poner fechas antiguas para EXPIRED
+              UPDATE mktmrespuestacliente SET rcfecalta = '2021-05-07', rcfecmodificacion = '2021-05-07' WHERE rcidentity = 'Y6320673B';
+              UPDATE mktmrespuestacliente SET rcfecalta = '2021-05-07', rcfecmodificacion = '2021-05-07' WHERE rcidentity = '71448558R';
+              UPDATE mktmrespuestacliente SET rcfecalta = '2023-10-18', rcfecmodificacion = '2023-10-18' WHERE rcidentity = '05336805T';

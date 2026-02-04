@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: uat-placeholder
+      author: system
+      context: uat
+      changes:
+        - tagDatabase:
+            tag: uat-placeholder

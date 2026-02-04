@@ -1,0 +1,69 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0010
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      changes:
+        - createTable:
+            tableName: MKTMRESPUESTACLIENTEDETALLE
+            columns:
+              - column:
+                  name: RDID
+                  type: integer
+                  defaultValueSequenceNext: MKTMRESPUESTACLIENTEDETALLE_RDID_SEQ
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: RDRESPUESTACLIENTEID
+                  type: integer
+                  constraints:
+                    nullable: false
+              - column:
+                  name: RDRESPUESTAID
+                  type: integer
+                  constraints:
+                    nullable: false
+              - column:
+                  name: RDVALOR
+                  type: text
+              - column:
+                  name: RDFECALTA
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: RDFECMOD
+                  type: timestamp
+        - addForeignKeyConstraint:
+            baseTableName: MKTMRESPUESTACLIENTEDETALLE
+            baseColumnNames: RDRESPUESTACLIENTEID
+            referencedTableName: MKTMRESPUESTACLIENTE
+            referencedColumnNames: RCID
+            constraintName: FK__OPE_ENC_D__id_re__530F007D
+            onDelete: CASCADE
+        - addForeignKeyConstraint:
+            baseTableName: MKTMRESPUESTACLIENTEDETALLE
+            baseColumnNames: RDRESPUESTAID
+            referencedTableName: MKTMRESPUESTAS
+            referencedColumnNames: REID
+            constraintName: FK__OPE_ENC_D__id_re__540324B6
+        - createIndex:
+            tableName: MKTMRESPUESTACLIENTEDETALLE
+            columns:
+              - column:
+                  name: RDRESPUESTACLIENTEID
+            indexName: IDX_CLIENTEDETALLE_CLIENTEID
+      rollback:
+        - dropIndex:
+            tableName: MKTMRESPUESTACLIENTEDETALLE
+            indexName: IDX_CLIENTEDETALLE_CLIENTEID
+        - dropForeignKeyConstraint:
+            baseTableName: MKTMRESPUESTACLIENTEDETALLE
+            constraintName: FK__OPE_ENC_D__id_re__530F007D
+        - dropForeignKeyConstraint:
+            baseTableName: MKTMRESPUESTACLIENTEDETALLE
+            constraintName: FK__OPE_ENC_D__id_re__540324B6
+        - dropTable:
+            tableName: MKTMRESPUESTACLIENTEDETALLE

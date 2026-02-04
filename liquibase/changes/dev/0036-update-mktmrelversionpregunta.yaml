@@ -1,0 +1,67 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0036-update-relversionpregunta-to-items-fix
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: "Actualizar MKTMRELVERSIONPREGUNTA para que apunte a MKTMITEMS - Correccion FK"
+      changes:
+        # 1. IMPORTANTE: Eliminar la restricción antigua antes de tocar los datos
+        - dropForeignKeyConstraint:
+            baseTableName: MKTMRELVERSIONPREGUNTA
+            constraintName: fk_mktmrelversionpregunta_pregunta
+
+        # 2. Crear tabla temporal de mapeo PRID -> ITID
+        - createTable:
+            tableName: TEMP_PRID_ITID_MAPPING
+            columns:
+              - column: { name: OLD_PRID, type: integer }
+              - column: { name: NEW_ITID, type: integer }
+
+        # 3. Poblar mapeo
+        - sql:
+            comment: "Mapear IDs antiguos de preguntas a nuevos IDs en MKTMITEMS"
+            sql: |
+              INSERT INTO TEMP_PRID_ITID_MAPPING (OLD_PRID, NEW_ITID)
+              SELECT vp.VPPREGUNTAID, i.ITID
+              FROM MKTMRELVERSIONPREGUNTA vp
+              JOIN MKTMPREGUNTAS p ON p.PRID = vp.VPPREGUNTAID
+              JOIN MKTMITEMS i ON i.ITTEXTO = p.PRTEXTO 
+                AND i.ITORDEN = p.PRORDEN
+                AND i.ITTIPOITEM = 'PR'
+                AND i.ITTIPOPREGUNTAID = p.PRTIPOID
+              WHERE NOT EXISTS (
+                SELECT 1 FROM TEMP_PRID_ITID_MAPPING t 
+                WHERE t.OLD_PRID = vp.VPPREGUNTAID
+              );
+
+        # 4. Actualizar MKTMRELVERSIONPREGUNTA con los nuevos IDs
+        - sql:
+            comment: "Actualizar referencias de MKTMRELVERSIONPREGUNTA a MKTMITEMS"
+            sql: |
+              UPDATE MKTMRELVERSIONPREGUNTA vp
+              SET VPPREGUNTAID = m.NEW_ITID
+              FROM TEMP_PRID_ITID_MAPPING m
+              WHERE vp.VPPREGUNTAID = m.OLD_PRID;
+
+        # 5. Limpieza de seguridad
+        - sql:
+            sql: |
+              DELETE FROM MKTMRELVERSIONPREGUNTA 
+              WHERE VPPREGUNTAID NOT IN (SELECT ITID FROM MKTMITEMS);
+
+        # 6. Crear la NUEVA restricción apuntando a MKTMITEMS
+        - addForeignKeyConstraint:
+            baseTableName: MKTMRELVERSIONPREGUNTA
+            baseColumnNames: VPPREGUNTAID
+            referencedTableName: MKTMITEMS
+            referencedColumnNames: ITID
+            constraintName: fk_mktmrelversionpregunta_item
+
+        # 7. Limpiar tabla temporal
+        - dropTable:
+            tableName: TEMP_PRID_ITID_MAPPING
+
+      # CORREGIDO: Rollback vacío (Severidad Media)
+      # Marcado como no reversible porque depende de MKTMPREGUNTAS que es eliminada en el changeset 0037.
+      # Restaurar la FK antigua fallaría si 0037 ya ha corrido.
+      rollback: []

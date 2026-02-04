@@ -1,0 +1,872 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0018-respuestas-idoneidad
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      changes:
+        # Respuestas para Pregunta 11 - Rentas de inversiones
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 11
+              - column:
+                  name: RETEXTO
+                  value: "Más del 75%"
+              - column:
+                  name: REVALOR
+                  value: "A"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 11
+              - column:
+                  name: RETEXTO
+                  value: "Entre el 50 y el 75%"
+              - column:
+                  name: REVALOR
+                  value: "B"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 11
+              - column:
+                  name: RETEXTO
+                  value: "Entre el 25 y el 50%"
+              - column:
+                  name: REVALOR
+                  value: "C"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 11
+              - column:
+                  name: RETEXTO
+                  value: "Menos del 25%"
+              - column:
+                  name: REVALOR
+                  value: "D"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 11
+              - column:
+                  name: RETEXTO
+                  value: "Ninguno"
+              - column:
+                  name: REVALOR
+                  value: "E"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        # Respuestas para Sub-pregunta 121 - Inversión en SB (%)
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 121
+              - column:
+                  name: RETEXTO
+                  value: "Más del 75%"
+              - column:
+                  name: REVALOR
+                  value: "A"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 121
+              - column:
+                  name: RETEXTO
+                  value: "Entre el 50 y el 75%"
+              - column:
+                  name: REVALOR
+                  value: "B"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 121
+              - column:
+                  name: RETEXTO
+                  value: "Entre el 25 y el 50%"
+              - column:
+                  name: REVALOR
+                  value: "C"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 121
+              - column:
+                  name: RETEXTO
+                  value: "Menos del 25%"
+              - column:
+                  name: REVALOR
+                  value: "D"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        # Respuestas para Sub-pregunta 122 - Inversión total (%)
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 122
+              - column:
+                  name: RETEXTO
+                  value: "Más del 75%"
+              - column:
+                  name: REVALOR
+                  value: "A"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 122
+              - column:
+                  name: RETEXTO
+                  value: "Entre el 50 y el 75%"
+              - column:
+                  name: REVALOR
+                  value: "B"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 122
+              - column:
+                  name: RETEXTO
+                  value: "Entre el 25 y el 50%"
+              - column:
+                  name: REVALOR
+                  value: "C"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 122
+              - column:
+                  name: RETEXTO
+                  value: "Menos del 25%"
+              - column:
+                  name: REVALOR
+                  value: "D"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        # Respuestas para Pregunta 13 - Horizonte temporal
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 13
+              - column:
+                  name: RETEXTO
+                  value: "No preveo utilizar esta inversión en los próximos 5 años"
+              - column:
+                  name: REVALOR
+                  value: "A"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 13
+              - column:
+                  name: RETEXTO
+                  value: "Preveo disponer de ello entre 3 y 5 años"
+              - column:
+                  name: REVALOR
+                  value: "B"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 13
+              - column:
+                  name: RETEXTO
+                  value: "Preveo disponer de ello entre 1 y 3 años"
+              - column:
+                  name: REVALOR
+                  value: "C"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 13
+              - column:
+                  name: RETEXTO
+                  value: "Preveo disponer de ello antes de 1 año"
+              - column:
+                  name: REVALOR
+                  value: "D"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        # Respuestas para Pregunta 14 - Patrimonio necesario en 2 años
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 14
+              - column:
+                  name: RETEXTO
+                  value: "Más del 75%"
+              - column:
+                  name: REVALOR
+                  value: "A"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 14
+              - column:
+                  name: RETEXTO
+                  value: "Entre el 50 y el 75%"
+              - column:
+                  name: REVALOR
+                  value: "B"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 14
+              - column:
+                  name: RETEXTO
+                  value: "Entre el 25 y el 50%"
+              - column:
+                  name: REVALOR
+                  value: "C"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 14
+              - column:
+                  name: RETEXTO
+                  value: "Menos del 25%"
+              - column:
+                  name: REVALOR
+                  value: "D"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 14
+              - column:
+                  name: RETEXTO
+                  value: "Nada"
+              - column:
+                  name: REVALOR
+                  value: "E"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        # Respuestas para Pregunta 15 - Comportamiento ante descensos
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 15
+              - column:
+                  name: RETEXTO
+                  value: "Aumentaría mi inversión en productos arriesgados buscando maximizar la rentabilidad de mi cartera financiera"
+              - column:
+                  name: REVALOR
+                  value: "A"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 15
+              - column:
+                  name: RETEXTO
+                  value: "Mantendría mi inversión, manteniendo la misma exposición a productos arriesgados soportando posibles pérdidas elevadas, pero buscando rentabilidad a futuro"
+              - column:
+                  name: REVALOR
+                  value: "B"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 15
+              - column:
+                  name: RETEXTO
+                  value: "Mantendría mi inversión, pero modificando parcialmente la composición de la cartera financiera disminuyendo parte de la exposición a productos más arriesgados a otros productos de menor riesgo buscando reducir parcialmente las posibles pérdidas, pero sin renunciar totalmente a la obtención una rentabilidad en el futuro"
+              - column:
+                  name: REVALOR
+                  value: "C"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 15
+              - column:
+                  name: RETEXTO
+                  value: "Vendería parte de mi inversión con el objetivo de minimizar las pérdidas"
+              - column:
+                  name: REVALOR
+                  value: "D"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 15
+              - column:
+                  name: RETEXTO
+                  value: "Vendería el total de mi cartera para evitar más pérdidas y podría no volver a invertir en valores arriesgados"
+              - column:
+                  name: REVALOR
+                  value: "E"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        # Respuestas para Sub-pregunta 161 - Un mes
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 161
+              - column:
+                  name: RETEXTO
+                  value: "0% - 5%"
+              - column:
+                  name: REVALOR
+                  value: "A"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 161
+              - column:
+                  name: RETEXTO
+                  value: "5% - 10%"
+              - column:
+                  name: REVALOR
+                  value: "B"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 161
+              - column:
+                  name: RETEXTO
+                  value: "10% - 20%"
+              - column:
+                  name: REVALOR
+                  value: "C"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 161
+              - column:
+                  name: RETEXTO
+                  value: "Más de un 20%"
+              - column:
+                  name: REVALOR
+                  value: "D"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        # Respuestas para Sub-pregunta 162 - Un año
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 162
+              - column:
+                  name: RETEXTO
+                  value: "0% - 5%"
+              - column:
+                  name: REVALOR
+                  value: "A"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 162
+              - column:
+                  name: RETEXTO
+                  value: "5% - 10%"
+              - column:
+                  name: REVALOR
+                  value: "B"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 162
+              - column:
+                  name: RETEXTO
+                  value: "10% - 20%"
+              - column:
+                  name: REVALOR
+                  value: "C"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 162
+              - column:
+                  name: RETEXTO
+                  value: "Más de un 20%"
+              - column:
+                  name: REVALOR
+                  value: "D"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        # Respuestas para Sub-pregunta 163 - Tres años
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 163
+              - column:
+                  name: RETEXTO
+                  value: "0% - 5%"
+              - column:
+                  name: REVALOR
+                  value: "A"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 163
+              - column:
+                  name: RETEXTO
+                  value: "5% - 10%"
+              - column:
+                  name: REVALOR
+                  value: "B"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 163
+              - column:
+                  name: RETEXTO
+                  value: "10% - 20%"
+              - column:
+                  name: REVALOR
+                  value: "C"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 163
+              - column:
+                  name: RETEXTO
+                  value: "Más de un 20%"
+              - column:
+                  name: REVALOR
+                  value: "D"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"

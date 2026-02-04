@@ -1,0 +1,90 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0022-relacion-version-preguntas-sostenibilidad
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      changes:
+        # Relacionar pregunta 17 con versión 1
+        - insert:
+            tableName: MKTMRELVERSIONPREGUNTA
+            columns:
+              - column:
+                  name: VPID
+                  value: 48
+              - column:
+                  name: VPVERSIONID
+                  value: 1
+              - column:
+                  name: VPPREGUNTAID
+                  value: 17
+              - column:
+                  name: VPUSUALTA
+                  value: "SISTEMA"
+
+        # Relacionar pregunta 18 con versión 1
+        - insert:
+            tableName: MKTMRELVERSIONPREGUNTA
+            columns:
+              - column:
+                  name: VPID
+                  value: 49
+              - column:
+                  name: VPVERSIONID
+                  value: 1
+              - column:
+                  name: VPPREGUNTAID
+                  value: 18
+              - column:
+                  name: VPUSUALTA
+                  value: "SISTEMA"
+
+        # Relacionar pregunta 19 con versión 1
+        - insert:
+            tableName: MKTMRELVERSIONPREGUNTA
+            columns:
+              - column:
+                  name: VPID
+                  value: 50
+              - column:
+                  name: VPVERSIONID
+                  value: 1
+              - column:
+                  name: VPPREGUNTAID
+                  value: 19
+              - column:
+                  name: VPUSUALTA
+                  value: "SISTEMA"
+
+        # Relacionar pregunta 20 con versión 1
+        - insert:
+            tableName: MKTMRELVERSIONPREGUNTA
+            columns:
+              - column:
+                  name: VPID
+                  value: 51
+              - column:
+                  name: VPVERSIONID
+                  value: 1
+              - column:
+                  name: VPPREGUNTAID
+                  value: 20
+              - column:
+                  name: VPUSUALTA
+                  value: "SISTEMA"
+
+        # Relacionar pregunta 21 con versión 1
+        - insert:
+            tableName: MKTMRELVERSIONPREGUNTA
+            columns:
+              - column:
+                  name: VPID
+                  value: 52
+              - column:
+                  name: VPVERSIONID
+                  value: 1
+              - column:
+                  name: VPPREGUNTAID
+                  value: 21
+              - column:
+                  name: VPUSUALTA
+                  value: "SISTEMA"

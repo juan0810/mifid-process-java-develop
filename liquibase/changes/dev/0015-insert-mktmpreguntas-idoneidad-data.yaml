@@ -1,0 +1,339 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0015-preguntas-idoneidad
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      changes:
+        # Pregunta 1 - Rentas de inversiones para gastos corrientes
+        - insert:
+            tableName: MKTMPREGUNTAS
+            columns:
+              - column:
+                  name: PRID
+                  value: 11
+              - column:
+                  name: PRTIPOID
+                  value: 2  # RESPUESTA_UNICA
+              - column:
+                  name: PRTEXTO
+                  value: "¿Qué parte de las rentas de sus inversiones podría necesitar para cubrir sus gastos corrientes?"
+              - column:
+                  name: PRORDEN
+                  value: 1
+              - column:
+                  name: PRTIPOTEST
+                  value: "I"
+              - column:
+                  name: PRRESPUESTACORRECTA
+                  value: false
+              - column:
+                  name: PRFECINICIO
+                  valueDate: "2025-01-01"
+              - column:
+                  name: PRUSUALTA
+                  value: "SISTEMA"
+
+        # Pregunta 2 - Porcentaje inversión sobre patrimonio (CABECERA)
+        - insert:
+            tableName: MKTMPREGUNTAS
+            columns:
+              - column:
+                  name: PRID
+                  value: 12
+              - column:
+                  name: PRTIPOID
+                  value: 1  # CABECERA
+              - column:
+                  name: PRTEXTO
+                  value: "¿Qué porcentaje representa su inversión sobre su patrimonio global?"
+              - column:
+                  name: PRORDEN
+                  value: 2
+              - column:
+                  name: PRTIPOTEST
+                  value: "I"
+              - column:
+                  name: PRRESPUESTACORRECTA
+                  value: false
+              - column:
+                  name: PRFECINICIO
+                  valueDate: "2025-01-01"
+              - column:
+                  name: PRUSUALTA
+                  value: "SISTEMA"
+
+        # Sub-pregunta 2.1 - Inversión en SB (%)
+        - insert:
+            tableName: MKTMPREGUNTAS
+            columns:
+              - column:
+                  name: PRID
+                  value: 121
+              - column:
+                  name: PRDEPENDEDE
+                  value: 12
+              - column:
+                  name: PRTIPOID
+                  value: 2  # RESPUESTA_UNICA
+              - column:
+                  name: PRTEXTO
+                  value: "Inversión en SB (%)"
+              - column:
+                  name: PRORDEN
+                  value: 3
+              - column:
+                  name: PRTIPOTEST
+                  value: "I"
+              - column:
+                  name: PRRESPUESTACORRECTA
+                  value: false
+              - column:
+                  name: PRFECINICIO
+                  valueDate: "2025-01-01"
+              - column:
+                  name: PRUSUALTA
+                  value: "SISTEMA"
+
+        # Sub-pregunta 2.2 - Inversión total (%)
+        - insert:
+            tableName: MKTMPREGUNTAS
+            columns:
+              - column:
+                  name: PRID
+                  value: 122
+              - column:
+                  name: PRDEPENDEDE
+                  value: 12
+              - column:
+                  name: PRTIPOID
+                  value: 2  # RESPUESTA_UNICA
+              - column:
+                  name: PRTEXTO
+                  value: "Inversión total (%)"
+              - column:
+                  name: PRORDEN
+                  value: 4
+              - column:
+                  name: PRTIPOTEST
+                  value: "I"
+              - column:
+                  name: PRRESPUESTACORRECTA
+                  value: false
+              - column:
+                  name: PRFECINICIO
+                  valueDate: "2025-01-01"
+              - column:
+                  name: PRUSUALTA
+                  value: "SISTEMA"
+
+        # Pregunta 3 - Horizonte temporal
+        - insert:
+            tableName: MKTMPREGUNTAS
+            columns:
+              - column:
+                  name: PRID
+                  value: 13
+              - column:
+                  name: PRTIPOID
+                  value: 2  # RESPUESTA_UNICA
+              - column:
+                  name: PRTEXTO
+                  value: "¿Cuál es el horizonte temporal de su inversión?"
+              - column:
+                  name: PRORDEN
+                  value: 5
+              - column:
+                  name: PRTIPOTEST
+                  value: "I"
+              - column:
+                  name: PRRESPUESTACORRECTA
+                  value: false
+              - column:
+                  name: PRFECINICIO
+                  valueDate: "2025-01-01"
+              - column:
+                  name: PRUSUALTA
+                  value: "SISTEMA"
+
+        # Pregunta 4 - Patrimonio necesario en 2 años
+        - insert:
+            tableName: MKTMPREGUNTAS
+            columns:
+              - column:
+                  name: PRID
+                  value: 14
+              - column:
+                  name: PRTIPOID
+                  value: 2  # RESPUESTA_UNICA
+              - column:
+                  name: PRTEXTO
+                  value: "¿Qué parte del patrimonio invertido en Singular Bank prevé que necesitará disponer en los próximos dos años?"
+              - column:
+                  name: PRORDEN
+                  value: 6
+              - column:
+                  name: PRTIPOTEST
+                  value: "I"
+              - column:
+                  name: PRRESPUESTACORRECTA
+                  value: false
+              - column:
+                  name: PRFECINICIO
+                  valueDate: "2025-01-01"
+              - column:
+                  name: PRUSUALTA
+                  value: "SISTEMA"
+
+        # Pregunta 5 - Comportamiento ante descensos del mercado
+        - insert:
+            tableName: MKTMPREGUNTAS
+            columns:
+              - column:
+                  name: PRID
+                  value: 15
+              - column:
+                  name: PRTIPOID
+                  value: 2  # RESPUESTA_UNICA
+              - column:
+                  name: PRTEXTO
+                  value: "Teniendo en cuenta que la rentabilidad depende del riesgo de la inversión, ¿cuál sería su comportamiento ante un escenario de descensos fuertes y generalizados de los mercados?"
+              - column:
+                  name: PRORDEN
+                  value: 7
+              - column:
+                  name: PRTIPOTEST
+                  value: "I"
+              - column:
+                  name: PRRESPUESTACORRECTA
+                  value: false
+              - column:
+                  name: PRFECINICIO
+                  valueDate: "2025-01-01"
+              - column:
+                  name: PRUSUALTA
+                  value: "SISTEMA"
+
+        # Pregunta 6 - Pérdida máxima por períodos (CABECERA)
+        - insert:
+            tableName: MKTMPREGUNTAS
+            columns:
+              - column:
+                  name: PRID
+                  value: 16
+              - column:
+                  name: PRTIPOID
+                  value: 1  # CABECERA
+              - column:
+                  name: PRTEXTO
+                  value: "En función de las fluctuaciones del mercado, ¿qué pérdida máxima estaría dispuesto a asumir en los distintos periodos?"
+              - column:
+                  name: PRORDEN
+                  value: 8
+              - column:
+                  name: PRTIPOTEST
+                  value: "I"
+              - column:
+                  name: PRRESPUESTACORRECTA
+                  value: false
+              - column:
+                  name: PRFECINICIO
+                  valueDate: "2025-01-01"
+              - column:
+                  name: PRUSUALTA
+                  value: "SISTEMA"
+
+        # Sub-pregunta 6.1 - Un mes
+        - insert:
+            tableName: MKTMPREGUNTAS
+            columns:
+              - column:
+                  name: PRID
+                  value: 161
+              - column:
+                  name: PRDEPENDEDE
+                  value: 16
+              - column:
+                  name: PRTIPOID
+                  value: 2  # RESPUESTA_UNICA
+              - column:
+                  name: PRTEXTO
+                  value: "Un mes"
+              - column:
+                  name: PRORDEN
+                  value: 9
+              - column:
+                  name: PRTIPOTEST
+                  value: "I"
+              - column:
+                  name: PRRESPUESTACORRECTA
+                  value: false
+              - column:
+                  name: PRFECINICIO
+                  valueDate: "2025-01-01"
+              - column:
+                  name: PRUSUALTA
+                  value: "SISTEMA"
+
+        # Sub-pregunta 6.2 - Un año
+        - insert:
+            tableName: MKTMPREGUNTAS
+            columns:
+              - column:
+                  name: PRID
+                  value: 162
+              - column:
+                  name: PRDEPENDEDE
+                  value: 16
+              - column:
+                  name: PRTIPOID
+                  value: 2  # RESPUESTA_UNICA
+              - column:
+                  name: PRTEXTO
+                  value: "Un año"
+              - column:
+                  name: PRORDEN
+                  value: 10
+              - column:
+                  name: PRTIPOTEST
+                  value: "I"
+              - column:
+                  name: PRRESPUESTACORRECTA
+                  value: false
+              - column:
+                  name: PRFECINICIO
+                  valueDate: "2025-01-01"
+              - column:
+                  name: PRUSUALTA
+                  value: "SISTEMA"
+
+        # Sub-pregunta 6.3 - Tres años
+        - insert:
+            tableName: MKTMPREGUNTAS
+            columns:
+              - column:
+                  name: PRID
+                  value: 163
+              - column:
+                  name: PRDEPENDEDE
+                  value: 16
+              - column:
+                  name: PRTIPOID
+                  value: 2  # RESPUESTA_UNICA
+              - column:
+                  name: PRTEXTO
+                  value: "Tres años"
+              - column:
+                  name: PRORDEN
+                  value: 11
+              - column:
+                  name: PRTIPOTEST
+                  value: "I"
+              - column:
+                  name: PRRESPUESTACORRECTA
+                  value: false
+              - column:
+                  name: PRFECINICIO
+                  valueDate: "2025-01-01"
+              - column:
+                  name: PRUSUALTA
+                  value: "SISTEMA"

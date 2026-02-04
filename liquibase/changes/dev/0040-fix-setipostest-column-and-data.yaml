@@ -1,0 +1,36 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0040-fix-setipostest-column-and-data
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: "Ampliar columna SETIPOSTEST a varchar(15) y corregir datos"
+      preConditions:
+        onFail: MARK_RAN
+        sqlCheck:
+          expectedResult: 1
+          sql: "SELECT COUNT(*) FROM mktmservicios WHERE seid = 1 AND setipostest = 'C,I,S'"
+      changes:
+        - modifyDataType:
+            tableName: MKTMSERVICIOS
+            columnName: SETIPOSTEST
+            newDataType: varchar(15)
+        - update:
+            tableName: MKTMSERVICIOS
+            columns:
+              - column:
+                  name: SETIPOSTEST
+                  value: "CO,ID,SO"
+            where: SEID = 1
+
+      rollback:
+        - update:
+            tableName: MKTMSERVICIOS
+            columns:
+              - column:
+                  name: SETIPOSTEST
+                  value: "C,I,S"
+            where: SEID = 1
+        - modifyDataType:
+            tableName: MKTMSERVICIOS
+            columnName: SETIPOSTEST
+            newDataType: char(2)

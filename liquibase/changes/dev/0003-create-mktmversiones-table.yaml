@@ -1,0 +1,68 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0003
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      changes:
+        - createTable:
+            tableName: MKTMVERSIONES
+            columns:
+              - column:
+                  name: VEID
+                  type: smallint
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: VESERVICIOID
+                  type: smallint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: VEDESCRIPCION
+                  type: varchar(500)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: VEFECINICIO
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: VEFECFIN
+                  type: date
+              - column:
+                  name: VEACTIVA
+                  type: boolean
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+              - column:
+                  name: VEFECALTA
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: VEFECMOD
+                  type: timestamp
+              - column:
+                  name: VEUSUALTA
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: VEUSUMOD
+                  type: varchar(50)
+        - addForeignKeyConstraint:
+            baseTableName: MKTMVERSIONES
+            baseColumnNames: VESERVICIOID
+            referencedTableName: MKTMSERVICIOS
+            referencedColumnNames: SEID
+            constraintName: fk_mktmversiones_mktmservicios
+      rollback:
+        - dropForeignKeyConstraint:
+            baseTableName: MKTMVERSIONES
+            constraintName: fk_mktmversiones_mktmservicios
+        - dropTable:
+            tableName: MKTMVERSIONES

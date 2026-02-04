@@ -1,0 +1,2997 @@
+databaseChangeLog:
+  # ==========================================
+  # TRUNCATE TABLE
+  # ==========================================
+  - changeSet:
+      id: 0042-truncate-mktmrespuestacliente
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Truncate mktmrespuestacliente and cascade to detail table
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              TRUNCATE TABLE mktmrespuestacliente CASCADE;
+
+  # ==========================================
+  # FILA 1: 00103821E - ESG: C (Banquero decide)
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila01-00103821E-20250306
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 00103821E - Delega en banquero
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('00103821E', '2025-03-06', '2027-03-06', 2, 'Agresivo', 'A,B,C,D,E,F,G,H,I, J, K', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'C';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '00103821E' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '00103821E' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 2: 00129907A - ESG: B completo (No%, No%, No PIAS, Mín 5%)
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila02-00129907A-20240924
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 00129907A - Preferencias propias completas
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('00129907A', '2024-09-24', '2026-09-24', 2, 'Decidido', 'A,B,C, D', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 17 AND itvalor = 'B'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 18 AND itvalor = 'A'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 19 AND itvalor = 'A'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 20 AND itvalor = '1'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 21 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '00129907A' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '00129907A' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 3: 00218852F - ESG: No
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila03-00218852F-20240722
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 00218852F - No desea sostenibilidad
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('00218852F', '2024-07-22', '2026-07-22', 2, 'Decidido', 'A,B,C, D', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '00218852F' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '00218852F' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 4: 00223332W - ESG: No
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila04-00223332W-20250822
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 00223332W - No desea sostenibilidad
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('00223332W', '2025-08-22', '2027-08-22', 2, 'Agresivo', 'A,B,C,D,E', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '00223332W' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '00223332W' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 5: 00402489N - ESG: No
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila05-00402489N-20241122
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 00402489N - No desea sostenibilidad
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('00402489N', '2024-11-22', '2026-11-22', 2, 'Prudente', 'A,B,C,D,E, F', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '00402489N' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '00402489N' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 6: 00410412T - ESG: B completo (Mín 5%, Mín 2%, Gases, Mín 10%)
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila06-00410412T-20231122
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 00410412T - Preferencias propias completas
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('00410412T', '2023-11-22', '2025-11-22', 2, 'Decidido', 'A,B,C,D,E,F,G,H,I, J', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 17 AND itvalor = 'B'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 18 AND itvalor = 'B'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 19 AND itvalor = 'B'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 20 AND itvalor = '2'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 21 AND itvalor = 'B';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '00410412T' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '00410412T' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 7: 00443424F - ESG: C (Banquero decide) - EXPIRED
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila07-00443424F-20241108
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 00443424F - Delega en banquero (EXPIRED)
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('00443424F', '2024-11-08', '2026-12-02', 4, 'Agresivo', 'A,B,C,D,E, F, G', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'C';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '00443424F' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '00443424F' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 8: 00831611T - ESG: C (Banquero decide)
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila08-00831611T-20251016
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 00831611T - Delega en banquero
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('00831611T', '2025-10-16', '2027-10-16', 2, 'Decidido', 'A,B,C,D,E, F, G, H', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'C';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '00831611T' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '00831611T' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 9: 05202785R - ESG: No (No perfilado)
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila09-05202785R-20240101
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 05202785R - No desea sostenibilidad
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('05202785R', NULL, NULL, 0, 'No perfilado', '', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '05202785R' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '05202785R' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 10: 05219145P - ESG: C (Banquero decide)
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila10-05219145P-20240516
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 05219145P - Delega en banquero
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('05219145P', '2024-05-16', '2026-05-16', 2, 'Decidido', 'A,B,C,D,E,F,G,H,I, J, K', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'C';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '05219145P' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '05219145P' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 11: 05319569Z - ESG: No (No perfilado)
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila11-05319569Z-20240101
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 05319569Z - No desea sostenibilidad
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('05319569Z', NULL, NULL, 0, 'No perfilado', '', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '05319569Z' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '05319569Z' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 12: 05336805T - ESG: C (Banquero decide)
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila12-05336805T-20240723
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 05336805T - Delega en banquero
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('05336805T', '2024-07-23', '2026-07-23', 2, 'Decidido', 'A,B,C,D,E,F,G,H,I, J, K', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'C';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '05336805T' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '05336805T' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 13: 09754617H - ESG: No
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila13-09754617H-20241119
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 09754617H - No desea sostenibilidad
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('09754617H', '2024-11-19', '2026-11-19', 2, 'Decidido', 'A,B,C,D,E,F,G,H,I, J', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '09754617H' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '09754617H' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 14: 09780382T - ESG: No
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila14-09780382T-20240320
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 09780382T - No desea sostenibilidad
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('09780382T', '2024-03-20', '2026-03-20', 2, 'Agresivo', 'A,B,C,D,E, F, G, H, I, J, K', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '09780382T' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '09780382T' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 15: 10197793F - ESG: B completo (Mín 5%, Mín 5%, Gases, Sin%)
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila15-10197793F-20250122
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 10197793F - Preferencias propias completas
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('10197793F', '2025-01-22', '2027-01-23', 2, 'Prudente', 'A,B,C', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 17 AND itvalor = 'B'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 18 AND itvalor = 'B'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 19 AND itvalor = 'C'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 20 AND itvalor = '2'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 21 AND itvalor = 'D';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '10197793F' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '10197793F' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 16: 14099755L - ESG: No
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila16-14099755L-20240626
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 14099755L - No desea sostenibilidad
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('14099755L', '2024-06-26', '2026-07-01', 2, 'Flexible', 'A,B,C', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '14099755L' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '14099755L' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 17: 15792476D - ESG: B completo (Mín 5%, Mín 2%, Gases, Sin%)
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila17-15792476D-20250930
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 15792476D - Preferencias propias completas
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('15792476D', '2025-09-30', '2027-09-30', 2, 'Agresivo', 'A,B,C,D,E,F,G,H,I, J, K', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 17 AND itvalor = 'B'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 18 AND itvalor = 'B'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 19 AND itvalor = 'B'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 20 AND itvalor = '2'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 21 AND itvalor = 'D';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '15792476D' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '15792476D' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 18: 16035622E - ESG: No
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila18-16035622E-20240624
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 16035622E - No desea sostenibilidad
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('16035622E', '2024-06-24', '2026-07-01', 2, 'Flexible', 'A,B,C', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '16035622E' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '16035622E' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 19: 16036996Q - ESG: B completo (Mín 20%, Mín 5%, No PIAS, Mín 5%)
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila19-16036996Q-20240621
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 16036996Q - Preferencias propias completas
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('16036996Q', '2024-06-21', '2026-07-01', 2, 'Flexible', 'A,B,C,D,E,F,G,H,I, J', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 17 AND itvalor = 'B'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 18 AND itvalor = 'C'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 19 AND itvalor = 'C'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 20 AND itvalor = '1'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 21 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '16036996Q' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '16036996Q' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 20: 17856108N - ESG: No
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila20-17856108N-20250924
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 17856108N - No desea sostenibilidad
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('17856108N', '2025-09-24', '2027-09-24', 2, 'Agresivo', 'A,B,C,D,E,F', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '17856108N' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '17856108N' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 21: 18980250Y - ESG: No
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila21-18980250Y-20240827
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 18980250Y - No desea sostenibilidad
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('18980250Y', '2024-08-27', '2026-08-27', 2, 'Flexible', 'A,B,C,D,E,F', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '18980250Y' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '18980250Y' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 22: 22447542W - ESG: B completo (Mín 5%, No%, No PIAS, Mín 10%)
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila22-22447542W-20240715
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 22447542W - Preferencias propias completas
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('22447542W', '2024-07-15', '2026-07-15', 2, 'Conservador', 'A,B,C', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 17 AND itvalor = 'B'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 18 AND itvalor = 'B'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 19 AND itvalor = 'A'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 20 AND itvalor = '1'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 21 AND itvalor = 'B';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '22447542W' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '22447542W' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 23: 25403793V - ESG: No
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila23-25403793V-20240425
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 25403793V - No desea sostenibilidad
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('25403793V', '2024-04-25', '2026-04-25', 2, 'Agresivo', 'A,B,C,D,E,F,G,H,I, J', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '25403793V' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '25403793V' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 24: 36168341J - ESG: B completo (Mín 20%, No%, No PIAS, Mín 20%)
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila24-36168341J-20250208
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 36168341J - Preferencias propias completas
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('36168341J', '2025-02-08', '2027-02-08', 2, 'Prudente', 'A,B,C,D,E,F,G,H,I, J, K', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 17 AND itvalor = 'B'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 18 AND itvalor = 'C'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 19 AND itvalor = 'A'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 20 AND itvalor = '1'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 21 AND itvalor = 'C';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '36168341J' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '36168341J' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 25: 37349860E - ESG: No
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila25-37349860E-20240909
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 37349860E - No desea sostenibilidad
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('37349860E', '2024-09-09', '2026-09-09', 2, 'Agresivo', 'A,B,C,D,E,F,G,H,I, J', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '37349860E' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '37349860E' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 26: 42982336M - ESG: No (No perfilado)
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila26-42982336M-20240101
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 42982336M - No desea sostenibilidad
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('42982336M', NULL, NULL, 0, 'No perfilado', '', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '42982336M' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '42982336M' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 27: 45087831B - ESG: No
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila27-45087831B-20250105
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 45087831B - No desea sostenibilidad
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('45087831B', '2025-01-05', '2027-01-05', 2, 'Agresivo', 'A,B,C,D,E,F', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '45087831B' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '45087831B' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 28: 47358332K - ESG: C (Banquero decide)
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila28-47358332K-20241022
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 47358332K - Delega en banquero
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('47358332K', '2024-10-22', '2026-10-29', 2, 'Flexible', 'A,B,C,D,E,F', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'C';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '47358332K' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '47358332K' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 29: 50762470K - ESG: No
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila29-50762470K-20250630
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 50762470K - No desea sostenibilidad
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('50762470K', '2025-06-30', '2027-06-30', 2, 'Agresivo', 'A,B,C', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '50762470K' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '50762470K' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 30: 50812947J - ESG: B completo (No%, Mín 2%, No PIAS, Mín 5%)
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila30-50812947J-20241009
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 50812947J - Preferencias propias completas
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('50812947J', '2024-10-09', '2026-10-09', 2, 'Agresivo', 'A,B,C,D,E,F,G,H,I, J, K', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 17 AND itvalor = 'B'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 18 AND itvalor = 'A'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 19 AND itvalor = 'B'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 20 AND itvalor = '1'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 21 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '50812947J' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '50812947J' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 31: 50835529D - ESG: B completo (No%, Mín 2%, No PIAS, Mín 10%)
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila31-50835529D-20250703
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 50835529D - Preferencias propias completas
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('50835529D', '2025-07-03', '2027-07-03', 2, 'Agresivo', 'A,B,C,D,E,F,G,H,I, J, K', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 17 AND itvalor = 'B'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 18 AND itvalor = 'A'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 19 AND itvalor = 'B'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 20 AND itvalor = '1'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 21 AND itvalor = 'B';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '50835529D' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '50835529D' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 32: 51414663A - ESG: No (No perfilado)
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila32-51414663A-20240101
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 51414663A - No desea sostenibilidad
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('51414663A', NULL, NULL, 0, 'No perfilado', '', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '51414663A' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '51414663A' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 33: 60131863L - ESG: No
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila33-60131863L-20241018
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 60131863L - No desea sostenibilidad
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('60131863L', '2024-10-18', '2026-10-29', 2, 'Agresivo', 'A,B,C,D,E,F,G,H,I, J, K', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '60131863L' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '60131863L' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 34: 71544007T - ESG: B incompleto (solo pregunta 17)
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila34-71544007T-20240627
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 71544007T - Preferencias propias incompletas
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('71544007T', '2024-06-27', '2026-06-27', 2, 'Conservador', 'A,B,C', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'B';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '71544007T' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '71544007T' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 35: 78405698D - ESG: No
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila35-78405698D-20250617
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 78405698D - No desea sostenibilidad
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('78405698D', '2025-06-17', '2027-06-17', 2, 'Decidido', 'A,B,C,D,E,F,G,H,I, J, K', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '78405698D' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '78405698D' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 36: A87717286 - ESG: No (No perfilado)
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila36-A87717286-20240101
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad A87717286 - No desea sostenibilidad
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('A87717286', NULL, NULL, 0, 'No perfilado', '', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = 'A87717286' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = 'A87717286' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 37: B24673360 - ESG: C completo (No%, Mín 5%, No PIAS, Mín 20%)
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila37-B24673360-20240320
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad B24673360 - Delega en banquero con preferencias
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('B24673360', '2024-03-20', '2026-03-20', 2, 'Decidido', 'A,B,C', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 17 AND itvalor = 'C'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 18 AND itvalor = 'A'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 19 AND itvalor = 'C'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 20 AND itvalor = '1'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 21 AND itvalor = 'C';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = 'B24673360' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = 'B24673360' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 38: B38799680 - ESG: C (Banquero decide)
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila38-B38799680-20250725
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad B38799680 - Delega en banquero
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('B38799680', '2025-07-25', '2027-07-25', 2, 'Decidido', 'A,B,C,D,E,F,G,H,I, J', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'C';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = 'B38799680' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = 'B38799680' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 39: B82668146 - ESG: B completo (No%, Mín 5%, Medioamb, Mín 20%)
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila39-B82668146-20250114
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad B82668146 - Preferencias propias completas
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('B82668146', '2025-01-14', '2027-01-14', 2, 'Prudente', 'A,B,C,D,E,F,G,H,I, J, K', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 17 AND itvalor = 'B'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 18 AND itvalor = 'A'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 19 AND itvalor = 'C'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 20 AND itvalor = '3'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 21 AND itvalor = 'C';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = 'B82668146' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = 'B82668146' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 40: B87446720 - ESG: B completo (No%, No%, Medioamb, Sin%)
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila40-B87446720-20240514
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad B87446720 - Preferencias propias completas
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('B87446720', '2024-05-14', '2026-05-14', 2, 'Conservador', 'A,B,C,D,E,F,G,H,I, J, K', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 17 AND itvalor = 'B'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 18 AND itvalor = 'A'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 19 AND itvalor = 'A'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 20 AND itvalor = '3'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 21 AND itvalor = 'D';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = 'B87446720' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = 'B87446720' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 41: V95952644 - ESG: No (No perfilado)
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila41-V95952644-20240101
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad V95952644 - No desea sostenibilidad
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('V95952644', NULL, NULL, 0, 'No perfilado', '', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = 'V95952644' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = 'V95952644' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 42: X0691717S - ESG: B completo (No%, No%, Sociales, Sin%)
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila42-X0691717S-20250108
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad X0691717S - Preferencias propias completas
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('X0691717S', '2025-01-08', '2027-01-08', 2, 'Flexible', 'A,B,C,D,E,F', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 17 AND itvalor = 'B'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 18 AND itvalor = 'A'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 19 AND itvalor = 'A'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 20 AND itvalor = '4'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 21 AND itvalor = 'D';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = 'X0691717S' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = 'X0691717S' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 43: Y4381181V - ESG: No
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila43-Y4381181V-20240927
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad Y4381181V - No desea sostenibilidad
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('Y4381181V', '2024-09-27', '2026-09-27', 2, 'Agresivo', 'A,B,C,D,E,F,G,H,I, J', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = 'Y4381181V' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = 'Y4381181V' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 44: Y6320673B - ESG: No - EXPIRED
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila44-Y6320673B-20210507
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad Y6320673B - No desea sostenibilidad (EXPIRED)
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('Y6320673B', '2021-05-07', '2023-05-07', 4, 'Agresivo', 'A,B,C,D,E, F, G, H', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = 'Y6320673B' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = 'Y6320673B' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 45: Z0553299Q - ESG: B completo (No%, No%, Todos, Sin%)
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila45-Z0553299Q-20250418
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad Z0553299Q - Preferencias propias completas
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('Z0553299Q', '2025-04-18', '2027-04-18', 2, 'Conservador', 'A,B,C,D,E,F,G,H,I, J', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 17 AND itvalor = 'B'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 18 AND itvalor = 'A'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 19 AND itvalor = 'A'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 20 AND itvalor = '5'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 21 AND itvalor = 'D';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = 'Z0553299Q' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = 'Z0553299Q' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 46: Z0717178C - ESG: B completo (Mín 5%, Mín 5%, Sociales, Mín 5%)
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila46-Z0717178C-20250508
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad Z0717178C - Preferencias propias completas
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('Z0717178C', '2025-05-08', '2027-05-08', 2, 'Flexible', 'A,B,C,D,E,F,G', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 17 AND itvalor = 'B'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 18 AND itvalor = 'B'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 19 AND itvalor = 'C'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 20 AND itvalor = '4'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 21 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = 'Z0717178C' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = 'Z0717178C' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 47: Z1285202J - ESG: No (No perfilado)
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila47-Z1285202J-20240101
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad Z1285202J - No desea sostenibilidad
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('Z1285202J', NULL, NULL, 0, 'No perfilado', '', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = 'Z1285202J' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = 'Z1285202J' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 48: 19498741P - ESG: No
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila48-19498741P-20250822
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 19498741P - No desea sostenibilidad
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('19498741P', '2025-08-22', '2027-08-22', 2, 'Agresivo', 'A,B,C,D,E', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '19498741P' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '19498741P' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 49: 02644871D - ESG: No
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila49-02644871D-20241122
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 02644871D - No desea sostenibilidad
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('02644871D', '2024-11-22', '2026-11-22', 2, 'Prudente', 'A,B,C,D,E, F', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '02644871D' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '02644871D' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 50: 46591811K - ESG: B completo (Mín 5%, Mín 2%, Gases, Mín 10%)
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila50-46591811K-20251122
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 46591811K - Preferencias propias completas
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('46591811K', '2025-11-22', '2027-11-22', 2, 'Decidido', 'A,B,C,D,E,F,G,H,I, J', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 17 AND itvalor = 'B'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 18 AND itvalor = 'B'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 19 AND itvalor = 'B'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 20 AND itvalor = '2'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 21 AND itvalor = 'B';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '46591811K' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '46591811K' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 51: 09775525L - ESG: C (Banquero decide)
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila51-09775525L-20241108
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 09775525L - Delega en banquero
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('09775525L', '2024-11-08', '2026-12-02', 2, 'Agresivo', 'A,B,C,D,E, F, G', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'C';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '09775525L' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '09775525L' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 52: 73077420A - ESG: B incompleto (solo pregunta 17)
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila52-73077420A-20240627
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 73077420A - Preferencias propias incompletas
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('73077420A', '2024-06-27', '2026-06-27', 2, 'Conservador', 'A,B,C', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'B';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '73077420A' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '73077420A' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 53: 51178881V - ESG: No
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila53-51178881V-20240927
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 51178881V - No desea sostenibilidad
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('51178881V', '2024-09-27', '2026-09-27', 2, 'Agresivo', 'A,B,C,D,E,F,G,H,I, J', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '51178881V' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '51178881V' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 54: 71448558R - ESG: No
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila54-71448558R-20210507
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 71448558R - No desea sostenibilidad
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('71448558R', '2021-05-07', '2023-05-07', 2, 'Agresivo', 'A,B,C,D,E, F, G, H', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '71448558R' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '71448558R' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 55: B21922273 - ESG: B completo (Mín 5%, No%, No PIAS, Mín 10%)
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila55-B21922273-20240715
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad B21922273 - Preferencias propias completas
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('B21922273', '2024-07-15', '2026-07-15', 2, 'Conservador', 'A,B,C', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 17 AND itvalor = 'B'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 18 AND itvalor = 'B'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 19 AND itvalor = 'A'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 20 AND itvalor = '1'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 21 AND itvalor = 'B';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = 'B21922273' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = 'B21922273' AND rcversionid = 1);
+
+  # ==========================================
+  # DUPLICATE ENTRIES START HERE
+  # ==========================================
+
+  # ==========================================
+  # FILA 56: 09775525L - ESG: B completo (No%, No%, Todos, Sin%) - EXPIRED - DUPLICATE
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila56-09775525L-20250418
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 09775525L - Preferencias propias completas (EXPIRED - segundo registro)
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('09775525L', '2025-04-18', '2027-04-18', 4, 'Conservador', 'A,B,C,D,E,F,G,H,I, J', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 17 AND itvalor = 'B'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 18 AND itvalor = 'A'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 19 AND itvalor = 'A'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 20 AND itvalor = '5'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 21 AND itvalor = 'D';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '09775525L' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '09775525L' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 57: 46591811K - ESG: No - DUPLICATE
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila57-46591811K-20240425
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 46591811K - No desea sostenibilidad (segundo registro)
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('46591811K', '2024-04-25', '2026-04-25', 2, 'Agresivo', 'A,B,C,D,E,F,G,H,I, J', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '46591811K' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '46591811K' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 58: 14099755L - ESG: B completo (Mín 20%, No%, No PIAS, Mín 20%) - DUPLICATE
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila58-14099755L-20250208
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 14099755L - Preferencias propias completas (segundo registro)
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('14099755L', '2025-02-08', '2027-02-08', 2, 'Prudente', 'A,B,C,D,E,F,G,H,I, J, K', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 17 AND itvalor = 'B'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 18 AND itvalor = 'C'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 19 AND itvalor = 'A'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 20 AND itvalor = '1'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 21 AND itvalor = 'C';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '14099755L' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '14099755L' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 59: 16035622E - ESG: No - DUPLICATE
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila59-16035622E-20240909
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 16035622E - No desea sostenibilidad (segundo registro)
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('16035622E', '2024-09-09', '2026-09-09', 2, 'Agresivo', 'A,B,C,D,E,F,G,H,I, J', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '16035622E' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '16035622E' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 60: V95952644 - ESG: No - DUPLICATE
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila60-V95952644-20240102
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad V95952644 - No desea sostenibilidad (segundo registro)
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('V95952644', NULL, NULL, 0, 'No perfilado', '', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = 'V95952644' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = 'V95952644' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 61: B87446720 - ESG: No - DUPLICATE
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila61-B87446720-20250105
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad B87446720 - No desea sostenibilidad (segundo registro)
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('B87446720', '2025-01-05', '2027-01-05', 2, 'Agresivo', 'A,B,C,D,E,F', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = 'B87446720' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = 'B87446720' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 62: B38799680 - ESG: C (Banquero decide) - DUPLICATE
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila62-B38799680-20241022
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad B38799680 - Delega en banquero (segundo registro)
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('B38799680', '2024-10-22', '2026-10-29', 2, 'Flexible', 'A,B,C,D,E,F', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'C';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = 'B38799680' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = 'B38799680' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 63: 78405698D - ESG: No - DUPLICATE
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila63-78405698D-20250630
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 78405698D - No desea sostenibilidad (segundo registro)
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('78405698D', '2025-06-30', '2027-06-30', 2, 'Agresivo', 'A,B,C', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '78405698D' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '78405698D' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 64: B24673360 - ESG: B completo (No%, Mín 2%, No PIAS, Mín 5%) - DUPLICATE
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila64-B24673360-20241009
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad B24673360 - Preferencias propias completas (segundo registro)
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('B24673360', '2024-10-09', '2026-10-09', 2, 'Agresivo', 'A,B,C,D,E,F,G,H,I, J, K', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 17 AND itvalor = 'B'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 18 AND itvalor = 'A'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 19 AND itvalor = 'B'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 20 AND itvalor = '1'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 21 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = 'B24673360' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = 'B24673360' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 65: 09780382T - ESG: B completo (No%, Mín 2%, No PIAS, Mín 10%) - DUPLICATE
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila65-09780382T-20250703
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 09780382T - Preferencias propias completas (segundo registro)
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('09780382T', '2025-07-03', '2027-07-03', 2, 'Agresivo', 'A,B,C,D,E,F,G,H,I, J, K', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 17 AND itvalor = 'B'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 18 AND itvalor = 'A'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 19 AND itvalor = 'B'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 20 AND itvalor = '1'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 21 AND itvalor = 'B';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '09780382T' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '09780382T' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 66: 60131863L - ESG: No - DUPLICATE
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila66-60131863L-20240102
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 60131863L - No desea sostenibilidad (segundo registro)
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('60131863L', NULL, NULL, 0, 'No perfilado', '', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '60131863L' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '60131863L' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 67: B82668146 - ESG: No - DUPLICATE
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila67-B82668146-20241018
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad B82668146 - No desea sostenibilidad (segundo registro)
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('B82668146', '2024-10-18', '2026-10-29', 2, 'Agresivo', 'A,B,C,D,E,F,G,H,I, J, K', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = 'B82668146' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = 'B82668146' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 68: A87717286 - ESG: C completo (No%, Mín 5%, No PIAS, Mín 20%) - DUPLICATE
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila68-A87717286-20240320
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad A87717286 - Delega en banquero con preferencias (segundo registro)
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('A87717286', '2024-03-20', '2026-03-20', 2, 'Decidido', 'A,B,C', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 17 AND itvalor = 'C'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 18 AND itvalor = 'A'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 19 AND itvalor = 'C'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 20 AND itvalor = '1'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 21 AND itvalor = 'C';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = 'A87717286' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = 'A87717286' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 69: 42982336M - ESG: C (Banquero decide) - DUPLICATE
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila69-42982336M-20250725
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 42982336M - Delega en banquero (segundo registro)
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('42982336M', '2025-07-25', '2027-07-25', 2, 'Decidido', 'A,B,C,D,E,F,G,H,I, J', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'C';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '42982336M' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '42982336M' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 70: 05319569Z - ESG: B completo (No%, Mín 5%, Medioamb, Mín 20%) - DUPLICATE
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila70-05319569Z-20250114
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 05319569Z - Preferencias propias completas (segundo registro)
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('05319569Z', '2025-01-14', '2027-01-14', 2, 'Prudente', 'A,B,C,D,E,F,G,H,I, J, K', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 17 AND itvalor = 'B'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 18 AND itvalor = 'A'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 19 AND itvalor = 'C'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 20 AND itvalor = '3'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 21 AND itvalor = 'C';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '05319569Z' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '05319569Z' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 71: 05202785R - ESG: B completo (No%, No%, Medioamb, Sin%) - DUPLICATE
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila71-05202785R-20240514
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 05202785R - Preferencias propias completas (segundo registro)
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('05202785R', '2024-05-14', '2026-05-14', 2, 'Conservador', 'A,B,C,D,E,F,G,H,I, J, K', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 17 AND itvalor = 'B'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 18 AND itvalor = 'A'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 19 AND itvalor = 'A'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 20 AND itvalor = '3'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 21 AND itvalor = 'D';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '05202785R' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '05202785R' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 72: 00129907A - ESG: C (Banquero decide) - DUPLICATE
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila72-00129907A-20240102
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 00129907A - Delega en banquero (segundo registro)
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('00129907A', NULL, NULL, 0, 'Agresivo', 'A,B,C,D,E,F,G,H,I, J, K', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'C';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '00129907A' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '00129907A' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 73: 00402489N - ESG: B completo (No%, No%, No PIAS, Mín 5%) - DUPLICATE
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila73-00402489N-20241018
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 00402489N - Preferencias propias completas (segundo registro)
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('00402489N', '2024-10-18', '2026-10-29', 2, 'Decidido', 'A,B,C, D', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 17 AND itvalor = 'B'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 18 AND itvalor = 'A'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 19 AND itvalor = 'A'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 20 AND itvalor = '1'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 21 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '00402489N' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '00402489N' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 74: 00410412T - ESG: No - DUPLICATE
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila74-00410412T-20251122
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 00410412T - No desea sostenibilidad (segundo registro)
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('00410412T', '2025-11-22', '2027-11-22', 2, 'Decidido', 'A,B,C, D', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '00410412T' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '00410412T' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 75: 00443424F - ESG: No - DUPLICATE
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila75-00443424F-20250725
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 00443424F - No desea sostenibilidad (segundo registro)
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('00443424F', '2025-07-25', '2027-07-25', 2, 'Agresivo', 'A,B,C,D,E', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '00443424F' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '00443424F' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 76: 00831611T - ESG: No - DUPLICATE
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila76-00831611T-20250114
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 00831611T - No desea sostenibilidad (segundo registro)
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('00831611T', '2025-01-14', '2027-01-14', 2, 'Prudente', 'A,B,C,D,E, F', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '00831611T' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '00831611T' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 77: 05219145P - ESG: B completo (Mín 5%, Mín 2%, Gases, Mín 10%) - DUPLICATE
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila77-05219145P-20240514
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 05219145P - Preferencias propias completas (segundo registro)
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('05219145P', '2024-05-14', '2026-05-14', 2, 'Decidido', 'A,B,C,D,E,F,G,H,I, J', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 17 AND itvalor = 'B'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 18 AND itvalor = 'B'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 19 AND itvalor = 'B'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 20 AND itvalor = '2'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 21 AND itvalor = 'B';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '05219145P' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '05219145P' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 78: 05336805T - ESG: C (Banquero decide) - EXPIRED - DUPLICATE
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila78-05336805T-20231018
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 05336805T - Delega en banquero (EXPIRED - segundo registro)
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('05336805T', '2023-10-18', '2025-10-29', 4, 'Agresivo', 'A,B,C,D,E, F, G', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'C';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '05336805T' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '05336805T' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 79: 09754617H - ESG: C (Banquero decide) - DUPLICATE
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila79-09754617H-20241018
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 09754617H - Delega en banquero (segundo registro)
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('09754617H', '2024-10-18', '2026-10-29', 2, 'Decidido', 'A,B,C,D,E, F, G, H', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'C';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '09754617H' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '09754617H' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 80: 10197793F - ESG: No - DUPLICATE
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila80-10197793F-20240102
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 10197793F - No desea sostenibilidad (segundo registro)
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('10197793F', NULL, NULL, 0, 'No perfilado', '', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '10197793F' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '10197793F' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 81: 15792476D - ESG: C (Banquero decide) - DUPLICATE
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila81-15792476D-20250725
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 15792476D - Delega en banquero (segundo registro)
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('15792476D', '2025-07-25', '2027-07-25', 2, 'Decidido', 'A,B,C,D,E,F,G,H,I, J, K', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'C';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '15792476D' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '15792476D' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 82: 16036996Q - ESG: No - DUPLICATE
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila82-16036996Q-20240102
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 16036996Q - No desea sostenibilidad (segundo registro)
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('16036996Q', NULL, NULL, 0, 'No perfilado', '', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '16036996Q' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '16036996Q' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 83: 17856108N - ESG: C (Banquero decide) - DUPLICATE
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila83-17856108N-20240514
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 17856108N - Delega en banquero (segundo registro)
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('17856108N', '2024-05-14', '2026-05-14', 2, 'Decidido', 'A,B,C,D,E,F,G,H,I, J, K', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'C';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '17856108N' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '17856108N' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 84: 22447542W - ESG: No - EXPIRED - DUPLICATE
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila84-22447542W-20231018
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 22447542W - No desea sostenibilidad (EXPIRED - segundo registro)
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('22447542W', '2023-10-18', '2025-10-29', 4, 'Decidido', 'A,B,C,D,E,F,G,H,I, J', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '22447542W' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '22447542W' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 85: 25403793V - ESG: No - DUPLICATE
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila85-25403793V-20241018
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 25403793V - No desea sostenibilidad (segundo registro)
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('25403793V', '2024-10-18', '2026-10-29', 2, 'Agresivo', 'A,B,C,D,E, F, G, H, I, J, K', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '25403793V' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '25403793V' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 86: 36168341J - ESG: B completo (Mín 5%, Mín 5%, Gases, Sin%) - DUPLICATE
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila86-36168341J-20240320
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 36168341J - Preferencias propias completas (segundo registro)
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('36168341J', '2024-03-20', '2026-03-20', 2, 'Prudente', 'A,B,C', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 17 AND itvalor = 'B'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 18 AND itvalor = 'B'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 19 AND itvalor = 'C'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 20 AND itvalor = '2'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 21 AND itvalor = 'D';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '36168341J' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '36168341J' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 87: 37349860E - ESG: No - DUPLICATE
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila87-37349860E-20250725
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 37349860E - No desea sostenibilidad (segundo registro)
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('37349860E', '2025-07-25', '2027-07-25', 2, 'Flexible', 'A,B,C', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '37349860E' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '37349860E' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 88: 45087831B - ESG: B completo (Mín 5%, Mín 2%, Gases, Sin%) - DUPLICATE
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila88-45087831B-20250114
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 45087831B - Preferencias propias completas (segundo registro)
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('45087831B', '2025-01-14', '2027-01-14', 2, 'Agresivo', 'A,B,C,D,E,F,G,H,I, J, K', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 17 AND itvalor = 'B'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 18 AND itvalor = 'B'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 19 AND itvalor = 'B'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 20 AND itvalor = '2'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 21 AND itvalor = 'D';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '45087831B' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '45087831B' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 89: 47358332K - ESG: No - DUPLICATE
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila89-47358332K-20240514
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 47358332K - No desea sostenibilidad (segundo registro)
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('47358332K', '2024-05-14', '2026-05-14', 2, 'Flexible', 'A,B,C', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '47358332K' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '47358332K' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 90: 50762470K - ESG: B completo (Mín 20%, Mín 5%, No PIAS, Mín 5%) - DUPLICATE
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila90-50762470K-20240102
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 50762470K - Preferencias propias completas (segundo registro)
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('50762470K', NULL, NULL, 0, 'Flexible', 'A,B,C,D,E,F,G,H,I, J', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 17 AND itvalor = 'B'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 18 AND itvalor = 'C'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 19 AND itvalor = 'C'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 20 AND itvalor = '1'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 21 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '50762470K' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '50762470K' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 91: 50812947J - ESG: No - EXPIRED - DUPLICATE
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila91-50812947J-20231018
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 50812947J - No desea sostenibilidad (EXPIRED - segundo registro)
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('50812947J', '2023-10-18', '2025-10-29', 4, 'Agresivo', 'A,B,C,D,E,F', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '50812947J' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '50812947J' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 92: 50835529D - ESG: No - DUPLICATE
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila92-50835529D-20240320
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 50835529D - No desea sostenibilidad (segundo registro)
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('50835529D', '2024-03-20', '2026-03-20', 2, 'Flexible', 'A,B,C,D,E,F', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '50835529D' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '50835529D' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 93: 51414663A - ESG: B completo (Mín 5%, No%, No PIAS, Mín 10%) - DUPLICATE
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila93-51414663A-20250725
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 51414663A - Preferencias propias completas (segundo registro)
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('51414663A', '2025-07-25', '2027-07-25', 2, 'Conservador', 'A,B,C', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 17 AND itvalor = 'B'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 18 AND itvalor = 'B'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 19 AND itvalor = 'A'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 20 AND itvalor = '1'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 21 AND itvalor = 'B';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '51414663A' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '51414663A' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 94: 71544007T - ESG: No - DUPLICATE
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila94-71544007T-20250114
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 71544007T - No desea sostenibilidad (segundo registro)
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('71544007T', '2025-01-14', '2027-01-14', 2, 'Agresivo', 'A,B,C,D,E,F,G,H,I, J', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '71544007T' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '71544007T' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 95: X0691717S - ESG: B completo (Mín 20%, No%, No PIAS, Mín 20%) - DUPLICATE
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila95-X0691717S-20240514
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad X0691717S - Preferencias propias completas (segundo registro)
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('X0691717S', '2024-05-14', '2026-05-14', 2, 'Prudente', 'A,B,C,D,E,F,G,H,I, J, K', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 17 AND itvalor = 'B'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 18 AND itvalor = 'C'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 19 AND itvalor = 'A'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 20 AND itvalor = '1'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 21 AND itvalor = 'C';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = 'X0691717S' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = 'X0691717S' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 96: Y4381181V - ESG: No - DUPLICATE
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila96-Y4381181V-20240102
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad Y4381181V - No desea sostenibilidad (segundo registro)
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('Y4381181V', NULL, NULL, 0, 'Agresivo', 'A,B,C,D,E,F,G,H,I, J', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = 'Y4381181V' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = 'Y4381181V' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 97: Y6320673B - ESG: No - DUPLICATE
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila97-Y6320673B-20240102
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad Y6320673B - No desea sostenibilidad (segundo registro)
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('Y6320673B', NULL, NULL, 0, 'No perfilado', '', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = 'Y6320673B' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = 'Y6320673B' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 98: Z0553299Q - ESG: No - DUPLICATE
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila98-Z0553299Q-20240320
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad Z0553299Q - No desea sostenibilidad (segundo registro)
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('Z0553299Q', '2024-03-20', '2026-03-20', 2, 'Agresivo', 'A,B,C,D,E,F', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = 'Z0553299Q' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = 'Z0553299Q' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 99: Z0717178C - ESG: C (Banquero decide) - DUPLICATE
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila99-Z0717178C-20250725
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad Z0717178C - Delega en banquero (segundo registro)
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('Z0717178C', '2025-07-25', '2027-07-25', 2, 'Flexible', 'A,B,C,D,E,F', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'C';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = 'Z0717178C' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = 'Z0717178C' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 100: 00223332W - ESG: No - DUPLICATE
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila100-00223332W-20250114
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 00223332W - No desea sostenibilidad (segundo registro)
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('00223332W', '2025-01-14', '2027-01-14', 2, 'Agresivo', 'A,B,C', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '00223332W' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '00223332W' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 101: 18980250Y - ESG: B completo (No%, Mín 2%, No PIAS, Mín 5%) - DUPLICATE
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila101-18980250Y-20240514
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 18980250Y - Preferencias propias completas (segundo registro)
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('18980250Y', '2024-05-14', '2026-05-14', 2, 'Agresivo', 'A,B,C,D,E,F,G,H,I, J, K', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 17 AND itvalor = 'B'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 18 AND itvalor = 'A'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 19 AND itvalor = 'B'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 20 AND itvalor = '1'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 21 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '18980250Y' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '18980250Y' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 102: Z1285202J - ESG: B completo (No%, Mín 2%, No PIAS, Mín 10%) - DUPLICATE
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila102-Z1285202J-20240320
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad Z1285202J - Preferencias propias completas (segundo registro)
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('Z1285202J', '2024-03-20', '2026-03-20', 2, 'Agresivo', 'A,B,C,D,E,F,G,H,I, J, K', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 17 AND itvalor = 'B'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 18 AND itvalor = 'A'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 19 AND itvalor = 'B'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 20 AND itvalor = '1'
+              UNION ALL
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid FROM mktmitems WHERE itdependede = 21 AND itvalor = 'B';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = 'Z1285202J' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = 'Z1285202J' AND rcversionid = 1);
+
+  # ==========================================
+  # FILA 103: 00218852F - ESG: No - DUPLICATE
+  # ==========================================
+  - changeSet:
+      id: 0042-esg-fila103-00218852F-20250725
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: Sostenibilidad 00218852F - No desea sostenibilidad (segundo registro)
+      changes:
+        - sql:
+            endDelimiter: ;
+            sql: |
+              INSERT INTO mktmrespuestacliente (rcidentity, rcfecfirma, rcfeccaducidad, rcestado, rcresidoneidad, rcresconveniencia, rcversionid)
+              VALUES ('00218852F', '2025-07-25', '2027-07-25', 2, 'Decidido', '', 1);
+              
+              INSERT INTO mktmrespuestaclientedetalle (rdrespuestaclienteid, rdrespuestaid) 
+              SELECT currval('mktmrespuestacliente_rcid_seq'), itid 
+              FROM mktmitems 
+              WHERE itdependede = 17 AND itvalor = 'A';
+      rollback:
+        - sql:
+            sql: |
+              DELETE FROM mktmrespuestaclientedetalle 
+              WHERE rdrespuestaclienteid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '00218852F' AND rcversionid = 1);
+              DELETE FROM mktmrespuestacliente 
+              WHERE rcid = (SELECT MAX(rcid) FROM mktmrespuestacliente WHERE rcidentity = '00218852F' AND rcversionid = 1);

@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0024
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      changes:
+        - addDefaultValue:
+            tableName: MKTMRESPUESTACLIENTE
+            columnName: RCID
+            defaultValueSequenceNext: MKTMRESPUESTACLIENTE_RCID_SEQ
+      rollback:
+        - dropDefaultValue:
+            tableName: MKTMRESPUESTACLIENTE
+            columnName: RCID
