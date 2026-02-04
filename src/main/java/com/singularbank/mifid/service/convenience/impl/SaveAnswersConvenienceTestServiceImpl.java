@@ -9,9 +9,8 @@ import com.singularbank.mifid.exception.BadRequestException;
 import com.singularbank.mifid.repository.RelRespuestaCombinacionRepository;
 import com.singularbank.mifid.repository.RespuestaClienteDetalleRepository;
 import com.singularbank.mifid.repository.RespuestaClienteRepository;
-import com.singularbank.mifid.service.answer.impl.SaveAnswersServiceImpl;
 import com.singularbank.mifid.service.convenience.ConvenienceCalculatorService;
-import com.singularbank.mifid.service.convenience.SaveConvenienceAnswersService;
+import com.singularbank.mifid.service.convenience.SaveAnswersConvenienceTestService;
 import com.singularbank.mifid.service.helpers.AnswersTestLoader;
 import com.singularbank.mifid.service.helpers.AnswersTestLoader.LoadedAnswers;
 import com.singularbank.mifid.service.helpers.ResultTestDescriptionBuilder;
@@ -23,7 +22,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Service
-public class SaveConvenienceAnswersServiceImpl implements SaveConvenienceAnswersService {
+public class SaveAnswersConvenienceTestServiceImpl implements SaveAnswersConvenienceTestService {
 
   private final AnswersTestLoader answersTestLoader;
   private final RespuestaClienteRepository respuestaClienteRepository;
@@ -32,7 +31,7 @@ public class SaveConvenienceAnswersServiceImpl implements SaveConvenienceAnswers
   private final ConvenienceCalculatorService convenienceCalculator;
   private final ResultTestDescriptionBuilder descriptionBuilder;
 
-  public SaveConvenienceAnswersServiceImpl(
+  public SaveAnswersConvenienceTestServiceImpl(
       AnswersTestLoader answersTestLoader,
       RespuestaClienteRepository respuestaClienteRepository,
       RespuestaClienteDetalleRepository respuestaClienteDetalleRepository,

@@ -7,7 +7,7 @@ import com.singularbank.mifid.controller.helpers.dto.AnswersTestRequestDTO;
 import com.singularbank.mifid.controller.helpers.dto.ErrorResponse;
 import com.singularbank.mifid.controller.helpers.dto.TestResponseCreatedDTO;
 import com.singularbank.mifid.controller.helpers.mapper.AnswersTestRequestMapper;
-import com.singularbank.mifid.service.convenience.SaveConvenienceAnswersService;
+import com.singularbank.mifid.service.convenience.SaveAnswersConvenienceTestService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -32,9 +32,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/test-mifid")
 @Validated
 @Slf4j
-public class ConvenienceTestSaveAnswersController {
+public class SaveAnswersConvenienceTestController {
 
-    private final SaveConvenienceAnswersService saveConvenienceAnswersService;
+    private final SaveAnswersConvenienceTestService saveAnswersConvenienceService;
     private final AnswersTestRequestMapper mapper;
     private final ObjectMapper objectMapper;
 
@@ -98,7 +98,7 @@ public class ConvenienceTestSaveAnswersController {
           log.error("Error serializando log de entrada", e);
       }
 
-        TestResponseCreatedDTO response = saveConvenienceAnswersService.saveAnswers(
+        TestResponseCreatedDTO response = saveAnswersConvenienceService.saveAnswers(
                 documentNumber,
                 mapper.toDomain(request)
         );
