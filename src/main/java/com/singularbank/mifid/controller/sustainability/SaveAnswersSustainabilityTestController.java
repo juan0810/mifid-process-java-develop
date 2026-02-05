@@ -1,9 +1,12 @@
 package com.singularbank.mifid.controller.sustainability;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.singularbank.mifid.annotation.validation.EnsureIdentificationClient;
 import com.singularbank.mifid.controller.helpers.dto.AnswersTestRequestDTO;
 import com.singularbank.mifid.controller.helpers.dto.TestResponseCreatedDTO;
 import com.singularbank.mifid.controller.helpers.mapper.AnswersTestRequestMapper;
+import com.singularbank.mifid.service.sustainability.SaveAnswersSustainabilityService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -28,9 +31,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/test-mifid")
 @Validated
 @Slf4j
-public class SustainabilityTestSaveAnswersController {
+public class SaveAnswersSustainabilityTestController {
 
-  private final AnswersTestRequestMapper mapper;
+    private final SaveAnswersSustainabilityService saveAnswersSustainabilityService;
+    private final AnswersTestRequestMapper mapper;
+    private final ObjectMapper objectMapper;
 
   @Tag(name = "Sustainability Test", description = "Operations to manage sustainability test answers")
   @Operation(
@@ -69,8 +74,28 @@ public class SustainabilityTestSaveAnswersController {
       @PathVariable("document-number") @EnsureIdentificationClient String documentNumber,
       @Valid @RequestBody AnswersTestRequestDTO request
   ) {
-    log.info("Processing sustainability test save request");
+    log.info("Processing Sustainability test save request");
+      try {
+          log.info("ENTRADA DEV - Document: {} - Raw JSON Payload: {}", documentNumber,  objectMapper.writeValueAsString(request));
 
-    return ResponseEntity.status(HttpStatus.CREATED).body(null);
+          if (request.getQuestionResponses() == null || request.getQuestionResponses().isEmpty()) {
+              log.warn("ALERTA DEV: La lista de 'QuestionResponses' ha llegado VACÍA o NULA. Revisar mapeo Mulesoft.");
+          }
+      } catch (JsonProcessingException e) {
+          log.error("Error serializando log de entrada", e);
+      }
+
+      TestResponseCreatedDTO response = saveAnswersSustainabilityService.saveAnswers(
+              documentNumber,
+              mapper.toDomain(request)
+      );
+
+      try {
+          log.info("SALIDA DEV - Response JSON: {}", objectMapper.writeValueAsString(response));
+      } catch (JsonProcessingException e) {
+          log.error("Error serializando log de salida", e);
+      }
+
+    return ResponseEntity.status(HttpStatus.CREATED).body(response);
   }
 }

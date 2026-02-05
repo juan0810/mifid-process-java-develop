@@ -1,19 +1,19 @@
-package com.singularbank.mifid.service.suitability.impl;
+package com.singularbank.mifid.service.sustainability.impl;
 
 import com.singularbank.mifid.controller.helpers.dto.TestResponseCreatedDTO;
+import com.singularbank.mifid.controller.helpers.dto.TestResponseCreatedDTO.FamilyDTO;
 import com.singularbank.mifid.controller.helpers.dto.TestResponseCreatedDTO.TestResults;
 import com.singularbank.mifid.entity.*;
 import com.singularbank.mifid.entity.CustomerActiveTests.SustainabilityPreferences;
 import com.singularbank.mifid.entity.RespuestaCliente.RespuestaDetalle;
 import com.singularbank.mifid.exception.BadRequestException;
-import com.singularbank.mifid.repository.RelRespuestaCombinacionRepository;
 import com.singularbank.mifid.repository.RespuestaClienteDetalleRepository;
 import com.singularbank.mifid.repository.RespuestaClienteRepository;
 import com.singularbank.mifid.service.helpers.AnswersTestLoader;
 import com.singularbank.mifid.service.helpers.AnswersTestLoader.LoadedAnswers;
 import com.singularbank.mifid.service.helpers.ResultTestDescriptionBuilder;
-import com.singularbank.mifid.service.suitability.SaveAnswersSuitabilityService;
-import com.singularbank.mifid.service.suitability.SuitabilityCalculatorService;
+import com.singularbank.mifid.service.sustainability.SaveAnswersSustainabilityService;
+import com.singularbank.mifid.service.sustainability.SustainabilityCalculatorService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,34 +23,31 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Service
-public class SaveAnswersSuitabilityServiceImpl implements SaveAnswersSuitabilityService {
+public class SaveAnswersSustainabilityServiceImpl implements SaveAnswersSustainabilityService {
 
   private final AnswersTestLoader answersTestLoader;
   private final RespuestaClienteRepository respuestaClienteRepository;
   private final RespuestaClienteDetalleRepository respuestaClienteDetalleRepository;
-  private final RelRespuestaCombinacionRepository relRespuestaCombinacionRepository;
-  private final SuitabilityCalculatorService suitabilityCalculator;
+  private final SustainabilityCalculatorService sustainabilityCalculator;
   private final ResultTestDescriptionBuilder descriptionBuilder;
 
-  public SaveAnswersSuitabilityServiceImpl(
+  public SaveAnswersSustainabilityServiceImpl(
       AnswersTestLoader answersTestLoader,
       RespuestaClienteRepository respuestaClienteRepository,
       RespuestaClienteDetalleRepository respuestaClienteDetalleRepository,
-      RelRespuestaCombinacionRepository relRespuestaCombinacionRepository,
-      SuitabilityCalculatorService suitabilityCalculator,
+      SustainabilityCalculatorService sustainabilityCalculator,
       ResultTestDescriptionBuilder descriptionBuilder) {
     this.answersTestLoader = answersTestLoader;
     this.respuestaClienteRepository = respuestaClienteRepository;
     this.respuestaClienteDetalleRepository = respuestaClienteDetalleRepository;
-    this.relRespuestaCombinacionRepository = relRespuestaCombinacionRepository;
-    this.suitabilityCalculator = suitabilityCalculator;
+    this.sustainabilityCalculator = sustainabilityCalculator;
     this.descriptionBuilder = descriptionBuilder;
   }
 
   @Override
   @Transactional
-  public TestResponseCreatedDTO saveAnswers(String documentNumber, StoreTestAnswers saveAnswers) {
-    log.info("Processing Suitability MiFID test answers for document: {}", documentNumber);
+  public   TestResponseCreatedDTO saveAnswers(String documentNumber, StoreTestAnswers saveAnswers){
+    log.info("Processing Sustainability MiFID test answers for document: {}", documentNumber);
 
     Objects.requireNonNull(documentNumber, "documentNumber is required");
     Objects.requireNonNull(saveAnswers, "testAnswers is required");
@@ -64,17 +61,15 @@ public class SaveAnswersSuitabilityServiceImpl implements SaveAnswersSuitability
 
     List<RespuestaDetalle> allDetails = buildDetails(questionResponses, loadedAnswers.answersMap());
 
-    CalculatedResults results = calculateResults(questionResponses, loadedAnswers.answersMap(), documentNumber, saveAnswers.getVersion());
+    CalculatedResults results = calculateResults(questionResponses, loadedAnswers.answersMap());
 
     Integer responseId = saveResponse(
         documentNumber,
         saveAnswers.getVersion(),
-        results.suitabilityResult(),
-        allDetails,
-        results.suitabilityCombinationId()
+        allDetails
     );
 
-    log.info("✓ Saved Suitability MiFID test - Response ID: {}", responseId);
+    log.info("✓ Saved MiFID test - Response ID: {}", responseId);
 
     return buildResponse(responseId, results);
   }
@@ -84,7 +79,7 @@ public class SaveAnswersSuitabilityServiceImpl implements SaveAnswersSuitability
 
     questionResponses.stream()
             .map(qr -> new ValidationPair(
-                    TypeTest.SUITABILITY,
+                    TypeTest.SUSTAINABILITY,
                     qr.getSelectedOptionId(),
                     answersMap.get(qr.getSelectedOptionId())
             ))
@@ -134,36 +129,16 @@ public class SaveAnswersSuitabilityServiceImpl implements SaveAnswersSuitability
   }
 
   /**
-   * Metodo principal de cálculo: Para Idoneidad
+   * Metodo principal de cálculo: Sostenibilidad
    */
   private CalculatedResults calculateResults(
       List<StoreTestAnswers.QuestionResponse> questionResponses,
-      Map<Integer, Answer> answersMap,
-      String documentNumber,
-      Short versionId) {
+      Map<Integer, Answer> answersMap) {
 
-    Map<Integer, String> suitabilityResponsesByOrder = extractResponsesByOrder(questionResponses, answersMap);
+    Map<Integer, String> responsesByOrder = extractResponsesByOrder(questionResponses, answersMap);
+    SustainabilityResultData sustainabilityData = calculateSustainability(responsesByOrder);
 
-    Map<Integer, String> convenienceResponsesByOrder = loadPreviousConvenienceByOrder(documentNumber, versionId);
-
-    var result = calculateSuitability(suitabilityResponsesByOrder,  convenienceResponsesByOrder);
-
-    return new CalculatedResults(result.getResult(), result.combinationId());
-  }
-
-  private SuitabilityResult calculateSuitability(
-      Map<Integer, String> responses,
-      Map<Integer, String> convenienceResponses) {
-
-    log.info("Calculating suitability result");
-
-    if (convenienceResponses == null || convenienceResponses.isEmpty()) {
-      throw new BadRequestException("Convenience test required for suitability calculation");
-    }
-
-    var result = suitabilityCalculator.calculateWithConvenience(responses, convenienceResponses);
-    log.info("Suitability result: {}", result.getResult());
-    return result;
+    return new CalculatedResults(sustainabilityData);
   }
 
   private Map<Integer, String> extractResponsesByOrder(List<StoreTestAnswers.QuestionResponse> questionResponses, Map<Integer, Answer> answersMap) {
@@ -180,87 +155,80 @@ public class SaveAnswersSuitabilityServiceImpl implements SaveAnswersSuitability
         ));
   }
 
-  private Map<Integer, String> loadPreviousConvenienceByOrder(String identity, Short versionId) {
-    log.info("🔍 Loading previous CONVENIENCE by ORDER for identity: {}, versionId: {}", identity, versionId);
+  private SustainabilityResultData calculateSustainability(Map<Integer, String> responses) {
+    log.info("Calculating sustainability result");
 
-    var optionalConv = respuestaClienteRepository.findConvenienceTestByIdentityAndVersion(identity, versionId);
+    AnswersTest answersTest = buildAnswersTest(responses);
 
-    if (optionalConv.isEmpty()) {
-      throw new BadRequestException("Convenience test required before suitability for client " + identity);
-    }
+    String result = sustainabilityCalculator.calculateSustainabilityResult(answersTest);
+    SustainabilityPreferences preferences = sustainabilityCalculator.extractSustainabilityPreferences(answersTest);
 
-    RespuestaCliente conv = optionalConv.get();
-    List<RespuestaDetalle> convDetails = conv.getDetalles();
+    log.info("Sustainability result calculated");
+    return new SustainabilityResultData(result, preferences);
+  }
 
-    if (convDetails == null || convDetails.isEmpty()) {
-      throw new BadRequestException("Convenience test details empty for client " + identity);
-    }
+  private AnswersTest buildAnswersTest(Map<Integer, String> responses) {
+    List<AnswersTest.Question> questions = responses.entrySet().stream()
+        .map(entry -> AnswersTest.Question.builder()
+            .id(entry.getKey())
+            .option(AnswersTest.Option.builder()
+                .value(entry.getValue())
+                .build())
+            .build())
+        .toList();
 
-    Map<Integer, String> convResponses = convDetails.stream()
-        .collect(Collectors.toMap(
-            d -> d.getAnswer().getQuestion().getOrder().intValue(),
-            d -> d.getAnswer().getValue() != null ? d.getAnswer().getValue() : d.getValor()
-        ));
-
-    log.info("📋 Loaded {} convenience responses (by order) from previous test", convResponses.size());
-    return convResponses;
+    return AnswersTest.builder()
+        .questions(questions)
+        .build();
   }
 
   private Integer saveResponse(
       String documentNumber,
       Short versionId,
-      String suitabilityResult,
-      List<RespuestaDetalle> details,
-      Integer suitabilityCombinationId) {
+      List<RespuestaDetalle> details) {
 
     RespuestaCliente response = RespuestaCliente.builder()
         .clienteDni(documentNumber)
         .versionId(versionId)
         .estado(StateTest.DRAFT)
-        .resultadoIdoneidad(suitabilityResult)
         .build();
 
     RespuestaCliente saved = respuestaClienteRepository.save(response);
     respuestaClienteDetalleRepository.saveAll(saved.getId(), details);
 
-    saveCombinationRelations(saved.getId(), suitabilityCombinationId);
-
     log.debug("✓ Saved response ID: {} with {} details", saved.getId(), details.size());
     return saved.getId();
-  }
-
-  private void saveCombinationRelations(
-      Integer responseId,
-      Integer suitabilityCombinationId) {
-
-    List<Integer> allCombinationIds = new ArrayList<>();
-
-    if (suitabilityCombinationId != null) {
-      allCombinationIds.add(suitabilityCombinationId);
-      log.debug("Adding suitability combination ID: {}", suitabilityCombinationId);
-    }
-
-    if (!allCombinationIds.isEmpty()) {
-      relRespuestaCombinacionRepository.saveAll(responseId, allCombinationIds);
-      log.info("✓ Saved {} combination relations for response {}",
-          allCombinationIds.size(), responseId);
-    } else {
-      log.debug("No combination IDs to save for response {}", responseId);
-    }
   }
 
   private TestResponseCreatedDTO buildResponse(
       Integer responseId,
       CalculatedResults results) {
 
-    TestResponseCreatedDTO.SuitabilityResult suitabilityDto = buildSuitabilityResult(results.suitabilityResult());
+    TestResponseCreatedDTO.SustainabilityResult sustainabilityDto = buildSustainabilityResult(results.sustainabilityData());
 
-    TestResults testResults = new TestResults(null, suitabilityDto, null);
+    TestResults testResults = new TestResults(null, null, sustainabilityDto);
 
     return new TestResponseCreatedDTO(responseId, testResults);
   }
 
-  private TestResponseCreatedDTO.SuitabilityResult buildSuitabilityResult(String suitabilityResult) {
+  private TestResponseCreatedDTO.ConvenienceResult buildConvenienceResult(
+      String convenienceResult) {
+    if (convenienceResult == null) {
+      return null;
+    }
+
+    String description = descriptionBuilder.buildConvenienceDescription(convenienceResult);
+    List<ProductFamily> families = descriptionBuilder.parseConvenienceFamilies(convenienceResult);
+
+    List<FamilyDTO> familyDTOs = families.stream()
+        .map(family -> new FamilyDTO(family.name(), family.getDescription()))
+        .toList();
+
+    return new TestResponseCreatedDTO.ConvenienceResult(convenienceResult, description, familyDTOs);
+  }
+
+  private TestResponseCreatedDTO.SuitabilityResult buildSuitabilityResult(
+      String suitabilityResult) {
     if (suitabilityResult == null) {
       return null;
     }
@@ -270,10 +238,18 @@ public class SaveAnswersSuitabilityServiceImpl implements SaveAnswersSuitability
     return new TestResponseCreatedDTO.SuitabilityResult(suitabilityResult, description);
   }
 
-  private record CalculatedResults(
-      String suitabilityResult,
-      Integer suitabilityCombinationId
-  ) { }
+  private TestResponseCreatedDTO.SustainabilityResult buildSustainabilityResult(
+      SustainabilityResultData data) {
+    if (data == null) {
+      return null;
+    }
 
-  private record SustainabilityResultData(String result, SustainabilityPreferences preferences) { }
+    return new TestResponseCreatedDTO.SustainabilityResult(data.result(), data.result());
+  }
+
+  private record CalculatedResults(SustainabilityResultData sustainabilityData) { }
+
+  private record SustainabilityResultData(String result, SustainabilityPreferences preferences) {
+
+  }
 }
