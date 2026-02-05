@@ -1,13 +1,14 @@
-package com.singularbank.mifid.service.convenience;
+package com.singularbank.mifid.service.suitability;
 
 import com.singularbank.mifid.controller.helpers.dto.TestResponseCreatedDTO;
 import com.singularbank.mifid.entity.*;
 import com.singularbank.mifid.entity.RespuestaCliente.RespuestaDetalle;
 import com.singularbank.mifid.exception.BadRequestException;
 import com.singularbank.mifid.repository.*;
-import com.singularbank.mifid.service.convenience.impl.SaveAnswersConvenienceTestServiceImpl;
+import com.singularbank.mifid.service.convenience.ConvenienceQuestionIdLoader;
 import com.singularbank.mifid.service.helpers.AnswersTestLoader;
 import com.singularbank.mifid.service.helpers.ResultTestDescriptionBuilder;
+import com.singularbank.mifid.service.suitability.impl.SaveAnswersSuitabilityServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,6 +19,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -25,7 +27,7 @@ import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class SaveAnswersConvenienceServiceTest {
+class SaveAnswersSuitabilityServiceTest {
 
   @Mock
   private ItemRepository itemRepository;
@@ -37,7 +39,7 @@ class SaveAnswersConvenienceServiceTest {
   private RespuestaClienteDetalleRepository respuestaClienteDetalleRepository;
 
   @Mock
-  private RelRespuestaCombinacionRepository relRespuestaCombinacionRepository;
+  private com.singularbank.mifid.repository.RelRespuestaCombinacionRepository relRespuestaCombinacionRepository;
 
   @Captor
   private ArgumentCaptor<RespuestaCliente> respuestaClienteCaptor;
@@ -45,7 +47,7 @@ class SaveAnswersConvenienceServiceTest {
   @Captor
   private ArgumentCaptor<List<RespuestaDetalle>> detallesCaptor;
 
-  private SaveAnswersConvenienceTestServiceImpl saveAnswersConvenienceTestService;
+  private SaveAnswersSuitabilityService saveAnswersService;
 
   private static final String DOCUMENT_NUMBER = "12345678A";
   private static final Short VERSION_ID = 1;
@@ -54,6 +56,11 @@ class SaveAnswersConvenienceServiceTest {
   private static final Integer CONV_QUESTION_2 = 2;
   private static final Integer CONV_ANSWER_1 = 101;
   private static final Integer CONV_ANSWER_2 = 102;
+
+  private static final Integer SUIT_QUESTION_1 = 11;
+  private static final Integer SUIT_QUESTION_2 = 121;
+  private static final Integer SUIT_ANSWER_1 = 201;
+  private static final Integer SUIT_ANSWER_2 = 202;
 
   private static final Integer RESPONSE_ID = 100;
 
@@ -87,149 +94,194 @@ class SaveAnswersConvenienceServiceTest {
           return order + 13; // 11->24, 12->25, etc.
         });
     
-    CombinacionMatchingRepository combinacionMatchingRepository = mock(CombinacionMatchingRepository.class);
     AnswersTestLoader answersTestLoader = new AnswersTestLoader(itemRepository);
-    ConvenienceCalculatorService convenienceCalculator = new ConvenienceCalculatorService(combinacionRepository, questionIdLoader, combinacionMatchingRepository);
+    SuitabilityCalculatorService suitabilityCalculator = new SuitabilityCalculatorService(combinacionRepository);
     ResultTestDescriptionBuilder descriptionBuilder = new ResultTestDescriptionBuilder();
 
-    saveAnswersConvenienceTestService = new SaveAnswersConvenienceTestServiceImpl(
+    saveAnswersService = new SaveAnswersSuitabilityServiceImpl(
         answersTestLoader,
         respuestaClienteRepository,
         respuestaClienteDetalleRepository,
         relRespuestaCombinacionRepository,
-        convenienceCalculator,
+        suitabilityCalculator,
         descriptionBuilder
     );
   }
 
   @Test
-  void shouldSaveConvenienceTest() {
-    StoreTestAnswers StoreTestAnswers = createTestAnswers(createConvenienceQuestions());
+  void shouldSaveSingleSuitabilityTest() {
+    StoreTestAnswers saveAnswers = createTestAnswers(createSuitabilityQuestions());
 
     List<Answer> answers = List.of(
-        createRespuesta(CONV_ANSWER_1, CONV_QUESTION_1, "A", TypeTest.CONVENIENCE),
-        createRespuesta(CONV_ANSWER_2, CONV_QUESTION_2, "B", TypeTest.CONVENIENCE)
+        createRespuesta(SUIT_ANSWER_1, SUIT_QUESTION_1, "D", TypeTest.SUITABILITY),
+        createRespuesta(SUIT_ANSWER_2, SUIT_QUESTION_2, "C", TypeTest.SUITABILITY)
     );
 
     RespuestaCliente savedResponse = createSavedResponse(RESPONSE_ID);
+    RespuestaCliente previousConvenience = createPreviousConvenienceTest();
 
     when(itemRepository.findAnswersByIds(anyList())).thenReturn(answers);
+    when(respuestaClienteRepository.findConvenienceTestByIdentityAndVersion(DOCUMENT_NUMBER, VERSION_ID))
+        .thenReturn(Optional.of(previousConvenience));
     when(respuestaClienteRepository.save(any(RespuestaCliente.class))).thenReturn(savedResponse);
 
-    TestResponseCreatedDTO response = saveAnswersConvenienceTestService.saveAnswers(DOCUMENT_NUMBER, StoreTestAnswers);
+    TestResponseCreatedDTO response = saveAnswersService.saveAnswers(DOCUMENT_NUMBER, saveAnswers);
 
     assertThat(response).isNotNull();
     assertThat(response.responseClientId()).isEqualTo(RESPONSE_ID);
     assertThat(response.results()).isNotNull();
-    assertThat(response.results().convenience()).isNotNull();
-    assertThat(response.results().suitability()).isNull();
+    assertThat(response.results().convenience()).isNull();
+    assertThat(response.results().suitability()).isNotNull();
     assertThat(response.results().sustainability()).isNull();
 
     verify(respuestaClienteRepository).save(respuestaClienteCaptor.capture());
     RespuestaCliente captured = respuestaClienteCaptor.getValue();
-    assertThat(captured.getClienteDni()).isEqualTo(DOCUMENT_NUMBER);
-    assertThat(captured.getResultadoConveniencia()).isNotNull();
-    assertThat(captured.getResultadoIdoneidad()).isNull();
-
-    verify(respuestaClienteDetalleRepository).saveAll(eq(RESPONSE_ID), detallesCaptor.capture());
-    assertThat(detallesCaptor.getValue()).hasSize(2);
+    assertThat(captured.getResultadoConveniencia()).isNull();
+    assertThat(captured.getResultadoIdoneidad()).isNotNull();
   }
 
   @Test
   void shouldThrowBadRequestExceptionWhenAnswerNotFound() {
-    StoreTestAnswers StoreTestAnswers = createTestAnswers(createConvenienceQuestions());
+    StoreTestAnswers saveAnswers = createTestAnswers(createSuitabilityQuestions());
 
     when(itemRepository.findAnswersByIds(anyList())).thenReturn(Collections.emptyList());
 
-    assertThatThrownBy(() -> saveAnswersConvenienceTestService.saveAnswers(DOCUMENT_NUMBER, StoreTestAnswers))
+    assertThatThrownBy(() -> saveAnswersService.saveAnswers(DOCUMENT_NUMBER, saveAnswers))
         .isInstanceOf(BadRequestException.class)
         .hasMessageContaining("Answer IDs not found");
   }
 
   @Test
   void shouldThrowBadRequestExceptionWhenPartialAnswersFound() {
-    StoreTestAnswers StoreTestAnswers = createTestAnswers(createConvenienceQuestions());
+    StoreTestAnswers saveAnswers = createTestAnswers(createSuitabilityQuestions());
 
     List<Answer> answers = List.of(
-        createRespuesta(CONV_ANSWER_1, CONV_QUESTION_1, "A", TypeTest.CONVENIENCE)
+        createRespuesta(SUIT_ANSWER_1, SUIT_QUESTION_1, "A", TypeTest.SUITABILITY)
     );
 
-    when(itemRepository.findAnswersByIds(List.of(CONV_ANSWER_1, CONV_ANSWER_2)))
+    when(itemRepository.findAnswersByIds(List.of(SUIT_ANSWER_1, SUIT_ANSWER_2)))
         .thenReturn(answers);
 
-    assertThatThrownBy(() -> saveAnswersConvenienceTestService.saveAnswers(DOCUMENT_NUMBER, StoreTestAnswers))
+    assertThatThrownBy(() -> saveAnswersService.saveAnswers(DOCUMENT_NUMBER, saveAnswers))
         .isInstanceOf(BadRequestException.class)
         .hasMessageContaining("Answer IDs not found")
-        .hasMessageContaining("102");
+        .hasMessageContaining("202");
   }
 
   @Test
   void shouldThrowBadRequestExceptionWhenQuestionBelongsToWrongTestType() {
-    StoreTestAnswers StoreTestAnswers = createTestAnswers(createConvenienceQuestions());
+    StoreTestAnswers saveAnswers = createTestAnswers(createSuitabilityQuestions());
 
     List<Answer> answers = List.of(
-        createRespuesta(CONV_ANSWER_1, CONV_QUESTION_1, "A", TypeTest.SUITABILITY),
-        createRespuesta(CONV_ANSWER_2, CONV_QUESTION_2, "B", TypeTest.SUITABILITY)
+        createRespuesta(SUIT_ANSWER_1, SUIT_QUESTION_1, "A", TypeTest.CONVENIENCE),
+        createRespuesta(SUIT_ANSWER_2, SUIT_QUESTION_2, "B", TypeTest.CONVENIENCE)
     );
+
+    createPreviousConvenienceTest();
 
     when(itemRepository.findAnswersByIds(anyList())).thenReturn(answers);
 
-    assertThatThrownBy(() -> saveAnswersConvenienceTestService.saveAnswers(DOCUMENT_NUMBER, StoreTestAnswers))
+    assertThatThrownBy(() -> saveAnswersService.saveAnswers(DOCUMENT_NUMBER, saveAnswers))
         .isInstanceOf(BadRequestException.class)
-        .hasMessageContaining("belongs to test type 'ID'")
-        .hasMessageContaining("but was sent in test type 'CO'");
+        .hasMessageContaining("belongs to test type 'CO'")
+        .hasMessageContaining("but was sent in test type 'ID'");
+  }
+
+  @Test
+  void shouldThrowBadRequestExceptionWhenSuitabilityWithoutPreviousConvenience() {
+    StoreTestAnswers saveAnswers = createTestAnswers(createSuitabilityQuestions());
+
+    List<Answer> answers = List.of(
+        createRespuesta(SUIT_ANSWER_1, SUIT_QUESTION_1, "D", TypeTest.SUITABILITY),
+        createRespuesta(SUIT_ANSWER_2, SUIT_QUESTION_2, "C", TypeTest.SUITABILITY)
+    );
+
+    when(itemRepository.findAnswersByIds(anyList())).thenReturn(answers);
+    when(respuestaClienteRepository.findConvenienceTestByIdentityAndVersion(DOCUMENT_NUMBER,
+        VERSION_ID))
+        .thenReturn(Optional.empty());
+
+    assertThatThrownBy(() -> saveAnswersService.saveAnswers(DOCUMENT_NUMBER, saveAnswers))
+        .isInstanceOf(BadRequestException.class)
+        .hasMessageContaining("Convenience test required before suitability");
+  }
+
+  @Test
+  void shouldUsePreviousConvenienceForSuitability() {
+    StoreTestAnswers saveAnswers = createTestAnswers(createSuitabilityQuestions());
+
+    List<Answer> answers = List.of(
+        createRespuesta(SUIT_ANSWER_1, SUIT_QUESTION_1, "D", TypeTest.SUITABILITY),
+        createRespuesta(SUIT_ANSWER_2, SUIT_QUESTION_2, "C", TypeTest.SUITABILITY)
+    );
+
+    RespuestaCliente savedResponse = createSavedResponse(RESPONSE_ID);
+    RespuestaCliente previousConvenience = createPreviousConvenienceTest();
+
+    when(itemRepository.findAnswersByIds(anyList())).thenReturn(answers);
+    when(respuestaClienteRepository.findConvenienceTestByIdentityAndVersion(DOCUMENT_NUMBER,
+        VERSION_ID))
+        .thenReturn(Optional.of(previousConvenience));
+    when(respuestaClienteRepository.save(any(RespuestaCliente.class))).thenReturn(savedResponse);
+
+    TestResponseCreatedDTO response = saveAnswersService.saveAnswers(DOCUMENT_NUMBER, saveAnswers);
+
+    assertThat(response).isNotNull();
+    assertThat(response.responseClientId()).isEqualTo(RESPONSE_ID);
+    assertThat(response.results()).isNotNull();
+    verify(respuestaClienteRepository).findConvenienceTestByIdentityAndVersion(DOCUMENT_NUMBER,
+        VERSION_ID);
   }
 
   @Test
   void shouldThrowNullPointerExceptionWhenDocumentNumberIsNull() {
-    StoreTestAnswers StoreTestAnswers = createTestAnswers(createConvenienceQuestions());
+    StoreTestAnswers saveAnswers = createTestAnswers(createSuitabilityQuestions());
 
-    assertThatThrownBy(() -> saveAnswersConvenienceTestService.saveAnswers(null, StoreTestAnswers))
+    assertThatThrownBy(() -> saveAnswersService.saveAnswers(null, saveAnswers))
         .isInstanceOf(NullPointerException.class)
         .hasMessage("documentNumber is required");
   }
 
   @Test
   void shouldThrowNullPointerExceptionWhenTestAnswersIsNull() {
-    assertThatThrownBy(() -> saveAnswersConvenienceTestService.saveAnswers(DOCUMENT_NUMBER, null))
+    assertThatThrownBy(() -> saveAnswersService.saveAnswers(DOCUMENT_NUMBER, null))
         .isInstanceOf(NullPointerException.class)
         .hasMessage("testAnswers is required");
   }
 
   @Test
   void shouldThrowBadRequestExceptionWhenAnswerHasNullQuestion() {
-    StoreTestAnswers StoreTestAnswers = createTestAnswers(createConvenienceQuestions());
+    StoreTestAnswers saveAnswers = createTestAnswers(createSuitabilityQuestions());
 
     Answer answerSinPregunta = Answer.builder()
-        .id(CONV_ANSWER_1)
+        .id(SUIT_ANSWER_1)
         .value("A")
         .question(null)
         .build();
 
-    Answer answerConPregunta = createRespuesta(CONV_ANSWER_2, CONV_QUESTION_2, "B",
-        TypeTest.CONVENIENCE);
+    Answer answerConPregunta = createRespuesta(SUIT_ANSWER_2, SUIT_QUESTION_2, "B",
+        TypeTest.SUITABILITY);
 
     when(itemRepository.findAnswersByIds(anyList())).thenReturn(
         List.of(answerSinPregunta, answerConPregunta));
 
-    assertThatThrownBy(() -> saveAnswersConvenienceTestService.saveAnswers(DOCUMENT_NUMBER, StoreTestAnswers))
+    assertThatThrownBy(() -> saveAnswersService.saveAnswers(DOCUMENT_NUMBER, saveAnswers))
         .isInstanceOf(BadRequestException.class)
-        .hasMessageContaining("Answer or question not found for ID: 101");
+        .hasMessageContaining("Answer or question not found for ID: 201");
   }
 
   private StoreTestAnswers createTestAnswers(List<StoreTestAnswers.QuestionResponse> questions) {
     return new StoreTestAnswers("ONBOARDING", VERSION_ID, questions);
   }
 
-  private List<StoreTestAnswers.QuestionResponse> createConvenienceQuestions() {
+  private List<StoreTestAnswers.QuestionResponse> createSuitabilityQuestions() {
     return List.of(
-            new StoreTestAnswers.QuestionResponse(CONV_QUESTION_1, CONV_ANSWER_1),
-            new StoreTestAnswers.QuestionResponse(CONV_QUESTION_2, CONV_ANSWER_2)
+            new StoreTestAnswers.QuestionResponse(SUIT_QUESTION_1, SUIT_ANSWER_1),
+            new StoreTestAnswers.QuestionResponse(SUIT_QUESTION_2, SUIT_ANSWER_2)
     );
   }
 
-  private Answer createRespuesta(Integer answerId, Integer questionId, String valor,
-      TypeTest typeTest) {
+  private Answer createRespuesta(Integer answerId, Integer questionId, String valor, TypeTest typeTest) {
     Question question = Question.builder()
         .id(questionId)
         .text("Pregunta " + questionId)
