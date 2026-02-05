@@ -74,7 +74,7 @@ public class SaveAnswersConvenienceTestServiceImpl implements SaveAnswersConveni
             results.convenienceCombinationIds()
     );
 
-    log.info("✓ Saved MiFID test - Response ID: {}", responseId);
+    log.info("✓ Saved Convenience MiFID test - Response ID: {}", responseId);
 
     return buildResponse(responseId, results);
   }
@@ -92,6 +92,7 @@ public class SaveAnswersConvenienceTestServiceImpl implements SaveAnswersConveni
 
     log.debug("✓ Test types validated");
   }
+
   private record ValidationPair(TypeTest expectedTypeTest, Integer answerId, Answer answer) { }
 
   private void validateQuestionType(ValidationPair pair) {

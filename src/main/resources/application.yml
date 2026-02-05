@@ -167,7 +167,7 @@ rest:
           client_secret: ${PDF_GENERATOR_CLIENT_SECRET}
           grant_type: client_credentials
           token-url: ${PDF_GENERATOR_TOKEN_URL}
-          scope: ""
+          scope: " "
         endpoints:
           generate-pdf:
             path: /generate-pdf
