@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/test-mifid")
 @Validated
 @Slf4j
-public class SuitabilityTestSaveAnswersController {
+public class SaveAnswersSuitabilityTestController {
 
   private final AnswersTestRequestMapper mapper;
     private final ObjectMapper objectMapper;
