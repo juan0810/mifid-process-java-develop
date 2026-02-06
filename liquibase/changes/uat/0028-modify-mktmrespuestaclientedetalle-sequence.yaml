@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0028-sequence-increment-by-50
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      changes:
+        - sql:
+            dbms: postgresql
+            sql: |
+              ALTER SEQUENCE MKTMRESPUESTACLIENTEDETALLE_RDID_SEQ 
+              INCREMENT BY 50;
+      rollback:
+        - sql:
+            dbms: postgresql
+            sql: |
+              ALTER SEQUENCE MKTMRESPUESTACLIENTEDETALLE_RDID_SEQ 
+              INCREMENT BY 1;

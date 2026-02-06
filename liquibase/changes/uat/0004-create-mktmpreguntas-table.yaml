@@ -1,0 +1,93 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0004
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      changes:
+        - createTable:
+            tableName: MKTMPREGUNTAS
+            columns:
+              - column:
+                  name: PRID
+                  type: integer
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: PRDEPENDEDE
+                  type: integer
+              - column:
+                  name: PRTIPOID
+                  type: smallint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: PRTEXTO
+                  type: varchar(500)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: PRORDEN
+                  type: smallint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: PRTIPOTEST
+                  type: char(1)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: PRFAMILIAS
+                  type: varchar(50)
+              - column:
+                  name: PRRESPUESTACORRECTA
+                  type: boolean
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+              - column:
+                  name: PRFECINICIO
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: PRFECFIN
+                  type: date
+              - column:
+                  name: PRFECALTA
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: PRFECMOD
+                  type: timestamp
+              - column:
+                  name: PRUSUALTA
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: PRUSUMOD
+                  type: varchar(50)
+        - addForeignKeyConstraint:
+            baseTableName: MKTMPREGUNTAS
+            baseColumnNames: PRTIPOID
+            referencedTableName: MKTMPREGUNTASTIPO
+            referencedColumnNames: PTID
+            constraintName: FK__OPE_ENC_P__id_ti__42D898B4
+        - addForeignKeyConstraint:
+            baseTableName: MKTMPREGUNTAS
+            baseColumnNames: PRDEPENDEDE
+            referencedTableName: MKTMPREGUNTAS
+            referencedColumnNames: PRID
+            constraintName: fk_mktmpreguntas_mktmpreguntas
+      rollback:
+        - dropForeignKeyConstraint:
+            baseTableName: MKTMPREGUNTAS
+            constraintName: FK__OPE_ENC_P__id_ti__42D898B4
+        - dropForeignKeyConstraint:
+            baseTableName: MKTMPREGUNTAS
+            constraintName: fk_mktmpreguntas_mktmpreguntas
+        - dropTable:
+            tableName: MKTMPREGUNTAS

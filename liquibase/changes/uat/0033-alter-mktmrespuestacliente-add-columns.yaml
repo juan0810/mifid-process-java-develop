@@ -1,0 +1,38 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0033-alter-mktmrespuestacliente-add-columns
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      changes:
+        - addColumn:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column:
+                  name: RCFECCADUCIDAD
+                  type: date
+              - column:
+                  name: RCFECFIRMA
+                  type: timestamp
+              - column:
+                  name: RCFECANULACION
+                  type: timestamp
+              - column:
+                  name: RCUSUALTA
+                  type: varchar(50)
+              - column:
+                  name: RCUSUMOD
+                  type: varchar(50)
+      rollback:
+        - dropColumn:
+            tableName: MKTMRESPUESTACLIENTE
+            columns:
+              - column:
+                  name: RCFECCADUCIDAD
+              - column:
+                  name: RCFECFIRMA
+              - column:
+                  name: RCFECANULACION
+              - column:
+                  name: RCUSUALTA
+              - column:
+                  name: RCUSUMOD

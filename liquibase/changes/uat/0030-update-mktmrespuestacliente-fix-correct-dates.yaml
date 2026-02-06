@@ -1,0 +1,63 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0030-fix-dates-and-profiles-mifid-tests
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      changes:
+        - sql:
+            sql: |
+              -- Actualizar perfiles de idoneidad
+              UPDATE mktmrespuestacliente SET rcresidoneidad = 'Agresivo' WHERE rcresidoneidad = 'Arriesgado';
+              UPDATE mktmrespuestacliente SET rcresidoneidad = 'Prudente' WHERE rcresidoneidad = 'Moderado';
+              
+              -- Actualizar fechas por NIF (ajustadas para vigencia minimo 1 mes)
+              UPDATE mktmrespuestacliente SET rcfecalta = '2025-08-22', rcfecmodificacion = '2025-08-22' WHERE rcidentity = '00223332W';
+              UPDATE mktmrespuestacliente SET rcfecalta = '2025-11-22', rcfecmodificacion = '2025-11-22' WHERE rcidentity = '00402489N';
+              UPDATE mktmrespuestacliente SET rcfecalta = '2025-11-22', rcfecmodificacion = '2025-11-22' WHERE rcidentity = '00410412T';
+              UPDATE mktmrespuestacliente SET rcfecalta = '2025-07-25', rcfecmodificacion = '2025-07-25' WHERE rcidentity = '00443424F';
+              UPDATE mktmrespuestacliente SET rcfecalta = '2025-01-17', rcfecmodificacion = '2025-01-17' WHERE rcidentity = '71544007T';
+              UPDATE mktmrespuestacliente SET rcfecalta = '2025-09-27', rcfecmodificacion = '2025-09-27' WHERE rcidentity = 'Y4381181V';
+              UPDATE mktmrespuestacliente SET rcfecalta = '2025-10-18', rcfecmodificacion = '2025-10-18' WHERE rcidentity = 'Y6320673B';
+              UPDATE mktmrespuestacliente SET rcfecalta = '2025-04-18', rcfecmodificacion = '2025-04-18' WHERE rcidentity = 'Z0553299Q';
+              UPDATE mktmrespuestacliente SET rcfecalta = '2025-08-22', rcfecmodificacion = '2025-08-22' WHERE rcidentity = '19498741P';
+              UPDATE mktmrespuestacliente SET rcfecalta = '2025-11-22', rcfecmodificacion = '2025-11-22' WHERE rcidentity = '02644871D';
+              UPDATE mktmrespuestacliente SET rcfecalta = '2025-11-22', rcfecmodificacion = '2025-11-22' WHERE rcidentity = '46591811K';
+              UPDATE mktmrespuestacliente SET rcfecalta = '2025-04-18', rcfecmodificacion = '2025-04-18' WHERE rcidentity = '09775525L';
+              UPDATE mktmrespuestacliente SET rcfecalta = '2025-06-27', rcfecmodificacion = '2025-06-27' WHERE rcidentity = '73077420A';
+              UPDATE mktmrespuestacliente SET rcfecalta = '2025-09-27', rcfecmodificacion = '2025-09-27' WHERE rcidentity = '51178881V';
+              UPDATE mktmrespuestacliente SET rcfecalta = '2025-05-07', rcfecmodificacion = '2025-05-07' WHERE rcidentity = '71448558R';
+              UPDATE mktmrespuestacliente SET rcfecalta = '2025-07-15', rcfecmodificacion = '2025-07-15' WHERE rcidentity = 'B21922273';
+              UPDATE mktmrespuestacliente SET rcfecalta = '2025-02-08', rcfecmodificacion = '2025-02-08' WHERE rcidentity = '14099755L';
+              UPDATE mktmrespuestacliente SET rcfecalta = '2025-09-09', rcfecmodificacion = '2025-09-09' WHERE rcidentity = '16035622E';
+              UPDATE mktmrespuestacliente SET rcfecalta = '2025-01-17', rcfecmodificacion = '2025-01-17' WHERE rcidentity = 'B87446720';
+              UPDATE mktmrespuestacliente SET rcfecalta = '2025-10-22', rcfecmodificacion = '2025-10-22' WHERE rcidentity = 'B38799680';
+              UPDATE mktmrespuestacliente SET rcfecalta = '2025-06-30', rcfecmodificacion = '2025-06-30' WHERE rcidentity = '78405698D';
+              UPDATE mktmrespuestacliente SET rcfecalta = '2025-10-09', rcfecmodificacion = '2025-10-09' WHERE rcidentity = 'B24673360';
+              UPDATE mktmrespuestacliente SET rcfecalta = '2025-07-03', rcfecmodificacion = '2025-07-03' WHERE rcidentity = '09780382T';
+              UPDATE mktmrespuestacliente SET rcfecalta = '2025-10-18', rcfecmodificacion = '2025-10-18' WHERE rcidentity = 'B82668146';
+              UPDATE mktmrespuestacliente SET rcfecalta = '2025-03-20', rcfecmodificacion = '2025-03-20' WHERE rcidentity = 'A87717286';
+              UPDATE mktmrespuestacliente SET rcfecalta = '2025-07-25', rcfecmodificacion = '2025-07-25' WHERE rcidentity = '42982336M';
+              UPDATE mktmrespuestacliente SET rcfecalta = '2025-01-17', rcfecmodificacion = '2025-01-17' WHERE rcidentity = '05319569Z';
+              UPDATE mktmrespuestacliente SET rcfecalta = '2025-05-14', rcfecmodificacion = '2025-05-14' WHERE rcidentity = '05202785R';
+              UPDATE mktmrespuestacliente SET rcfecalta = '2025-01-17', rcfecmodificacion = '2025-01-17' WHERE rcidentity = '00831611T';
+              UPDATE mktmrespuestacliente SET rcfecalta = '2025-05-14', rcfecmodificacion = '2025-05-14' WHERE rcidentity = '05219145P';
+              UPDATE mktmrespuestacliente SET rcfecalta = '2025-10-18', rcfecmodificacion = '2025-10-18' WHERE rcidentity = '05336805T';
+              UPDATE mktmrespuestacliente SET rcfecalta = '2025-10-18', rcfecmodificacion = '2025-10-18' WHERE rcidentity = '09754617H';
+              UPDATE mktmrespuestacliente SET rcfecalta = '2025-03-20', rcfecmodificacion = '2025-03-20' WHERE rcidentity = '10197793F';
+              UPDATE mktmrespuestacliente SET rcfecalta = '2025-07-25', rcfecmodificacion = '2025-07-25' WHERE rcidentity = '15792476D';
+              UPDATE mktmrespuestacliente SET rcfecalta = '2025-01-17', rcfecmodificacion = '2025-01-17' WHERE rcidentity = '16036996Q';
+              UPDATE mktmrespuestacliente SET rcfecalta = '2025-05-14', rcfecmodificacion = '2025-05-14' WHERE rcidentity = '17856108N';
+              UPDATE mktmrespuestacliente SET rcfecalta = '2025-10-18', rcfecmodificacion = '2025-10-18' WHERE rcidentity = '22447542W';
+              UPDATE mktmrespuestacliente SET rcfecalta = '2025-10-18', rcfecmodificacion = '2025-10-18' WHERE rcidentity = '25403793V';
+              UPDATE mktmrespuestacliente SET rcfecalta = '2025-03-20', rcfecmodificacion = '2025-03-20' WHERE rcidentity = '36168341J';
+              UPDATE mktmrespuestacliente SET rcfecalta = '2025-07-25', rcfecmodificacion = '2025-07-25' WHERE rcidentity = '37349860E';
+              UPDATE mktmrespuestacliente SET rcfecalta = '2025-01-17', rcfecmodificacion = '2025-01-17' WHERE rcidentity = '45087831B';
+              UPDATE mktmrespuestacliente SET rcfecalta = '2025-05-14', rcfecmodificacion = '2025-05-14' WHERE rcidentity = '47358332K';
+              UPDATE mktmrespuestacliente SET rcfecalta = '2025-10-18', rcfecmodificacion = '2025-10-18' WHERE rcidentity = '50812947J';
+              UPDATE mktmrespuestacliente SET rcfecalta = '2025-03-20', rcfecmodificacion = '2025-03-20' WHERE rcidentity = '50835529D';
+              UPDATE mktmrespuestacliente SET rcfecalta = '2025-07-25', rcfecmodificacion = '2025-07-25' WHERE rcidentity = '51414663A';
+              UPDATE mktmrespuestacliente SET rcfecalta = '2025-05-14', rcfecmodificacion = '2025-05-14' WHERE rcidentity = 'X0691717S';
+              UPDATE mktmrespuestacliente SET rcfecalta = '2025-07-25', rcfecmodificacion = '2025-07-25' WHERE rcidentity = 'Z0717178C';
+              UPDATE mktmrespuestacliente SET rcfecalta = '2025-05-14', rcfecmodificacion = '2025-05-14' WHERE rcidentity = '18980250Y';
+              UPDATE mktmrespuestacliente SET rcfecalta = '2025-03-20', rcfecmodificacion = '2025-03-20' WHERE rcidentity = 'Z1285202J';
+              UPDATE mktmrespuestacliente SET rcfecalta = '2025-07-25', rcfecmodificacion = '2025-07-25' WHERE rcidentity = '00218852F';

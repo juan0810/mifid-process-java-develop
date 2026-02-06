@@ -1,0 +1,700 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0014-preguntas-conveniencia
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      changes:
+        # Pregunta 1 - Tipo 2 (RESPUESTA_UNICA) ✓
+        - insert:
+            tableName: MKTMPREGUNTAS
+            columns:
+              - column:
+                  name: PRID
+                  value: 1
+              - column:
+                  name: PRTIPOID
+                  value: 2
+              - column:
+                  name: PRTEXTO
+                  value: "¿Cuál es su nivel de estudios?"
+              - column:
+                  name: PRORDEN
+                  value: 1
+              - column:
+                  name: PRTIPOTEST
+                  value: "C"
+              - column:
+                  name: PRRESPUESTACORRECTA
+                  value: false
+              - column:
+                  name: PRFECINICIO
+                  valueDate: "2025-01-01"
+              - column:
+                  name: PRUSUALTA
+                  value: "SISTEMA"
+
+        # Pregunta 2 - Tipo 2 (RESPUESTA_UNICA) ✓
+        - insert:
+            tableName: MKTMPREGUNTAS
+            columns:
+              - column:
+                  name: PRID
+                  value: 2
+              - column:
+                  name: PRTIPOID
+                  value: 2
+              - column:
+                  name: PRTEXTO
+                  value: "¿Cuál es su experiencia laboral o profesional en el sector financiero?"
+              - column:
+                  name: PRORDEN
+                  value: 2
+              - column:
+                  name: PRTIPOTEST
+                  value: "C"
+              - column:
+                  name: PRRESPUESTACORRECTA
+                  value: false
+              - column:
+                  name: PRFECINICIO
+                  valueDate: "2025-01-01"
+              - column:
+                  name: PRUSUALTA
+                  value: "SISTEMA"
+
+        # Pregunta 3 - Tipo 2 (RESPUESTA_UNICA) - CORREGIDO
+        - insert:
+            tableName: MKTMPREGUNTAS
+            columns:
+              - column:
+                  name: PRID
+                  value: 3
+              - column:
+                  name: PRTIPOID
+                  value: 2  # Cambiado de 1 a 2
+              - column:
+                  name: PRTEXTO
+                  value: "¿Qué es un índice bursátil (por ejemplo, el Ibex 35)?"
+              - column:
+                  name: PRORDEN
+                  value: 3
+              - column:
+                  name: PRTIPOTEST
+                  value: "C"
+              - column:
+                  name: PRRESPUESTACORRECTA
+                  value: true
+              - column:
+                  name: PRFECINICIO
+                  valueDate: "2025-01-01"
+              - column:
+                  name: PRUSUALTA
+                  value: "SISTEMA"
+
+        # Pregunta 4 - Familia E - Tipo 2 (RESPUESTA_UNICA) - CORREGIDO
+        - insert:
+            tableName: MKTMPREGUNTAS
+            columns:
+              - column:
+                  name: PRID
+                  value: 4
+              - column:
+                  name: PRTIPOID
+                  value: 2  # Cambiado de 3 a 2
+              - column:
+                  name: PRTEXTO
+                  value: "En los bonos con opción de amortización anticipada, el riesgo de la inversión depende de:"
+              - column:
+                  name: PRORDEN
+                  value: 4
+              - column:
+                  name: PRTIPOTEST
+                  value: "C"
+              - column:
+                  name: PRFAMILIAS
+                  value: "E"
+              - column:
+                  name: PRRESPUESTACORRECTA
+                  value: true
+              - column:
+                  name: PRFECINICIO
+                  valueDate: "2025-01-01"
+              - column:
+                  name: PRUSUALTA
+                  value: "SISTEMA"
+
+        # Pregunta 5 - Familia F - Tipo 2 (RESPUESTA_UNICA) - CORREGIDO
+        - insert:
+            tableName: MKTMPREGUNTAS
+            columns:
+              - column:
+                  name: PRID
+                  value: 5
+              - column:
+                  name: PRTIPOID
+                  value: 2  # Cambiado de 3 a 2
+              - column:
+                  name: PRTEXTO
+                  value: "En un producto estructurado, entendemos por «valor final del valor subyacente»:"
+              - column:
+                  name: PRORDEN
+                  value: 5
+              - column:
+                  name: PRTIPOTEST
+                  value: "C"
+              - column:
+                  name: PRFAMILIAS
+                  value: "F"
+              - column:
+                  name: PRRESPUESTACORRECTA
+                  value: true
+              - column:
+                  name: PRFECINICIO
+                  valueDate: "2025-01-01"
+              - column:
+                  name: PRUSUALTA
+                  value: "SISTEMA"
+
+        # Pregunta 6 - Familia G - Tipo 2 (RESPUESTA_UNICA) - CORREGIDO
+        - insert:
+            tableName: MKTMPREGUNTAS
+            columns:
+              - column:
+                  name: PRID
+                  value: 6
+              - column:
+                  name: PRTIPOID
+                  value: 2  # Cambiado de 3 a 2
+              - column:
+                  name: PRTEXTO
+                  value: "Las participaciones preferentes son:"
+              - column:
+                  name: PRORDEN
+                  value: 6
+              - column:
+                  name: PRTIPOTEST
+                  value: "C"
+              - column:
+                  name: PRFAMILIAS
+                  value: "G"
+              - column:
+                  name: PRRESPUESTACORRECTA
+                  value: true
+              - column:
+                  name: PRFECINICIO
+                  valueDate: "2025-01-01"
+              - column:
+                  name: PRUSUALTA
+                  value: "SISTEMA"
+
+        # Pregunta 7 - Familia H - Tipo 2 (RESPUESTA_UNICA) - CORREGIDO
+        - insert:
+            tableName: MKTMPREGUNTAS
+            columns:
+              - column:
+                  name: PRID
+                  value: 7
+              - column:
+                  name: PRTIPOID
+                  value: 2  # Cambiado de 3 a 2
+              - column:
+                  name: PRTEXTO
+                  value: "¿En qué consiste el patrimonio de un fondo de inversión inmobiliaria?"
+              - column:
+                  name: PRORDEN
+                  value: 7
+              - column:
+                  name: PRTIPOTEST
+                  value: "C"
+              - column:
+                  name: PRFAMILIAS
+                  value: "H"
+              - column:
+                  name: PRRESPUESTACORRECTA
+                  value: true
+              - column:
+                  name: PRFECINICIO
+                  valueDate: "2025-01-01"
+              - column:
+                  name: PRUSUALTA
+                  value: "SISTEMA"
+
+        # Pregunta 8 - Familia I - Tipo 2 (RESPUESTA_UNICA) - CORREGIDO
+        - insert:
+            tableName: MKTMPREGUNTAS
+            columns:
+              - column:
+                  name: PRID
+                  value: 8
+              - column:
+                  name: PRTIPOID
+                  value: 2  # Cambiado de 3 a 2
+              - column:
+                  name: PRTEXTO
+                  value: "Las entidades de capital riesgo invierten en:"
+              - column:
+                  name: PRORDEN
+                  value: 8
+              - column:
+                  name: PRTIPOTEST
+                  value: "C"
+              - column:
+                  name: PRFAMILIAS
+                  value: "I"
+              - column:
+                  name: PRRESPUESTACORRECTA
+                  value: true
+              - column:
+                  name: PRFECINICIO
+                  valueDate: "2025-01-01"
+              - column:
+                  name: PRUSUALTA
+                  value: "SISTEMA"
+
+        # Pregunta 9 - Familias J,K - Tipo 2 (RESPUESTA_UNICA) - CORREGIDO
+        - insert:
+            tableName: MKTMPREGUNTAS
+            columns:
+              - column:
+                  name: PRID
+                  value: 9
+              - column:
+                  name: PRTIPOID
+                  value: 2  # Cambiado de 3 a 2
+              - column:
+                  name: PRTEXTO
+                  value: "Los productos derivados sirven para:"
+              - column:
+                  name: PRORDEN
+                  value: 9
+              - column:
+                  name: PRTIPOTEST
+                  value: "C"
+              - column:
+                  name: PRFAMILIAS
+                  value: "J,K"
+              - column:
+                  name: PRRESPUESTACORRECTA
+                  value: true
+              - column:
+                  name: PRFECINICIO
+                  valueDate: "2025-01-01"
+              - column:
+                  name: PRUSUALTA
+                  value: "SISTEMA"
+
+        # Pregunta 10 - Experiencia - Tipo 1 (CABECERA) - CORREGIDO
+        - insert:
+            tableName: MKTMPREGUNTAS
+            columns:
+              - column:
+                  name: PRID
+                  value: 10
+              - column:
+                  name: PRTIPOID
+                  value: 1  # Cambiado de 2 a 1 (CABECERA)
+              - column:
+                  name: PRTEXTO
+                  value: "Seguidamente mostramos una tabla con productos no complejos y complejos. Por favor indique, en relación con los primeros, con qué regularidad ha operado y/o mantiene posiciones vivas durante los últimos cinco años. Respecto a los complejos, con qué regularidad ha operado y/o mantiene posiciones vivas durante los últimos tres años"
+              - column:
+                  name: PRORDEN
+                  value: 10
+              - column:
+                  name: PRTIPOTEST
+                  value: "C"
+              - column:
+                  name: PRRESPUESTACORRECTA
+                  value: false
+              - column:
+                  name: PRFECINICIO
+                  valueDate: "2025-01-01"
+              - column:
+                  name: PRUSUALTA
+                  value: "SISTEMA"
+
+        # Subpreguntas 101-111 - Todas tipo 2 (RESPUESTA_UNICA) ✓
+        # (Estas ya están correctas en tu script)
+        # 10.1 - Familia A
+        - insert:
+            tableName: MKTMPREGUNTAS
+            columns:
+              - column:
+                  name: PRID
+                  value: 101
+              - column:
+                  name: PRTIPOID
+                  value: 2
+              - column:
+                  name: PRTEXTO
+                  value: "A. Depósitos bancarios e imposiciones a plazo fijo"
+              - column:
+                  name: PRORDEN
+                  value: 11
+              - column:
+                  name: PRTIPOTEST
+                  value: "C"
+              - column:
+                  name: PRFAMILIAS
+                  value: "A"
+              - column:
+                  name: PRDEPENDEDE
+                  value: 10
+              - column:
+                  name: PRRESPUESTACORRECTA
+                  value: false
+              - column:
+                  name: PRFECINICIO
+                  valueDate: "2025-01-01"
+              - column:
+                  name: PRUSUALTA
+                  value: "SISTEMA"
+
+        # 10.2 - Familia B
+        - insert:
+            tableName: MKTMPREGUNTAS
+            columns:
+              - column:
+                  name: PRID
+                  value: 102
+              - column:
+                  name: PRTIPOID
+                  value: 2  # RESPUESTA_UNICA ✓
+              - column:
+                  name: PRTEXTO
+                  value: "B. Renta fija no compleja (bonos simples, obligaciones del estado...)"
+              - column:
+                  name: PRORDEN
+                  value: 12
+              - column:
+                  name: PRTIPOTEST
+                  value: "C"
+              - column:
+                  name: PRFAMILIAS
+                  value: "B"
+              - column:
+                  name: PRDEPENDEDE
+                  value: 10
+              - column:
+                  name: PRRESPUESTACORRECTA
+                  value: false
+              - column:
+                  name: PRFECINICIO
+                  valueDate: "2025-01-01"
+              - column:
+                  name: PRUSUALTA
+                  value: "SISTEMA"
+
+        # 10.3 - Familia C
+        - insert:
+            tableName: MKTMPREGUNTAS
+            columns:
+              - column:
+                  name: PRID
+                  value: 103
+              - column:
+                  name: PRTIPOID
+                  value: 2  # RESPUESTA_UNICA ✓
+              - column:
+                  name: PRTEXTO
+                  value: "C. Renta variable cotizada en mercados organizados"
+              - column:
+                  name: PRORDEN
+                  value: 13
+              - column:
+                  name: PRTIPOTEST
+                  value: "C"
+              - column:
+                  name: PRFAMILIAS
+                  value: "C"
+              - column:
+                  name: PRDEPENDEDE
+                  value: 10
+              - column:
+                  name: PRRESPUESTACORRECTA
+                  value: false
+              - column:
+                  name: PRFECINICIO
+                  valueDate: "2025-01-01"
+              - column:
+                  name: PRUSUALTA
+                  value: "SISTEMA"
+
+        # 10.4 - Familia D
+        - insert:
+            tableName: MKTMPREGUNTAS
+            columns:
+              - column:
+                  name: PRID
+                  value: 104
+              - column:
+                  name: PRTIPOID
+                  value: 2  # RESPUESTA_UNICA ✓
+              - column:
+                  name: PRTEXTO
+                  value: "D. Fondos de inversión ordinarios o IIC UCITS"
+              - column:
+                  name: PRORDEN
+                  value: 14
+              - column:
+                  name: PRTIPOTEST
+                  value: "C"
+              - column:
+                  name: PRFAMILIAS
+                  value: "D"
+              - column:
+                  name: PRDEPENDEDE
+                  value: 10
+              - column:
+                  name: PRRESPUESTACORRECTA
+                  value: false
+              - column:
+                  name: PRFECINICIO
+                  valueDate: "2025-01-01"
+              - column:
+                  name: PRUSUALTA
+                  value: "SISTEMA"
+
+        # 10.5 - Familia E
+        - insert:
+            tableName: MKTMPREGUNTAS
+            columns:
+              - column:
+                  name: PRID
+                  value: 105
+              - column:
+                  name: PRTIPOID
+                  value: 2  # RESPUESTA_UNICA ✓
+              - column:
+                  name: PRTEXTO
+                  value: "E. Renta fija compleja (subordinada, bonos con opciones...)"
+              - column:
+                  name: PRORDEN
+                  value: 15
+              - column:
+                  name: PRTIPOTEST
+                  value: "C"
+              - column:
+                  name: PRFAMILIAS
+                  value: "E"
+              - column:
+                  name: PRDEPENDEDE
+                  value: 10
+              - column:
+                  name: PRRESPUESTACORRECTA
+                  value: false
+              - column:
+                  name: PRFECINICIO
+                  valueDate: "2025-01-01"
+              - column:
+                  name: PRUSUALTA
+                  value: "SISTEMA"
+
+        # 10.6 - Familia F
+        - insert:
+            tableName: MKTMPREGUNTAS
+            columns:
+              - column:
+                  name: PRID
+                  value: 106
+              - column:
+                  name: PRTIPOID
+                  value: 2  # RESPUESTA_UNICA ✓
+              - column:
+                  name: PRTEXTO
+                  value: "F. Productos estructurados"
+              - column:
+                  name: PRORDEN
+                  value: 16
+              - column:
+                  name: PRTIPOTEST
+                  value: "C"
+              - column:
+                  name: PRFAMILIAS
+                  value: "F"
+              - column:
+                  name: PRDEPENDEDE
+                  value: 10
+              - column:
+                  name: PRRESPUESTACORRECTA
+                  value: false
+              - column:
+                  name: PRFECINICIO
+                  valueDate: "2025-01-01"
+              - column:
+                  name: PRUSUALTA
+                  value: "SISTEMA"
+
+        # 10.7 - Familia G
+        - insert:
+            tableName: MKTMPREGUNTAS
+            columns:
+              - column:
+                  name: PRID
+                  value: 107
+              - column:
+                  name: PRTIPOID
+                  value: 2  # RESPUESTA_UNICA ✓
+              - column:
+                  name: PRTEXTO
+                  value: "G. Bonos convertibles o canjeables y participaciones preferentes"
+              - column:
+                  name: PRORDEN
+                  value: 17
+              - column:
+                  name: PRTIPOTEST
+                  value: "C"
+              - column:
+                  name: PRFAMILIAS
+                  value: "G"
+              - column:
+                  name: PRDEPENDEDE
+                  value: 10
+              - column:
+                  name: PRRESPUESTACORRECTA
+                  value: false
+              - column:
+                  name: PRFECINICIO
+                  valueDate: "2025-01-01"
+              - column:
+                  name: PRUSUALTA
+                  value: "SISTEMA"
+
+        # 10.8 - Familia H
+        - insert:
+            tableName: MKTMPREGUNTAS
+            columns:
+              - column:
+                  name: PRID
+                  value: 108
+              - column:
+                  name: PRTIPOID
+                  value: 2  # RESPUESTA_UNICA ✓
+              - column:
+                  name: PRTEXTO
+                  value: "H. IIC inmobiliarias"
+              - column:
+                  name: PRORDEN
+                  value: 18
+              - column:
+                  name: PRTIPOTEST
+                  value: "C"
+              - column:
+                  name: PRFAMILIAS
+                  value: "H"
+              - column:
+                  name: PRDEPENDEDE
+                  value: 10
+              - column:
+                  name: PRRESPUESTACORRECTA
+                  value: false
+              - column:
+                  name: PRFECINICIO
+                  valueDate: "2025-01-01"
+              - column:
+                  name: PRUSUALTA
+                  value: "SISTEMA"
+
+        # 10.9 - Familia I
+        - insert:
+            tableName: MKTMPREGUNTAS
+            columns:
+              - column:
+                  name: PRID
+                  value: 109
+              - column:
+                  name: PRTIPOID
+                  value: 2  # RESPUESTA_UNICA ✓
+              - column:
+                  name: PRTEXTO
+                  value: "I. IIC de inversión libre o fondos de capital riesgo"
+              - column:
+                  name: PRORDEN
+                  value: 19
+              - column:
+                  name: PRTIPOTEST
+                  value: "C"
+              - column:
+                  name: PRFAMILIAS
+                  value: "I"
+              - column:
+                  name: PRDEPENDEDE
+                  value: 10
+              - column:
+                  name: PRRESPUESTACORRECTA
+                  value: false
+              - column:
+                  name: PRFECINICIO
+                  valueDate: "2025-01-01"
+              - column:
+                  name: PRUSUALTA
+                  value: "SISTEMA"
+
+        # 10.10 - Familia J
+        - insert:
+            tableName: MKTMPREGUNTAS
+            columns:
+              - column:
+                  name: PRID
+                  value: 110
+              - column:
+                  name: PRTIPOID
+                  value: 2  # RESPUESTA_UNICA ✓
+              - column:
+                  name: PRTEXTO
+                  value: "J. Derivados cotizados (opciones, futuros, warrants...)"
+              - column:
+                  name: PRORDEN
+                  value: 20
+              - column:
+                  name: PRTIPOTEST
+                  value: "C"
+              - column:
+                  name: PRFAMILIAS
+                  value: "J"
+              - column:
+                  name: PRDEPENDEDE
+                  value: 10
+              - column:
+                  name: PRRESPUESTACORRECTA
+                  value: false
+              - column:
+                  name: PRFECINICIO
+                  valueDate: "2025-01-01"
+              - column:
+                  name: PRUSUALTA
+                  value: "SISTEMA"
+
+        # 10.11 - Familia K
+        - insert:
+            tableName: MKTMPREGUNTAS
+            columns:
+              - column:
+                  name: PRID
+                  value: 111
+              - column:
+                  name: PRTIPOID
+                  value: 2  # RESPUESTA_UNICA ✓
+              - column:
+                  name: PRTEXTO
+                  value: "K. Derivados OTC y otros productos apalancados (CFD, Spread Betting...)"
+              - column:
+                  name: PRORDEN
+                  value: 21
+              - column:
+                  name: PRTIPOTEST
+                  value: "C"
+              - column:
+                  name: PRFAMILIAS
+                  value: "K"
+              - column:
+                  name: PRDEPENDEDE
+                  value: 10
+              - column:
+                  name: PRRESPUESTACORRECTA
+                  value: false
+              - column:
+                  name: PRFECINICIO
+                  valueDate: "2025-01-01"
+              - column:
+                  name: PRUSUALTA
+                  value: "SISTEMA"

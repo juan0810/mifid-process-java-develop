@@ -1,0 +1,123 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0034-migrate-to-unified-model
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: "Migrar datos de MKTMPREGUNTAS y MKTMRESPUESTAS al modelo unificado MKTMITEMS"
+      changes:
+        # 1. Crear tabla temporal para mapeo de Preguntas (PRID -> ITID)
+        - createTable:
+            tableName: TEMP_PRID_ITID_MIG
+            columns:
+              - column: { name: OLD_PRID, type: integer }
+              - column: { name: NEW_ITID, type: integer }
+
+        # 2. Migrar preguntas (ITTIPOITEM='PR')
+        - sql:
+            comment: "Insertar preguntas en MKTMITEMS"
+            sql: |
+              INSERT INTO MKTMITEMS (
+                ITTIPOITEM, ITTIPOPREGUNTAID, ITTEXTO, ITORDEN, ITTEXTOLIBRE, 
+                ITTIPOTEST, ITFAMILIAS, ITTIENERESPCORRECTA, ITFECINICIO, ITFECALTA, ITUSUALTA
+              )
+              SELECT 'PR', p.PRTIPOID, p.PRTEXTO, p.PRORDEN, 0,
+                CASE p.PRTIPOTEST WHEN 'C' THEN 'CO' WHEN 'I' THEN 'ID' WHEN 'S' THEN 'SO' ELSE 'NA' END,
+                p.PRFAMILIAS, CASE WHEN p.PRRESPUESTACORRECTA = true THEN 1 ELSE 0 END,
+                p.PRFECINICIO, p.PRFECALTA, p.PRUSUALTA
+              FROM MKTMPREGUNTAS p
+              ORDER BY p.PRID;
+
+        # 3. Llenar tabla de mapeo y actualizar Dependencias (CORREGIDO: SEVERIDAD MEDIA y ALTA)
+        # Se añade validación por ITTIPOPREGUNTAID para evitar ambigüedad
+        - sql:
+            comment: "Mapear IDs y corregir dependencias (PRDEPENDEDE -> ITDEPENDEDE)"
+            sql: |
+              -- Llenar mapa relacionando por Texto, Orden y TIPO DE PREGUNTA
+              INSERT INTO TEMP_PRID_ITID_MIG (OLD_PRID, NEW_ITID)
+              SELECT p.PRID, i.ITID
+              FROM MKTMPREGUNTAS p
+              JOIN MKTMITEMS i ON i.ITTEXTO = p.PRTEXTO 
+                AND i.ITORDEN = p.PRORDEN 
+                AND i.ITTIPOITEM = 'PR'
+                AND i.ITTIPOPREGUNTAID = p.PRTIPOID;
+              
+              -- Actualizar la columna ITDEPENDEDE usando el mapa y validando
+              UPDATE MKTMITEMS i
+              SET ITDEPENDEDE = map.NEW_ITID
+              FROM MKTMPREGUNTAS old_p
+              JOIN TEMP_PRID_ITID_MIG map ON map.OLD_PRID = old_p.PRDEPENDEDE
+              WHERE i.ITTEXTO = old_p.PRTEXTO 
+                AND i.ITORDEN = old_p.PRORDEN
+                AND i.ITTIPOPREGUNTAID = old_p.PRTIPOID
+                AND old_p.PRDEPENDEDE IS NOT NULL;
+
+        # 4. Migrar respuestas (ITTIPOITEM='RE')
+        - sql:
+            comment: "Migrar respuestas enlazando con la nueva pregunta padre"
+            sql: |
+              INSERT INTO MKTMITEMS (
+                ITTIPOITEM, ITTIPOPREGUNTAID, ITDEPENDEDE, ITTEXTO, ITORDEN, ITVALOR, 
+                ITTEXTOLIBRE, ITTIPOTEST, ITFAMILIAS, ITESCORRECTA, ITFECINICIO, ITFECALTA, ITUSUALTA
+              )
+              SELECT 'RE', pr.PRTIPOID, map.NEW_ITID, r.RETEXTO, 0, r.REVALOR,
+                CASE WHEN r.RETEXTOLIBRE = true THEN 1 ELSE 0 END,
+                CASE pr.PRTIPOTEST WHEN 'C' THEN 'CO' WHEN 'I' THEN 'ID' WHEN 'S' THEN 'SO' ELSE 'NA' END,
+                pr.PRFAMILIAS, CASE WHEN r.RECORRECTA = true THEN 1 ELSE 0 END,
+                pr.PRFECINICIO, r.REFECALTA, r.REUSUALTA
+              FROM MKTMRESPUESTAS r
+              JOIN MKTMPREGUNTAS pr ON pr.PRID = r.REPREGUNTAID
+              JOIN TEMP_PRID_ITID_MIG map ON map.OLD_PRID = pr.PRID
+              ORDER BY r.REID;
+
+        # 5. Drop FK antigua
+        - dropForeignKeyConstraint:
+            baseTableName: MKTMRESPUESTACLIENTEDETALLE
+            constraintName: FK__OPE_ENC_D__id_re__540324B6
+            ifExists: true
+
+        # 6. Actualizar MKTMRESPUESTACLIENTEDETALLE con nuevos IDs (CORREGIDO: SEVERIDAD ALTA)
+        - sql:
+            comment: "Actualizar detalle cliente para apuntar a MKTMITEMS validando padre"
+            sql: |
+              UPDATE MKTMRESPUESTACLIENTEDETALLE rcd
+              SET RDRESPUESTAID = inew.ITID
+              FROM MKTMRESPUESTAS rold
+              JOIN TEMP_PRID_ITID_MIG map ON map.OLD_PRID = rold.REPREGUNTAID
+              JOIN MKTMITEMS inew ON inew.ITTEXTO = rold.RETEXTO 
+                AND inew.ITTIPOITEM = 'RE' 
+                AND inew.ITDEPENDEDE = map.NEW_ITID
+                AND COALESCE(inew.ITVALOR, '') = COALESCE(rold.REVALOR, '')
+              WHERE rcd.RDRESPUESTAID = rold.REID;
+
+        # 7. Add nueva FK y limpiar
+        - addForeignKeyConstraint:
+            baseTableName: MKTMRESPUESTACLIENTEDETALLE
+            baseColumnNames: rdrespuestaid
+            referencedTableName: MKTMITEMS
+            referencedColumnNames: itid
+            constraintName: fk_mktmrespuestaclientedetalle_item
+
+        - dropTable:
+            tableName: TEMP_PRID_ITID_MIG
+
+      # ROLLBACK CORREGIDO (Orden invertido para evitar error de FK)
+      rollback:
+        - dropForeignKeyConstraint:
+            baseTableName: MKTMRESPUESTACLIENTEDETALLE
+            constraintName: fk_mktmrespuestaclientedetalle_item
+        - sql:
+            comment: "Restaurar IDs originales en detalle cliente antes de borrar items"
+            sql: |
+              UPDATE MKTMRESPUESTACLIENTEDETALLE rcd
+              SET RDRESPUESTAID = rold.REID
+              FROM MKTMITEMS inew
+              JOIN MKTMITEMS iparent ON inew.ITDEPENDEDE = iparent.ITID
+              JOIN MKTMPREGUNTAS pold ON pold.PRTEXTO = iparent.ITTEXTO 
+                AND pold.PRORDEN = iparent.ITORDEN
+                AND pold.PRTIPOID = iparent.ITTIPOPREGUNTAID
+              JOIN MKTMRESPUESTAS rold ON rold.REPREGUNTAID = pold.PRID 
+                AND rold.RETEXTO = inew.ITTEXTO 
+                AND COALESCE(rold.REVALOR, '') = COALESCE(inew.ITVALOR, '')
+              WHERE rcd.RDRESPUESTAID = inew.ITID;
+        - sql:
+            sql: DELETE FROM MKTMITEMS WHERE ITTIPOITEM IN ('PR', 'RE');

@@ -1,0 +1,101 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0011
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      changes:
+        - insert:
+            tableName: MKTMPREGUNTASTIPO
+            columns:
+              - column:
+                  name: PTID
+                  value: 1
+              - column:
+                  name: PTTIPO
+                  value: "CABECERA"
+              - column:
+                  name: PTDESCRIPCION
+                  value: "Pregunta cabecera sin respuesta, sirve de contexto para otras preguntas"
+              - column:
+                  name: PTUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMPREGUNTASTIPO
+            columns:
+              - column:
+                  name: PTID
+                  value: 2
+              - column:
+                  name: PTTIPO
+                  value: "RESPUESTA_UNICA"
+              - column:
+                  name: PTDESCRIPCION
+                  value: "Pregunta que permite elegir una sola opción de respuesta"
+              - column:
+                  name: PTUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMPREGUNTASTIPO
+            columns:
+              - column:
+                  name: PTID
+                  value: 3
+              - column:
+                  name: PTTIPO
+                  value: "RESPUESTA_MULTIPLE"
+              - column:
+                  name: PTDESCRIPCION
+                  value: "Pregunta que permite elegir varias opciones de respuesta"
+              - column:
+                  name: PTUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMPREGUNTASTIPO
+            columns:
+              - column:
+                  name: PTID
+                  value: 4
+              - column:
+                  name: PTTIPO
+                  value: "PREGUNTA_RESPUESTA"
+              - column:
+                  name: PTDESCRIPCION
+                  value: "Item que es pregunta y respuesta al mismo tiempo"
+              - column:
+                  name: PTUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMPREGUNTASTIPO
+            columns:
+              - column:
+                  name: PTID
+                  value: 5
+              - column:
+                  name: PTTIPO
+                  value: "TEXTO_LIBRE"
+              - column:
+                  name: PTDESCRIPCION
+                  value: "Pregunta abierta con respuesta de texto libre"
+              - column:
+                  name: PTUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMPREGUNTASTIPO
+            columns:
+              - column:
+                  name: PTID
+                  value: 6
+              - column:
+                  name: PTTIPO
+                  value: "NO_APLICA"
+              - column:
+                  name: PTDESCRIPCION
+                  value: "Tipo asignado a items que son solo respuestas"
+              - column:
+                  name: PTUSUALTA
+                  value: "SISTEMA"

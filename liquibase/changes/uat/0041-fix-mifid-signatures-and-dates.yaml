@@ -1,0 +1,126 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0041-fix-mifid-signatures-and-dates
+      author: gemini-ai
+      comment: Correccion de estados a FIRMADO (2) e inyeccion de fechas desde CSV.
+      preConditions:
+        onFail: MARK_RAN
+        onError: HALT
+        tableExists:
+          tableName: mktmrespuestacliente
+
+      changes:
+        - sql:
+            sql: |
+              -- 1. 00223332W
+              UPDATE public.mktmrespuestacliente SET rcestado = 2, rcfecfirma = '2025-08-22 00:00:00', rcfeccaducidad = '2025-08-22', rcfecmodificacion = NOW(), rcusumod = 'SYSTEM' WHERE rcidentity = '00223332W' AND rcestado = 1;
+              -- 2. 00402489N
+              UPDATE public.mktmrespuestacliente SET rcestado = 2, rcfecfirma = '2024-11-22 00:00:00', rcfeccaducidad = '2026-11-22', rcfecmodificacion = NOW(), rcusumod = 'SYSTEM' WHERE rcidentity = '00402489N' AND rcestado = 1;
+              -- 3. 00410412T
+              UPDATE public.mktmrespuestacliente SET rcestado = 2, rcfecfirma = '2025-11-22 00:00:00', rcfeccaducidad = '2027-11-22', rcfecmodificacion = NOW(), rcusumod = 'SYSTEM' WHERE rcidentity = '00410412T' AND rcestado = 1;
+              -- 4. 00443424F
+              UPDATE public.mktmrespuestacliente SET rcestado = 2, rcfecfirma = '2024-11-08 00:00:00', rcfeccaducidad = '2026-12-02', rcfecmodificacion = NOW(), rcusumod = 'SYSTEM' WHERE rcidentity = '00443424F' AND rcestado = 1;
+              -- 5. 71544007T
+              UPDATE public.mktmrespuestacliente SET rcestado = 2, rcfecfirma = '2024-06-27 00:00:00', rcfeccaducidad = '2026-06-27', rcfecmodificacion = NOW(), rcusumod = 'SYSTEM' WHERE rcidentity = '71544007T' AND rcestado = 1;
+              -- 6. Y4381181V
+              UPDATE public.mktmrespuestacliente SET rcestado = 2, rcfecfirma = '2024-09-27 00:00:00', rcfeccaducidad = '2026-09-27', rcfecmodificacion = NOW(), rcusumod = 'SYSTEM' WHERE rcidentity = 'Y4381181V' AND rcestado = 1;
+              -- 7. Y6320673B
+              UPDATE public.mktmrespuestacliente SET rcestado = 2, rcfecfirma = '2021-05-07 00:00:00', rcfeccaducidad = '2023-05-07', rcfecmodificacion = NOW(), rcusumod = 'SYSTEM' WHERE rcidentity = 'Y6320673B' AND rcestado = 1;
+              -- 8. Z0553299Q
+              UPDATE public.mktmrespuestacliente SET rcestado = 2, rcfecfirma = '2025-04-18 00:00:00', rcfeccaducidad = '2027-04-18', rcfecmodificacion = NOW(), rcusumod = 'SYSTEM' WHERE rcidentity = 'Z0553299Q' AND rcestado = 1;
+              -- 9. 19498741P
+              UPDATE public.mktmrespuestacliente SET rcestado = 2, rcfecfirma = '2025-08-22 00:00:00', rcfeccaducidad = '2027-08-22', rcfecmodificacion = NOW(), rcusumod = 'SYSTEM' WHERE rcidentity = '19498741P' AND rcestado = 1;
+              -- 10. 02644871D
+              UPDATE public.mktmrespuestacliente SET rcestado = 2, rcfecfirma = '2024-11-22 00:00:00', rcfeccaducidad = '2026-11-22', rcfecmodificacion = NOW(), rcusumod = 'SYSTEM' WHERE rcidentity = '02644871D' AND rcestado = 1;
+              -- 11. 46591811K
+              UPDATE public.mktmrespuestacliente SET rcestado = 2, rcfecfirma = '2025-11-22 00:00:00', rcfeccaducidad = '2027-11-22', rcfecmodificacion = NOW(), rcusumod = 'SYSTEM' WHERE rcidentity = '46591811K' AND rcestado = 1;
+              -- 12. 09775525L
+              UPDATE public.mktmrespuestacliente SET rcestado = 2, rcfecfirma = '2024-11-08 00:00:00', rcfeccaducidad = '2026-12-02', rcfecmodificacion = NOW(), rcusumod = 'SYSTEM' WHERE rcidentity = '09775525L' AND rcestado = 1;
+              -- 13. 73077420A
+              UPDATE public.mktmrespuestacliente SET rcestado = 2, rcfecfirma = '2024-06-27 00:00:00', rcfeccaducidad = '2026-06-27', rcfecmodificacion = NOW(), rcusumod = 'SYSTEM' WHERE rcidentity = '73077420A' AND rcestado = 1;
+              -- 14. 51178881v
+              UPDATE public.mktmrespuestacliente SET rcestado = 2, rcfecfirma = '2024-09-27 00:00:00', rcfeccaducidad = '2026-09-27', rcfecmodificacion = NOW(), rcusumod = 'SYSTEM' WHERE rcidentity = '51178881v' AND rcestado = 1;
+              -- 15. 71448558R
+              UPDATE public.mktmrespuestacliente SET rcestado = 2, rcfecfirma = '2021-05-07 00:00:00', rcfeccaducidad = '2023-05-07', rcfecmodificacion = NOW(), rcusumod = 'SYSTEM' WHERE rcidentity = '71448558R' AND rcestado = 1;
+              -- 16. B21922273
+              UPDATE public.mktmrespuestacliente SET rcestado = 2, rcfecfirma = '2024-07-15 00:00:00', rcfeccaducidad = '2026-07-15', rcfecmodificacion = NOW(), rcusumod = 'SYSTEM' WHERE rcidentity = 'B21922273' AND rcestado = 1;
+              -- 17. 14099755L
+              UPDATE public.mktmrespuestacliente SET rcestado = 2, rcfecfirma = '2024-02-08 00:00:00', rcfeccaducidad = '2026-02-08', rcfecmodificacion = NOW(), rcusumod = 'SYSTEM' WHERE rcidentity = '14099755L' AND rcestado = 1;
+              -- 18. 16035622E
+              UPDATE public.mktmrespuestacliente SET rcestado = 2, rcfecfirma = '2024-09-09 00:00:00', rcfeccaducidad = '2026-09-09', rcfecmodificacion = NOW(), rcusumod = 'SYSTEM' WHERE rcidentity = '16035622E' AND rcestado = 1;
+              -- 19. B87446720
+              UPDATE public.mktmrespuestacliente SET rcestado = 2, rcfecfirma = '2024-01-05 00:00:00', rcfeccaducidad = '2026-01-05', rcfecmodificacion = NOW(), rcusumod = 'SYSTEM' WHERE rcidentity = 'B87446720' AND rcestado = 1;
+              -- 20. B38799680
+              UPDATE public.mktmrespuestacliente SET rcestado = 2, rcfecfirma = '2024-10-22 00:00:00', rcfeccaducidad = '2026-10-29', rcfecmodificacion = NOW(), rcusumod = 'SYSTEM' WHERE rcidentity = 'B38799680' AND rcestado = 1;
+              -- 21. 78405698D
+              UPDATE public.mktmrespuestacliente SET rcestado = 2, rcfecfirma = '2025-06-30 00:00:00', rcfeccaducidad = '2027-06-30', rcfecmodificacion = NOW(), rcusumod = 'SYSTEM' WHERE rcidentity = '78405698D' AND rcestado = 1;
+              -- 22. B24673360
+              UPDATE public.mktmrespuestacliente SET rcestado = 2, rcfecfirma = '2024-10-09 00:00:00', rcfeccaducidad = '2026-10-09', rcfecmodificacion = NOW(), rcusumod = 'SYSTEM' WHERE rcidentity = 'B24673360' AND rcestado = 1;
+              -- 23. 09780382T
+              UPDATE public.mktmrespuestacliente SET rcestado = 2, rcfecfirma = '2025-07-03 00:00:00', rcfeccaducidad = '2027-07-03', rcfecmodificacion = NOW(), rcusumod = 'SYSTEM' WHERE rcidentity = '09780382T' AND rcestado = 1;
+              -- 24. B82668146
+              UPDATE public.mktmrespuestacliente SET rcestado = 2, rcfecfirma = '2024-10-18 00:00:00', rcfeccaducidad = '2026-10-29', rcfecmodificacion = NOW(), rcusumod = 'SYSTEM' WHERE rcidentity = 'B82668146' AND rcestado = 1;
+              -- 25. A87717286
+              UPDATE public.mktmrespuestacliente SET rcestado = 2, rcfecfirma = '2024-03-20 00:00:00', rcfeccaducidad = '2026-03-20', rcfecmodificacion = NOW(), rcusumod = 'SYSTEM' WHERE rcidentity = 'A87717286' AND rcestado = 1;
+              -- 26. 42982336M
+              UPDATE public.mktmrespuestacliente SET rcestado = 2, rcfecfirma = '2025-07-25 00:00:00', rcfeccaducidad = '2027-07-25', rcfecmodificacion = NOW(), rcusumod = 'SYSTEM' WHERE rcidentity = '42982336M' AND rcestado = 1;
+              -- 27. 05319569Z
+              UPDATE public.mktmrespuestacliente SET rcestado = 2, rcfecfirma = '2025-01-14 00:00:00', rcfeccaducidad = '2027-01-14', rcfecmodificacion = NOW(), rcusumod = 'SYSTEM' WHERE rcidentity = '05319569Z' AND rcestado = 1;
+              -- 28. 05202785R
+              UPDATE public.mktmrespuestacliente SET rcestado = 2, rcfecfirma = '2024-05-14 00:00:00', rcfeccaducidad = '2026-05-14', rcfecmodificacion = NOW(), rcusumod = 'SYSTEM' WHERE rcidentity = '05202785R' AND rcestado = 1;
+              -- 29. 00831611T
+              UPDATE public.mktmrespuestacliente SET rcestado = 2, rcfecfirma = '2025-01-14 00:00:00', rcfeccaducidad = '2027-01-14', rcfecmodificacion = NOW(), rcusumod = 'SYSTEM' WHERE rcidentity = '00831611T' AND rcestado = 1;
+              -- 30. 05219145P
+              UPDATE public.mktmrespuestacliente SET rcestado = 2, rcfecfirma = '2024-05-14 00:00:00', rcfeccaducidad = '2026-05-14', rcfecmodificacion = NOW(), rcusumod = 'SYSTEM' WHERE rcidentity = '05219145P' AND rcestado = 1;
+              -- 31. 05336805T
+              UPDATE public.mktmrespuestacliente SET rcestado = 2, rcfecfirma = '2023-10-18 00:00:00', rcfeccaducidad = '2025-10-29', rcfecmodificacion = NOW(), rcusumod = 'SYSTEM' WHERE rcidentity = '05336805T' AND rcestado = 1;
+              -- 32. 09754617H
+              UPDATE public.mktmrespuestacliente SET rcestado = 2, rcfecfirma = '2024-10-18 00:00:00', rcfeccaducidad = '2026-10-29', rcfecmodificacion = NOW(), rcusumod = 'SYSTEM' WHERE rcidentity = '09754617H' AND rcestado = 1;
+              -- 33. 10197793F
+              UPDATE public.mktmrespuestacliente SET rcestado = 2, rcfecfirma = '2024-03-20 00:00:00', rcfeccaducidad = '2026-03-20', rcfecmodificacion = NOW(), rcusumod = 'SYSTEM' WHERE rcidentity = '10197793F' AND rcestado = 1;
+              -- 34. 15792476D
+              UPDATE public.mktmrespuestacliente SET rcestado = 2, rcfecfirma = '2025-07-25 00:00:00', rcfeccaducidad = '2027-07-25', rcfecmodificacion = NOW(), rcusumod = 'SYSTEM' WHERE rcidentity = '15792476D' AND rcestado = 1;
+              -- 35. 16036996Q
+              UPDATE public.mktmrespuestacliente SET rcestado = 2, rcfecfirma = '2025-01-14 00:00:00', rcfeccaducidad = '2027-01-14', rcfecmodificacion = NOW(), rcusumod = 'SYSTEM' WHERE rcidentity = '16036996Q' AND rcestado = 1;
+              -- 36. 17856108N
+              UPDATE public.mktmrespuestacliente SET rcestado = 2, rcfecfirma = '2024-05-14 00:00:00', rcfeccaducidad = '2026-05-14', rcfecmodificacion = NOW(), rcusumod = 'SYSTEM' WHERE rcidentity = '17856108N' AND rcestado = 1;
+              -- 37. 22447542W
+              UPDATE public.mktmrespuestacliente SET rcestado = 2, rcfecfirma = '2023-10-18 00:00:00', rcfeccaducidad = '2025-10-29', rcfecmodificacion = NOW(), rcusumod = 'SYSTEM' WHERE rcidentity = '22447542W' AND rcestado = 1;
+              -- 38. 25403793V
+              UPDATE public.mktmrespuestacliente SET rcestado = 2, rcfecfirma = '2024-10-18 00:00:00', rcfeccaducidad = '2026-10-29', rcfecmodificacion = NOW(), rcusumod = 'SYSTEM' WHERE rcidentity = '25403793V' AND rcestado = 1;
+              -- 39. 36168341J
+              UPDATE public.mktmrespuestacliente SET rcestado = 2, rcfecfirma = '2024-03-20 00:00:00', rcfeccaducidad = '2026-03-20', rcfecmodificacion = NOW(), rcusumod = 'SYSTEM' WHERE rcidentity = '36168341J' AND rcestado = 1;
+              -- 40. 37349860E
+              UPDATE public.mktmrespuestacliente SET rcestado = 2, rcfecfirma = '2025-07-25 00:00:00', rcfeccaducidad = '2027-07-25', rcfecmodificacion = NOW(), rcusumod = 'SYSTEM' WHERE rcidentity = '37349860E' AND rcestado = 1;
+              -- 41. 45087831B
+              UPDATE public.mktmrespuestacliente SET rcestado = 2, rcfecfirma = '2025-01-14 00:00:00', rcfeccaducidad = '2027-01-14', rcfecmodificacion = NOW(), rcusumod = 'SYSTEM' WHERE rcidentity = '45087831B' AND rcestado = 1;
+              -- 42. 47358332K
+              UPDATE public.mktmrespuestacliente SET rcestado = 2, rcfecfirma = '2024-05-14 00:00:00', rcfeccaducidad = '2026-05-14', rcfecmodificacion = NOW(), rcusumod = 'SYSTEM' WHERE rcidentity = '47358332K' AND rcestado = 1;
+              -- 43. 50812947J
+              UPDATE public.mktmrespuestacliente SET rcestado = 2, rcfecfirma = '2023-10-18 00:00:00', rcfeccaducidad = '2025-10-29', rcfecmodificacion = NOW(), rcusumod = 'SYSTEM' WHERE rcidentity = '50812947J' AND rcestado = 1;
+              -- 44. 50835529D
+              UPDATE public.mktmrespuestacliente SET rcestado = 2, rcfecfirma = '2024-03-20 00:00:00', rcfeccaducidad = '2026-03-20', rcfecmodificacion = NOW(), rcusumod = 'SYSTEM' WHERE rcidentity = '50835529D' AND rcestado = 1;
+              -- 45. 51414663A
+              UPDATE public.mktmrespuestacliente SET rcestado = 2, rcfecfirma = '2025-07-25 00:00:00', rcfeccaducidad = '2027-07-25', rcfecmodificacion = NOW(), rcusumod = 'SYSTEM' WHERE rcidentity = '51414663A' AND rcestado = 1;
+              -- 46. X0691717S
+              UPDATE public.mktmrespuestacliente SET rcestado = 2, rcfecfirma = '2024-05-14 00:00:00', rcfeccaducidad = '2026-05-14', rcfecmodificacion = NOW(), rcusumod = 'SYSTEM' WHERE rcidentity = 'X0691717S' AND rcestado = 1;
+              -- 47. Z0717178C
+              UPDATE public.mktmrespuestacliente SET rcestado = 2, rcfecfirma = '2025-07-25 00:00:00', rcfeccaducidad = '2027-07-25', rcfecmodificacion = NOW(), rcusumod = 'SYSTEM' WHERE rcidentity = 'Z0717178C' AND rcestado = 1;
+              -- 48. 18980250Y
+              UPDATE public.mktmrespuestacliente SET rcestado = 2, rcfecfirma = '2024-05-14 00:00:00', rcfeccaducidad = '2026-05-14', rcfecmodificacion = NOW(), rcusumod = 'SYSTEM' WHERE rcidentity = '18980250Y' AND rcestado = 1;
+              -- 49. Z1285202J
+              UPDATE public.mktmrespuestacliente SET rcestado = 2, rcfecfirma = '2024-03-20 00:00:00', rcfeccaducidad = '2026-03-20', rcfecmodificacion = NOW(), rcusumod = 'SYSTEM' WHERE rcidentity = 'Z1285202J' AND rcestado = 1;
+              -- 50. 00218852F
+              UPDATE public.mktmrespuestacliente SET rcestado = 2, rcfecfirma = '2025-07-25 00:00:00', rcfeccaducidad = '2027-07-25', rcfecmodificacion = NOW(), rcusumod = 'SYSTEM' WHERE rcidentity = '00218852F' AND rcestado = 1;
+
+      rollback:
+        - sql:
+            sql: |
+              UPDATE public.mktmrespuestacliente 
+              SET rcestado = 1, 
+                  rcfecfirma = NULL, 
+                  rcfeccaducidad = NULL, 
+                  rcfecmodificacion = NOW(),
+                  rcusumod = NULL -- Limpiamos nuestra marca
+              WHERE rcusumod = 'SYSTEM' 
+                AND rcestado = 2;

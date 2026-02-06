@@ -1,0 +1,440 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0020-relacion-version-preguntas-conveniencia
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      changes:
+        # Test de Conveniencia (Preguntas 1-10)
+        - insert:
+            tableName: MKTMRELVERSIONPREGUNTA
+            columns:
+              - column:
+                  name: VPID
+                  value: 1
+              - column:
+                  name: VPVERSIONID
+                  value: 1
+              - column:
+                  name: VPPREGUNTAID
+                  value: 1
+              - column:
+                  name: VPUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRELVERSIONPREGUNTA
+            columns:
+              - column:
+                  name: VPID
+                  value: 2
+              - column:
+                  name: VPVERSIONID
+                  value: 1
+              - column:
+                  name: VPPREGUNTAID
+                  value: 2
+              - column:
+                  name: VPUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRELVERSIONPREGUNTA
+            columns:
+              - column:
+                  name: VPID
+                  value: 3
+              - column:
+                  name: VPVERSIONID
+                  value: 1
+              - column:
+                  name: VPPREGUNTAID
+                  value: 3
+              - column:
+                  name: VPUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRELVERSIONPREGUNTA
+            columns:
+              - column:
+                  name: VPID
+                  value: 4
+              - column:
+                  name: VPVERSIONID
+                  value: 1
+              - column:
+                  name: VPPREGUNTAID
+                  value: 4
+              - column:
+                  name: VPUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRELVERSIONPREGUNTA
+            columns:
+              - column:
+                  name: VPID
+                  value: 5
+              - column:
+                  name: VPVERSIONID
+                  value: 1
+              - column:
+                  name: VPPREGUNTAID
+                  value: 5
+              - column:
+                  name: VPUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRELVERSIONPREGUNTA
+            columns:
+              - column:
+                  name: VPID
+                  value: 6
+              - column:
+                  name: VPVERSIONID
+                  value: 1
+              - column:
+                  name: VPPREGUNTAID
+                  value: 6
+              - column:
+                  name: VPUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRELVERSIONPREGUNTA
+            columns:
+              - column:
+                  name: VPID
+                  value: 7
+              - column:
+                  name: VPVERSIONID
+                  value: 1
+              - column:
+                  name: VPPREGUNTAID
+                  value: 7
+              - column:
+                  name: VPUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRELVERSIONPREGUNTA
+            columns:
+              - column:
+                  name: VPID
+                  value: 8
+              - column:
+                  name: VPVERSIONID
+                  value: 1
+              - column:
+                  name: VPPREGUNTAID
+                  value: 8
+              - column:
+                  name: VPUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRELVERSIONPREGUNTA
+            columns:
+              - column:
+                  name: VPID
+                  value: 9
+              - column:
+                  name: VPVERSIONID
+                  value: 1
+              - column:
+                  name: VPPREGUNTAID
+                  value: 9
+              - column:
+                  name: VPUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRELVERSIONPREGUNTA
+            columns:
+              - column:
+                  name: VPID
+                  value: 10
+              - column:
+                  name: VPVERSIONID
+                  value: 1
+              - column:
+                  name: VPPREGUNTAID
+                  value: 10
+              - column:
+                  name: VPUSUALTA
+                  value: "SISTEMA"
+
+        # Test de Idoneidad (Preguntas 11-16)
+        - insert:
+            tableName: MKTMRELVERSIONPREGUNTA
+            columns:
+              - column:
+                  name: VPID
+                  value: 11
+              - column:
+                  name: VPVERSIONID
+                  value: 1
+              - column:
+                  name: VPPREGUNTAID
+                  value: 11
+              - column:
+                  name: VPUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRELVERSIONPREGUNTA
+            columns:
+              - column:
+                  name: VPID
+                  value: 12
+              - column:
+                  name: VPVERSIONID
+                  value: 1
+              - column:
+                  name: VPPREGUNTAID
+                  value: 12
+              - column:
+                  name: VPUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRELVERSIONPREGUNTA
+            columns:
+              - column:
+                  name: VPID
+                  value: 13
+              - column:
+                  name: VPVERSIONID
+                  value: 1
+              - column:
+                  name: VPPREGUNTAID
+                  value: 13
+              - column:
+                  name: VPUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRELVERSIONPREGUNTA
+            columns:
+              - column:
+                  name: VPID
+                  value: 14
+              - column:
+                  name: VPVERSIONID
+                  value: 1
+              - column:
+                  name: VPPREGUNTAID
+                  value: 14
+              - column:
+                  name: VPUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRELVERSIONPREGUNTA
+            columns:
+              - column:
+                  name: VPID
+                  value: 15
+              - column:
+                  name: VPVERSIONID
+                  value: 1
+              - column:
+                  name: VPPREGUNTAID
+                  value: 15
+              - column:
+                  name: VPUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRELVERSIONPREGUNTA
+            columns:
+              - column:
+                  name: VPID
+                  value: 16
+              - column:
+                  name: VPVERSIONID
+                  value: 1
+              - column:
+                  name: VPPREGUNTAID
+                  value: 16
+              - column:
+                  name: VPUSUALTA
+                  value: "SISTEMA"
+
+        # Relaciones para las subpreguntas de la pregunta 10 (101-111)
+        - insert:
+            tableName: MKTMRELVERSIONPREGUNTA
+            columns:
+              - column:
+                  name: VPID
+                  value: 17
+              - column:
+                  name: VPVERSIONID
+                  value: 1
+              - column:
+                  name: VPPREGUNTAID
+                  value: 101
+              - column:
+                  name: VPUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRELVERSIONPREGUNTA
+            columns:
+              - column:
+                  name: VPID
+                  value: 18
+              - column:
+                  name: VPVERSIONID
+                  value: 1
+              - column:
+                  name: VPPREGUNTAID
+                  value: 102
+              - column:
+                  name: VPUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRELVERSIONPREGUNTA
+            columns:
+              - column:
+                  name: VPID
+                  value: 19
+              - column:
+                  name: VPVERSIONID
+                  value: 1
+              - column:
+                  name: VPPREGUNTAID
+                  value: 103
+              - column:
+                  name: VPUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRELVERSIONPREGUNTA
+            columns:
+              - column:
+                  name: VPID
+                  value: 20
+              - column:
+                  name: VPVERSIONID
+                  value: 1
+              - column:
+                  name: VPPREGUNTAID
+                  value: 104
+              - column:
+                  name: VPUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRELVERSIONPREGUNTA
+            columns:
+              - column:
+                  name: VPID
+                  value: 21
+              - column:
+                  name: VPVERSIONID
+                  value: 1
+              - column:
+                  name: VPPREGUNTAID
+                  value: 105
+              - column:
+                  name: VPUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRELVERSIONPREGUNTA
+            columns:
+              - column:
+                  name: VPID
+                  value: 22
+              - column:
+                  name: VPVERSIONID
+                  value: 1
+              - column:
+                  name: VPPREGUNTAID
+                  value: 106
+              - column:
+                  name: VPUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRELVERSIONPREGUNTA
+            columns:
+              - column:
+                  name: VPID
+                  value: 23
+              - column:
+                  name: VPVERSIONID
+                  value: 1
+              - column:
+                  name: VPPREGUNTAID
+                  value: 107
+              - column:
+                  name: VPUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRELVERSIONPREGUNTA
+            columns:
+              - column:
+                  name: VPID
+                  value: 24
+              - column:
+                  name: VPVERSIONID
+                  value: 1
+              - column:
+                  name: VPPREGUNTAID
+                  value: 108
+              - column:
+                  name: VPUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRELVERSIONPREGUNTA
+            columns:
+              - column:
+                  name: VPID
+                  value: 25
+              - column:
+                  name: VPVERSIONID
+                  value: 1
+              - column:
+                  name: VPPREGUNTAID
+                  value: 109
+              - column:
+                  name: VPUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRELVERSIONPREGUNTA
+            columns:
+              - column:
+                  name: VPID
+                  value: 26
+              - column:
+                  name: VPVERSIONID
+                  value: 1
+              - column:
+                  name: VPPREGUNTAID
+                  value: 110
+              - column:
+                  name: VPUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRELVERSIONPREGUNTA
+            columns:
+              - column:
+                  name: VPID
+                  value: 27
+              - column:
+                  name: VPVERSIONID
+                  value: 1
+              - column:
+                  name: VPPREGUNTAID
+                  value: 111
+              - column:
+                  name: VPUSUALTA
+                  value: "SISTEMA"

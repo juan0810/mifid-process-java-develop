@@ -1,0 +1,82 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0007
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      changes:
+        - createTable:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REID
+                  type: integer
+                  defaultValueSequenceNext: MKTMRESPUESTAS_REID_SEQ
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: REPREGUNTAID
+                  type: integer
+                  constraints:
+                    nullable: false
+              - column:
+                  name: RETEXTO
+                  type: varchar(500)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: REVALOR
+                  type: varchar(500)
+              - column:
+                  name: RETEXTOLIBRE
+                  type: boolean
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+              - column:
+                  name: REPREGUNTAHABILITADAID
+                  type: integer
+              - column:
+                  name: RECORRECTA
+                  type: boolean
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+              - column:
+                  name: REFECALTA
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: REFECMOD
+                  type: timestamp
+              - column:
+                  name: REUSUALTA
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: REUSUMOD
+                  type: varchar(50)
+        - addForeignKeyConstraint:
+            baseTableName: MKTMRESPUESTAS
+            baseColumnNames: REPREGUNTAID
+            referencedTableName: MKTMPREGUNTAS
+            referencedColumnNames: PRID
+            constraintName: FK__OPE_ENC_R__id_pr__4C6202EE
+        - addForeignKeyConstraint:
+            baseTableName: MKTMRESPUESTAS
+            baseColumnNames: REPREGUNTAHABILITADAID
+            referencedTableName: MKTMPREGUNTAS
+            referencedColumnNames: PRID
+            constraintName: fk_mktmrespuestas_habilitada
+      rollback:
+        - dropForeignKeyConstraint:
+            baseTableName: MKTMRESPUESTAS
+            constraintName: FK__OPE_ENC_R__id_pr__4C6202EE
+        - dropForeignKeyConstraint:
+            baseTableName: MKTMRESPUESTAS
+            constraintName: fk_mktmrespuestas_habilitada
+        - dropTable:
+            tableName: MKTMRESPUESTAS

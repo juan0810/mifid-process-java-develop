@@ -1,0 +1,36 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0001
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      changes:
+        - createTable:
+            tableName: MKTMPREGUNTASTIPO
+            columns:
+              - column:
+                  name: PTID
+                  type: smallint
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: PTTIPO
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: PTDESCRIPCION
+                  type: varchar(250)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: PTUSUALTA
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: PTUSUMOD
+                  type: varchar(50)
+      rollback:
+        - dropTable:
+            tableName: MKTMPREGUNTASTIPO

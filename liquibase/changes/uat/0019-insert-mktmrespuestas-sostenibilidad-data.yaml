@@ -1,0 +1,407 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0019-respuestas-sostenibilidad
+      author: Sistema MiFID <mifid@singularbank.com>
+      context: dev
+      changes:
+        # Respuestas para Pregunta 17 - Preferencia general de sostenibilidad
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 17
+              - column:
+                  name: RETEXTO
+                  value: "No"
+              - column:
+                  name: REVALOR
+                  value: "A"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 17
+              - column:
+                  name: RETEXTO
+                  value: "Sí, deseo invertir en un producto sostenible conforme a la normativa europea. Y elegir yo mismo mis preferencias de sostenibilidad."
+              - column:
+                  name: REVALOR
+                  value: "B"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 17
+              - column:
+                  name: RETEXTO
+                  value: "Sí, deseo que mi banquero las tenga en cuenta a la hora de elegir producto de acuerdo a la política de integración de riesgos de sostenibilidad de Singular Bank: https://www.singularbank.es/informacion-legal/#esg"
+              - column:
+                  name: REVALOR
+                  value: "C"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        # Respuestas para Pregunta 18 - Productos con inversiones sostenibles
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 18
+              - column:
+                  name: RETEXTO
+                  value: "No me interesa establecer ningún porcentaje mínimo."
+              - column:
+                  name: REVALOR
+                  value: "A"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 18
+              - column:
+                  name: RETEXTO
+                  value: "Mínimo 5%"
+              - column:
+                  name: REVALOR
+                  value: "B"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 18
+              - column:
+                  name: RETEXTO
+                  value: "Mínimo 20%"
+              - column:
+                  name: REVALOR
+                  value: "C"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        # Respuestas para Pregunta 19 - Productos medioambientalmente sostenibles
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 19
+              - column:
+                  name: RETEXTO
+                  value: "No me interesa establecer ningún porcentaje mínimo"
+              - column:
+                  name: REVALOR
+                  value: "A"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 19
+              - column:
+                  name: RETEXTO
+                  value: "Mínimo 2%"
+              - column:
+                  name: REVALOR
+                  value: "B"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 19
+              - column:
+                  name: RETEXTO
+                  value: "Mínimo 5%"
+              - column:
+                  name: REVALOR
+                  value: "C"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        # Respuestas para Pregunta 20 - Principales Incidencias Adversas (PIAs)
+        # Nota: Esta pregunta parece ser de selección múltiple
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 20
+              - column:
+                  name: RETEXTO
+                  value: "No me interesa establecer ninguna preferencia respecto a PIAS"
+              - column:
+                  name: REVALOR
+                  value: "1"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 20
+              - column:
+                  name: RETEXTO
+                  value: "Impactos negativos por la emisión de gases con efecto invernadero"
+              - column:
+                  name: REVALOR
+                  value: "2"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 20
+              - column:
+                  name: RETEXTO
+                  value: "Impactos negativos medioambientales como en la biodiversidad, daños del agua o vertidos de agua o residuos"
+              - column:
+                  name: REVALOR
+                  value: "3"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 20
+              - column:
+                  name: RETEXTO
+                  value: "Impactos negativos en materias sociales y laborales, respeto a los derechos humanos y la lucha contra la corrupción y el soborno"
+              - column:
+                  name: REVALOR
+                  value: "4"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 20
+              - column:
+                  name: RETEXTO
+                  value: "Todos los impactos negativos de forma general"
+              - column:
+                  name: REVALOR
+                  value: "5"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        # Respuestas para Pregunta 21 - Porcentaje de cartera en productos ASG
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 21
+              - column:
+                  name: RETEXTO
+                  value: "Mínimo un 5%"
+              - column:
+                  name: REVALOR
+                  value: "A"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 21
+              - column:
+                  name: RETEXTO
+                  value: "Mínimo un 10%"
+              - column:
+                  name: REVALOR
+                  value: "B"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 21
+              - column:
+                  name: RETEXTO
+                  value: "Mínimo un 20%"
+              - column:
+                  name: REVALOR
+                  value: "C"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"
+
+        - insert:
+            tableName: MKTMRESPUESTAS
+            columns:
+              - column:
+                  name: REPREGUNTAID
+                  value: 21
+              - column:
+                  name: RETEXTO
+                  value: "No quiero establecer un porcentaje fijo, sí recibir siempre que sea posible una alternativa en inversión sostenible."
+              - column:
+                  name: REVALOR
+                  value: "D"
+              - column:
+                  name: RETEXTOLIBRE
+                  value: 0
+              - column:
+                  name: RECORRECTA
+                  value: 0
+              - column:
+                  name: REUSUALTA
+                  value: "SISTEMA"

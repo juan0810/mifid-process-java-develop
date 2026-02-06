@@ -1,0 +1,267 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0038-populate-mktmrelcombinacionitem-convenience
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      comment: "Poblar MKTMRELCOMBINACIONITEM con las condiciones mínimas para familias de conveniencia (A-K)"
+      preConditions:
+        onFail: MARK_RAN
+        sqlCheck:
+          expectedResult: 0
+          sql: "SELECT COUNT(*) FROM mktmrelcombinacionitem WHERE ciidcombinacion BETWEEN 20 AND 30"
+      changes:
+        # =====================================================
+        # FAMILIA A - DEPÓSITOS BANCARIOS (CRID 20)
+        # Condiciones: P3=D (correcta) Y P10-A IN (A,B) experiencia
+        # =====================================================
+        
+        # P3 = D (respuesta correcta conocimiento general)
+        - insert:
+            tableName: mktmrelcombinacionitem
+            columns:
+              - column: { name: ciidcombinacion, valueNumeric: 20 }
+              - column: { name: ciiditem, valueComputed: "(SELECT itid FROM mktmitems WHERE ittipoitem='RE' AND itdependede=(SELECT itid FROM mktmitems WHERE ittipoitem='PR' AND itorden=3 AND ittipotest='CO' LIMIT 1) AND itvalor='D' LIMIT 1)" }
+              - column: { name: ciusualta, value: 'SYSTEM' }
+        
+        # P10-A = A (experiencia alta)
+        - insert:
+            tableName: mktmrelcombinacionitem
+            columns:
+              - column: { name: ciidcombinacion, valueNumeric: 20 }
+              - column: { name: ciiditem, valueComputed: "(SELECT itid FROM mktmitems WHERE ittipoitem='RE' AND itdependede=(SELECT itid FROM mktmitems WHERE ittipoitem='PR' AND itorden=11 AND ittipotest='CO' LIMIT 1) AND itvalor='A' LIMIT 1)" }
+              - column: { name: ciusualta, value: 'SYSTEM' }
+
+        # =====================================================
+        # FAMILIA B - RENTA FIJA NO COMPLEJA (CRID 21)
+        # =====================================================
+        
+        - insert:
+            tableName: mktmrelcombinacionitem
+            columns:
+              - column: { name: ciidcombinacion, valueNumeric: 21 }
+              - column: { name: ciiditem, valueComputed: "(SELECT itid FROM mktmitems WHERE ittipoitem='RE' AND itdependede=(SELECT itid FROM mktmitems WHERE ittipoitem='PR' AND itorden=3 AND ittipotest='CO' LIMIT 1) AND itvalor='D' LIMIT 1)" }
+              - column: { name: ciusualta, value: 'SYSTEM' }
+        
+        - insert:
+            tableName: mktmrelcombinacionitem
+            columns:
+              - column: { name: ciidcombinacion, valueNumeric: 21 }
+              - column: { name: ciiditem, valueComputed: "(SELECT itid FROM mktmitems WHERE ittipoitem='RE' AND itdependede=(SELECT itid FROM mktmitems WHERE ittipoitem='PR' AND itorden=12 AND ittipotest='CO' LIMIT 1) AND itvalor='A' LIMIT 1)" }
+              - column: { name: ciusualta, value: 'SYSTEM' }
+
+        # =====================================================
+        # FAMILIA C - RENTA VARIABLE (CRID 22)
+        # =====================================================
+        
+        - insert:
+            tableName: mktmrelcombinacionitem
+            columns:
+              - column: { name: ciidcombinacion, valueNumeric: 22 }
+              - column: { name: ciiditem, valueComputed: "(SELECT itid FROM mktmitems WHERE ittipoitem='RE' AND itdependede=(SELECT itid FROM mktmitems WHERE ittipoitem='PR' AND itorden=3 AND ittipotest='CO' LIMIT 1) AND itvalor='D' LIMIT 1)" }
+              - column: { name: ciusualta, value: 'SYSTEM' }
+        
+        - insert:
+            tableName: mktmrelcombinacionitem
+            columns:
+              - column: { name: ciidcombinacion, valueNumeric: 22 }
+              - column: { name: ciiditem, valueComputed: "(SELECT itid FROM mktmitems WHERE ittipoitem='RE' AND itdependede=(SELECT itid FROM mktmitems WHERE ittipoitem='PR' AND itorden=13 AND ittipotest='CO' LIMIT 1) AND itvalor='A' LIMIT 1)" }
+              - column: { name: ciusualta, value: 'SYSTEM' }
+
+        # =====================================================
+        # FAMILIA D - FONDOS DE INVERSIÓN (CRID 23)
+        # =====================================================
+        
+        - insert:
+            tableName: mktmrelcombinacionitem
+            columns:
+              - column: { name: ciidcombinacion, valueNumeric: 23 }
+              - column: { name: ciiditem, valueComputed: "(SELECT itid FROM mktmitems WHERE ittipoitem='RE' AND itdependede=(SELECT itid FROM mktmitems WHERE ittipoitem='PR' AND itorden=3 AND ittipotest='CO' LIMIT 1) AND itvalor='D' LIMIT 1)" }
+              - column: { name: ciusualta, value: 'SYSTEM' }
+        
+        - insert:
+            tableName: mktmrelcombinacionitem
+            columns:
+              - column: { name: ciidcombinacion, valueNumeric: 23 }
+              - column: { name: ciiditem, valueComputed: "(SELECT itid FROM mktmitems WHERE ittipoitem='RE' AND itdependede=(SELECT itid FROM mktmitems WHERE ittipoitem='PR' AND itorden=14 AND ittipotest='CO' LIMIT 1) AND itvalor='A' LIMIT 1)" }
+              - column: { name: ciusualta, value: 'SYSTEM' }
+
+        # =====================================================
+        # FAMILIA E - RENTA FIJA COMPLEJA (CRID 24)
+        # Condiciones: P3=D Y P4=C (específica) Y P10-E=A
+        # =====================================================
+        
+        - insert:
+            tableName: mktmrelcombinacionitem
+            columns:
+              - column: { name: ciidcombinacion, valueNumeric: 24 }
+              - column: { name: ciiditem, valueComputed: "(SELECT itid FROM mktmitems WHERE ittipoitem='RE' AND itdependede=(SELECT itid FROM mktmitems WHERE ittipoitem='PR' AND itorden=3 AND ittipotest='CO' LIMIT 1) AND itvalor='D' LIMIT 1)" }
+              - column: { name: ciusualta, value: 'SYSTEM' }
+        
+        - insert:
+            tableName: mktmrelcombinacionitem
+            columns:
+              - column: { name: ciidcombinacion, valueNumeric: 24 }
+              - column: { name: ciiditem, valueComputed: "(SELECT itid FROM mktmitems WHERE ittipoitem='RE' AND itdependede=(SELECT itid FROM mktmitems WHERE ittipoitem='PR' AND itorden=4 AND ittipotest='CO' LIMIT 1) AND itvalor='C' LIMIT 1)" }
+              - column: { name: ciusualta, value: 'SYSTEM' }
+        
+        - insert:
+            tableName: mktmrelcombinacionitem
+            columns:
+              - column: { name: ciidcombinacion, valueNumeric: 24 }
+              - column: { name: ciiditem, valueComputed: "(SELECT itid FROM mktmitems WHERE ittipoitem='RE' AND itdependede=(SELECT itid FROM mktmitems WHERE ittipoitem='PR' AND itorden=15 AND ittipotest='CO' LIMIT 1) AND itvalor='A' LIMIT 1)" }
+              - column: { name: ciusualta, value: 'SYSTEM' }
+
+        # =====================================================
+        # FAMILIA F - DERIVADOS (CRID 25)
+        # =====================================================
+        
+        - insert:
+            tableName: mktmrelcombinacionitem
+            columns:
+              - column: { name: ciidcombinacion, valueNumeric: 25 }
+              - column: { name: ciiditem, valueComputed: "(SELECT itid FROM mktmitems WHERE ittipoitem='RE' AND itdependede=(SELECT itid FROM mktmitems WHERE ittipoitem='PR' AND itorden=3 AND ittipotest='CO' LIMIT 1) AND itvalor='D' LIMIT 1)" }
+              - column: { name: ciusualta, value: 'SYSTEM' }
+        
+        - insert:
+            tableName: mktmrelcombinacionitem
+            columns:
+              - column: { name: ciidcombinacion, valueNumeric: 25 }
+              - column: { name: ciiditem, valueComputed: "(SELECT itid FROM mktmitems WHERE ittipoitem='RE' AND itdependede=(SELECT itid FROM mktmitems WHERE ittipoitem='PR' AND itorden=5 AND ittipotest='CO' LIMIT 1) AND itvalor='B' LIMIT 1)" }
+              - column: { name: ciusualta, value: 'SYSTEM' }
+        
+        - insert:
+            tableName: mktmrelcombinacionitem
+            columns:
+              - column: { name: ciidcombinacion, valueNumeric: 25 }
+              - column: { name: ciiditem, valueComputed: "(SELECT itid FROM mktmitems WHERE ittipoitem='RE' AND itdependede=(SELECT itid FROM mktmitems WHERE ittipoitem='PR' AND itorden=16 AND ittipotest='CO' LIMIT 1) AND itvalor='A' LIMIT 1)" }
+              - column: { name: ciusualta, value: 'SYSTEM' }
+
+        # =====================================================
+        # FAMILIA G - ESTRUCTURADOS (CRID 26)
+        # =====================================================
+        
+        - insert:
+            tableName: mktmrelcombinacionitem
+            columns:
+              - column: { name: ciidcombinacion, valueNumeric: 26 }
+              - column: { name: ciiditem, valueComputed: "(SELECT itid FROM mktmitems WHERE ittipoitem='RE' AND itdependede=(SELECT itid FROM mktmitems WHERE ittipoitem='PR' AND itorden=3 AND ittipotest='CO' LIMIT 1) AND itvalor='D' LIMIT 1)" }
+              - column: { name: ciusualta, value: 'SYSTEM' }
+        
+        - insert:
+            tableName: mktmrelcombinacionitem
+            columns:
+              - column: { name: ciidcombinacion, valueNumeric: 26 }
+              - column: { name: ciiditem, valueComputed: "(SELECT itid FROM mktmitems WHERE ittipoitem='RE' AND itdependede=(SELECT itid FROM mktmitems WHERE ittipoitem='PR' AND itorden=6 AND ittipotest='CO' LIMIT 1) AND itvalor='B' LIMIT 1)" }
+              - column: { name: ciusualta, value: 'SYSTEM' }
+        
+        - insert:
+            tableName: mktmrelcombinacionitem
+            columns:
+              - column: { name: ciidcombinacion, valueNumeric: 26 }
+              - column: { name: ciiditem, valueComputed: "(SELECT itid FROM mktmitems WHERE ittipoitem='RE' AND itdependede=(SELECT itid FROM mktmitems WHERE ittipoitem='PR' AND itorden=17 AND ittipotest='CO' LIMIT 1) AND itvalor='A' LIMIT 1)" }
+              - column: { name: ciusualta, value: 'SYSTEM' }
+
+        # =====================================================
+        # FAMILIA H - GESTIÓN ALTERNATIVA (CRID 27)
+        # =====================================================
+        
+        - insert:
+            tableName: mktmrelcombinacionitem
+            columns:
+              - column: { name: ciidcombinacion, valueNumeric: 27 }
+              - column: { name: ciiditem, valueComputed: "(SELECT itid FROM mktmitems WHERE ittipoitem='RE' AND itdependede=(SELECT itid FROM mktmitems WHERE ittipoitem='PR' AND itorden=3 AND ittipotest='CO' LIMIT 1) AND itvalor='D' LIMIT 1)" }
+              - column: { name: ciusualta, value: 'SYSTEM' }
+        
+        - insert:
+            tableName: mktmrelcombinacionitem
+            columns:
+              - column: { name: ciidcombinacion, valueNumeric: 27 }
+              - column: { name: ciiditem, valueComputed: "(SELECT itid FROM mktmitems WHERE ittipoitem='RE' AND itdependede=(SELECT itid FROM mktmitems WHERE ittipoitem='PR' AND itorden=7 AND ittipotest='CO' LIMIT 1) AND itvalor='D' LIMIT 1)" }
+              - column: { name: ciusualta, value: 'SYSTEM' }
+        
+        - insert:
+            tableName: mktmrelcombinacionitem
+            columns:
+              - column: { name: ciidcombinacion, valueNumeric: 27 }
+              - column: { name: ciiditem, valueComputed: "(SELECT itid FROM mktmitems WHERE ittipoitem='RE' AND itdependede=(SELECT itid FROM mktmitems WHERE ittipoitem='PR' AND itorden=18 AND ittipotest='CO' LIMIT 1) AND itvalor='A' LIMIT 1)" }
+              - column: { name: ciusualta, value: 'SYSTEM' }
+
+        # =====================================================
+        # FAMILIA I - INVERSIÓN COLECTIVA LIBRE (CRID 28)
+        # =====================================================
+        
+        - insert:
+            tableName: mktmrelcombinacionitem
+            columns:
+              - column: { name: ciidcombinacion, valueNumeric: 28 }
+              - column: { name: ciiditem, valueComputed: "(SELECT itid FROM mktmitems WHERE ittipoitem='RE' AND itdependede=(SELECT itid FROM mktmitems WHERE ittipoitem='PR' AND itorden=3 AND ittipotest='CO' LIMIT 1) AND itvalor='D' LIMIT 1)" }
+              - column: { name: ciusualta, value: 'SYSTEM' }
+        
+        - insert:
+            tableName: mktmrelcombinacionitem
+            columns:
+              - column: { name: ciidcombinacion, valueNumeric: 28 }
+              - column: { name: ciiditem, valueComputed: "(SELECT itid FROM mktmitems WHERE ittipoitem='RE' AND itdependede=(SELECT itid FROM mktmitems WHERE ittipoitem='PR' AND itorden=8 AND ittipotest='CO' LIMIT 1) AND itvalor='B' LIMIT 1)" }
+              - column: { name: ciusualta, value: 'SYSTEM' }
+        
+        - insert:
+            tableName: mktmrelcombinacionitem
+            columns:
+              - column: { name: ciidcombinacion, valueNumeric: 28 }
+              - column: { name: ciiditem, valueComputed: "(SELECT itid FROM mktmitems WHERE ittipoitem='RE' AND itdependede=(SELECT itid FROM mktmitems WHERE ittipoitem='PR' AND itorden=19 AND ittipotest='CO' LIMIT 1) AND itvalor='A' LIMIT 1)" }
+              - column: { name: ciusualta, value: 'SYSTEM' }
+
+        # =====================================================
+        # FAMILIA J - DEPÓSITOS ESTRUCTURADOS (CRID 29)
+        # =====================================================
+        
+        - insert:
+            tableName: mktmrelcombinacionitem
+            columns:
+              - column: { name: ciidcombinacion, valueNumeric: 29 }
+              - column: { name: ciiditem, valueComputed: "(SELECT itid FROM mktmitems WHERE ittipoitem='RE' AND itdependede=(SELECT itid FROM mktmitems WHERE ittipoitem='PR' AND itorden=3 AND ittipotest='CO' LIMIT 1) AND itvalor='D' LIMIT 1)" }
+              - column: { name: ciusualta, value: 'SYSTEM' }
+        
+        - insert:
+            tableName: mktmrelcombinacionitem
+            columns:
+              - column: { name: ciidcombinacion, valueNumeric: 29 }
+              - column: { name: ciiditem, valueComputed: "(SELECT itid FROM mktmitems WHERE ittipoitem='RE' AND itdependede=(SELECT itid FROM mktmitems WHERE ittipoitem='PR' AND itorden=9 AND ittipotest='CO' LIMIT 1) AND itvalor='C' LIMIT 1)" }
+              - column: { name: ciusualta, value: 'SYSTEM' }
+        
+        - insert:
+            tableName: mktmrelcombinacionitem
+            columns:
+              - column: { name: ciidcombinacion, valueNumeric: 29 }
+              - column: { name: ciiditem, valueComputed: "(SELECT itid FROM mktmitems WHERE ittipoitem='RE' AND itdependede=(SELECT itid FROM mktmitems WHERE ittipoitem='PR' AND itorden=20 AND ittipotest='CO' LIMIT 1) AND itvalor='A' LIMIT 1)" }
+              - column: { name: ciusualta, value: 'SYSTEM' }
+
+        # =====================================================
+        # FAMILIA K - SEGUROS VINCULADOS (CRID 30)
+        # =====================================================
+        
+        - insert:
+            tableName: mktmrelcombinacionitem
+            columns:
+              - column: { name: ciidcombinacion, valueNumeric: 30 }
+              - column: { name: ciiditem, valueComputed: "(SELECT itid FROM mktmitems WHERE ittipoitem='RE' AND itdependede=(SELECT itid FROM mktmitems WHERE ittipoitem='PR' AND itorden=3 AND ittipotest='CO' LIMIT 1) AND itvalor='D' LIMIT 1)" }
+              - column: { name: ciusualta, value: 'SYSTEM' }
+        
+        - insert:
+            tableName: mktmrelcombinacionitem
+            columns:
+              - column: { name: ciidcombinacion, valueNumeric: 30 }
+              - column: { name: ciiditem, valueComputed: "(SELECT itid FROM mktmitems WHERE ittipoitem='RE' AND itdependede=(SELECT itid FROM mktmitems WHERE ittipoitem='PR' AND itorden=9 AND ittipotest='CO' LIMIT 1) AND itvalor='C' LIMIT 1)" }
+              - column: { name: ciusualta, value: 'SYSTEM' }
+        
+        - insert:
+            tableName: mktmrelcombinacionitem
+            columns:
+              - column: { name: ciidcombinacion, valueNumeric: 30 }
+              - column: { name: ciiditem, valueComputed: "(SELECT itid FROM mktmitems WHERE ittipoitem='RE' AND itdependede=(SELECT itid FROM mktmitems WHERE ittipoitem='PR' AND itorden=21 AND ittipotest='CO' LIMIT 1) AND itvalor='A' LIMIT 1)" }
+              - column: { name: ciusualta, value: 'SYSTEM' }
+
+      rollback:
+        - delete:
+            tableName: mktmrelcombinacionitem
+            where: ciidcombinacion BETWEEN 20 AND 30

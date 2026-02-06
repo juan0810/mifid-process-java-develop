@@ -1,0 +1,21 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0037-drop-old-tables
+      author: system
+      comment: "Eliminación de tablas antiguas mktmpreguntas y mktmrespuestas después de migración al modelo unificado"
+      preConditions:
+        onFail: MARK_RAN
+        tableExists:
+          tableName: mktmrespuestas
+      changes:
+        # Eliminar las tablas con CASCADE para manejar FKs automáticamente
+        - sql:
+            sql: "DROP TABLE IF EXISTS mktmrespuestas CASCADE;"
+
+        - sql:
+            sql: "DROP TABLE IF EXISTS mktmpreguntas CASCADE;"
+
+      rollback:
+        - sql:
+            comment: "ROLLBACK NO DISPONIBLE: Las tablas mktmpreguntas y mktmrespuestas han sido eliminadas. Se requiere restauración desde backup."
+            sql: "-- Rollback requires database restore from backup"

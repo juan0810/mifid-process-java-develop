@@ -1,0 +1,423 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0035-insert-combinaciones-respuestas-maestras
+      author: rmolina
+      comment: "Inserta datos maestros de combinaciones predefinidas para tests de conveniencia e idoneidad"
+      preConditions:
+        onFail: MARK_RAN
+        sqlCheck:
+          expectedResult: 0
+          sql: "SELECT COUNT(*) FROM mktmcombinacionesrespuestas WHERE crid IN (1,2,3,4,5,10,11,12,13,14,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41)"
+      changes:
+        # =====================================================
+        # COMBINACIONES DE CONVENIENCIA - FAMILIAS NO COMPLEJAS (A,B,C,D)
+        # =====================================================
+        # Resultado: CONVENIENTE para familias no complejas
+        - insert:
+            tableName: mktmcombinacionesrespuestas
+            columns:
+              - column: { name: crid, valueNumeric: 1 }
+              - column: { name: crresultado, value: 'CO' }
+              - column: { name: crdescripcion, value: 'Conveniente para familias no complejas' }
+              - column: { name: crjustificacion, value: 'El cliente cumple los requisitos de conocimientos y experiencia para productos no complejos' }
+              - column: { name: crmensaje, value: 'A,B,C,D' }
+              - column: { name: crfecalta, valueDate: 'now()' }
+              - column: { name: crusualta, value: 'SYSTEM' }
+
+        # Resultado: NO CONVENIENTE para familias no complejas
+        - insert:
+            tableName: mktmcombinacionesrespuestas
+            columns:
+              - column: { name: crid, valueNumeric: 2 }
+              - column: { name: crresultado, value: 'NC' }
+              - column: { name: crdescripcion, value: 'No conveniente para familias no complejas' }
+              - column: { name: crjustificacion, value: 'El cliente no cumple los requisitos de conocimientos y/o experiencia mínimos' }
+              - column: { name: crmensaje, value: '' }
+              - column: { name: crfecalta, valueDate: 'now()' }
+              - column: { name: crusualta, value: 'SYSTEM' }
+
+        # Resultado: ALERTA por incoherencia
+        - insert:
+            tableName: mktmcombinacionesrespuestas
+            columns:
+              - column: { name: crid, valueNumeric: 3 }
+              - column: { name: crresultado, value: 'AL' }
+              - column: { name: crdescripcion, value: 'Alerta por incoherencia en respuestas' }
+              - column: { name: crjustificacion, value: 'Se detecta incoherencia entre el cargo/experiencia laboral y el nivel de conocimientos financieros declarado' }
+              - column: { name: crmensaje, value: 'Revisar respuestas de experiencia laboral y conocimientos' }
+              - column: { name: crfecalta, valueDate: 'now()' }
+              - column: { name: crusualta, value: 'SYSTEM' }
+
+        # =====================================================
+        # COMBINACIONES DE CONVENIENCIA - FAMILIAS COMPLEJAS (E,F,G,H,I)
+        # =====================================================
+
+        # Resultado: CONVENIENTE para familias complejas
+        - insert:
+            tableName: mktmcombinacionesrespuestas
+            columns:
+              - column: { name: crid, valueNumeric: 4 }
+              - column: { name: crresultado, value: 'CO' }
+              - column: { name: crdescripcion, value: 'Conveniente para familias complejas' }
+              - column: { name: crjustificacion, value: 'El cliente cumple los requisitos de conocimientos y experiencia para productos complejos' }
+              - column: { name: crmensaje, value: 'E,F,G,H,I' }
+              - column: { name: crfecalta, valueDate: 'now()' }
+              - column: { name: crusualta, value: 'SYSTEM' }
+
+        # Resultado: NO CONVENIENTE para familias complejas
+        - insert:
+            tableName: mktmcombinacionesrespuestas
+            columns:
+              - column: { name: crid, valueNumeric: 5 }
+              - column: { name: crresultado, value: 'NC' }
+              - column: { name: crdescripcion, value: 'No conveniente para familias complejas' }
+              - column: { name: crjustificacion, value: 'El cliente no cumple los requisitos de conocimientos y/o experiencia para productos complejos' }
+              - column: { name: crmensaje, value: '' }
+              - column: { name: crfecalta, valueDate: 'now()' }
+              - column: { name: crusualta, value: 'SYSTEM' }
+
+        # =====================================================
+        # PERFILES DE IDONEIDAD (Resultados finales por scoring)
+        # =====================================================
+
+        # Perfil: CONSERVADOR (puntos 1-10)
+        - insert:
+            tableName: mktmcombinacionesrespuestas
+            columns:
+              - column: { name: crid, valueNumeric: 10 }
+              - column: { name: crresultado, value: 'CO' }
+              - column: { name: crdescripcion, value: 'Perfil Conservador' }
+              - column: { name: crjustificacion, value: 'Basado en tolerancia al riesgo y finalidad de inversión' }
+              - column: { name: crmensaje, value: 'Conservador' }
+              - column: { name: crfecalta, valueDate: 'now()' }
+              - column: { name: crusualta, value: 'SYSTEM' }
+
+        # Perfil: MODERADO (puntos 11-20)
+        - insert:
+            tableName: mktmcombinacionesrespuestas
+            columns:
+              - column: { name: crid, valueNumeric: 11 }
+              - column: { name: crresultado, value: 'MO' }
+              - column: { name: crdescripcion, value: 'Perfil Moderado' }
+              - column: { name: crjustificacion, value: 'Basado en tolerancia al riesgo y finalidad de inversión' }
+              - column: { name: crmensaje, value: 'Moderado' }
+              - column: { name: crfecalta, valueDate: 'now()' }
+              - column: { name: crusualta, value: 'SYSTEM' }
+
+        # Perfil: EQUILIBRADO (puntos 21-30)
+        - insert:
+            tableName: mktmcombinacionesrespuestas
+            columns:
+              - column: { name: crid, valueNumeric: 12 }
+              - column: { name: crresultado, value: 'EQ' }
+              - column: { name: crdescripcion, value: 'Perfil Equilibrado' }
+              - column: { name: crjustificacion, value: 'Basado en tolerancia al riesgo y finalidad de inversión' }
+              - column: { name: crmensaje, value: 'Equilibrado' }
+              - column: { name: crfecalta, valueDate: 'now()' }
+              - column: { name: crusualta, value: 'SYSTEM' }
+
+        # Perfil: DECIDIDO (puntos 31-40)
+        - insert:
+            tableName: mktmcombinacionesrespuestas
+            columns:
+              - column: { name: crid, valueNumeric: 13 }
+              - column: { name: crresultado, value: 'DE' }
+              - column: { name: crdescripcion, value: 'Perfil Decidido' }
+              - column: { name: crjustificacion, value: 'Basado en tolerancia al riesgo y finalidad de inversión' }
+              - column: { name: crmensaje, value: 'Decidido' }
+              - column: { name: crfecalta, valueDate: 'now()' }
+              - column: { name: crusualta, value: 'SYSTEM' }
+
+        # Perfil: AGRESIVO (puntos 41-50)
+        - insert:
+            tableName: mktmcombinacionesrespuestas
+            columns:
+              - column: { name: crid, valueNumeric: 14 }
+              - column: { name: crresultado, value: 'AG' }
+              - column: { name: crdescripcion, value: 'Perfil Agresivo' }
+              - column: { name: crjustificacion, value: 'Basado en tolerancia al riesgo y finalidad de inversión' }
+              - column: { name: crmensaje, value: 'Agresivo' }
+              - column: { name: crfecalta, valueDate: 'now()' }
+              - column: { name: crusualta, value: 'SYSTEM' }
+
+        # =====================================================
+        # FAMILIAS DE CONVENIENCIA - CONVENIENTES INDIVIDUALES (CRID 20-30)
+        # =====================================================
+
+        # Familia A - Depósitos bancarios
+        - insert:
+            tableName: mktmcombinacionesrespuestas
+            columns:
+              - column: { name: crid, valueNumeric: 20 }
+              - column: { name: crresultado, value: 'CO' }
+              - column: { name: crdescripcion, value: 'Familia A - Depósitos bancarios' }
+              - column: { name: crjustificacion, value: 'Cliente conveniente para familia A' }
+              - column: { name: crmensaje, value: 'A' }
+              - column: { name: crfecalta, valueDate: 'now()' }
+              - column: { name: crusualta, value: 'SYSTEM' }
+
+        # Familia B - Renta fija no compleja
+        - insert:
+            tableName: mktmcombinacionesrespuestas
+            columns:
+              - column: { name: crid, valueNumeric: 21 }
+              - column: { name: crresultado, value: 'CO' }
+              - column: { name: crdescripcion, value: 'Familia B - Renta fija no compleja' }
+              - column: { name: crjustificacion, value: 'Cliente conveniente para familia B' }
+              - column: { name: crmensaje, value: 'B' }
+              - column: { name: crfecalta, valueDate: 'now()' }
+              - column: { name: crusualta, value: 'SYSTEM' }
+
+        # Familia C - Renta variable
+        - insert:
+            tableName: mktmcombinacionesrespuestas
+            columns:
+              - column: { name: crid, valueNumeric: 22 }
+              - column: { name: crresultado, value: 'CO' }
+              - column: { name: crdescripcion, value: 'Familia C - Renta variable cotizada' }
+              - column: { name: crjustificacion, value: 'Cliente conveniente para familia C' }
+              - column: { name: crmensaje, value: 'C' }
+              - column: { name: crfecalta, valueDate: 'now()' }
+              - column: { name: crusualta, value: 'SYSTEM' }
+
+        # Familia D - Fondos de inversión
+        - insert:
+            tableName: mktmcombinacionesrespuestas
+            columns:
+              - column: { name: crid, valueNumeric: 23 }
+              - column: { name: crresultado, value: 'CO' }
+              - column: { name: crdescripcion, value: 'Familia D - Fondos de inversión ordinarios' }
+              - column: { name: crjustificacion, value: 'Cliente conveniente para familia D' }
+              - column: { name: crmensaje, value: 'D' }
+              - column: { name: crfecalta, valueDate: 'now()' }
+              - column: { name: crusualta, value: 'SYSTEM' }
+
+        # Familia E - Renta fija compleja
+        - insert:
+            tableName: mktmcombinacionesrespuestas
+            columns:
+              - column: { name: crid, valueNumeric: 24 }
+              - column: { name: crresultado, value: 'CO' }
+              - column: { name: crdescripcion, value: 'Familia E - Renta fija compleja' }
+              - column: { name: crjustificacion, value: 'Cliente conveniente para familia E' }
+              - column: { name: crmensaje, value: 'E' }
+              - column: { name: crfecalta, valueDate: 'now()' }
+              - column: { name: crusualta, value: 'SYSTEM' }
+
+        # Familia F - Productos estructurados
+        - insert:
+            tableName: mktmcombinacionesrespuestas
+            columns:
+              - column: { name: crid, valueNumeric: 25 }
+              - column: { name: crresultado, value: 'CO' }
+              - column: { name: crdescripcion, value: 'Familia F - Productos estructurados' }
+              - column: { name: crjustificacion, value: 'Cliente conveniente para familia F' }
+              - column: { name: crmensaje, value: 'F' }
+              - column: { name: crfecalta, valueDate: 'now()' }
+              - column: { name: crusualta, value: 'SYSTEM' }
+
+        # Familia G - Bonos convertibles
+        - insert:
+            tableName: mktmcombinacionesrespuestas
+            columns:
+              - column: { name: crid, valueNumeric: 26 }
+              - column: { name: crresultado, value: 'CO' }
+              - column: { name: crdescripcion, value: 'Familia G - Bonos convertibles y participaciones preferentes' }
+              - column: { name: crjustificacion, value: 'Cliente conveniente para familia G' }
+              - column: { name: crmensaje, value: 'G' }
+              - column: { name: crfecalta, valueDate: 'now()' }
+              - column: { name: crusualta, value: 'SYSTEM' }
+
+        # Familia H - IIC inmobiliarias
+        - insert:
+            tableName: mktmcombinacionesrespuestas
+            columns:
+              - column: { name: crid, valueNumeric: 27 }
+              - column: { name: crresultado, value: 'CO' }
+              - column: { name: crdescripcion, value: 'Familia H - IIC inmobiliarias' }
+              - column: { name: crjustificacion, value: 'Cliente conveniente para familia H' }
+              - column: { name: crmensaje, value: 'H' }
+              - column: { name: crfecalta, valueDate: 'now()' }
+              - column: { name: crusualta, value: 'SYSTEM' }
+
+        # Familia I - Capital riesgo
+        - insert:
+            tableName: mktmcombinacionesrespuestas
+            columns:
+              - column: { name: crid, valueNumeric: 28 }
+              - column: { name: crresultado, value: 'CO' }
+              - column: { name: crdescripcion, value: 'Familia I - IIC inversión libre y capital riesgo' }
+              - column: { name: crjustificacion, value: 'Cliente conveniente para familia I' }
+              - column: { name: crmensaje, value: 'I' }
+              - column: { name: crfecalta, valueDate: 'now()' }
+              - column: { name: crusualta, value: 'SYSTEM' }
+
+        # Familia J - Derivados cotizados
+        - insert:
+            tableName: mktmcombinacionesrespuestas
+            columns:
+              - column: { name: crid, valueNumeric: 29 }
+              - column: { name: crresultado, value: 'CO' }
+              - column: { name: crdescripcion, value: 'Familia J - Derivados cotizados' }
+              - column: { name: crjustificacion, value: 'Cliente conveniente para familia J' }
+              - column: { name: crmensaje, value: 'J' }
+              - column: { name: crfecalta, valueDate: 'now()' }
+              - column: { name: crusualta, value: 'SYSTEM' }
+
+        # Familia K - Derivados OTC
+        - insert:
+            tableName: mktmcombinacionesrespuestas
+            columns:
+              - column: { name: crid, valueNumeric: 30 }
+              - column: { name: crresultado, value: 'CO' }
+              - column: { name: crdescripcion, value: 'Familia K - Derivados OTC y apalancados' }
+              - column: { name: crjustificacion, value: 'Cliente conveniente para familia K' }
+              - column: { name: crmensaje, value: 'K' }
+              - column: { name: crfecalta, valueDate: 'now()' }
+              - column: { name: crusualta, value: 'SYSTEM' }
+
+        # =====================================================
+        # FAMILIAS NO CONVENIENTES - ALERTAS (CRID 31-41)
+        # =====================================================
+
+        # Familia A - No conveniente
+        - insert:
+            tableName: mktmcombinacionesrespuestas
+            columns:
+              - column: { name: crid, valueNumeric: 31 }
+              - column: { name: crresultado, value: 'NC' }
+              - column: { name: crdescripcion, value: 'Familia A - No conveniente (Alerta)' }
+              - column: { name: crjustificacion, value: 'Cliente no cumple requisitos para familia A' }
+              - column: { name: crmensaje, value: 'Alerta: Familia A no conveniente' }
+              - column: { name: crfecalta, valueDate: 'now()' }
+              - column: { name: crusualta, value: 'SYSTEM' }
+
+        # Familia B - No conveniente
+        - insert:
+            tableName: mktmcombinacionesrespuestas
+            columns:
+              - column: { name: crid, valueNumeric: 32 }
+              - column: { name: crresultado, value: 'NC' }
+              - column: { name: crdescripcion, value: 'Familia B - No conveniente (Alerta)' }
+              - column: { name: crjustificacion, value: 'Cliente no cumple requisitos para familia B' }
+              - column: { name: crmensaje, value: 'Alerta: Familia B no conveniente' }
+              - column: { name: crfecalta, valueDate: 'now()' }
+              - column: { name: crusualta, value: 'SYSTEM' }
+
+        # Familia C - No conveniente
+        - insert:
+            tableName: mktmcombinacionesrespuestas
+            columns:
+              - column: { name: crid, valueNumeric: 33 }
+              - column: { name: crresultado, value: 'NC' }
+              - column: { name: crdescripcion, value: 'Familia C - No conveniente (Alerta)' }
+              - column: { name: crjustificacion, value: 'Cliente no cumple requisitos para familia C' }
+              - column: { name: crmensaje, value: 'Alerta: Familia C no conveniente' }
+              - column: { name: crfecalta, valueDate: 'now()' }
+              - column: { name: crusualta, value: 'SYSTEM' }
+
+        # Familia D - No conveniente
+        - insert:
+            tableName: mktmcombinacionesrespuestas
+            columns:
+              - column: { name: crid, valueNumeric: 34 }
+              - column: { name: crresultado, value: 'NC' }
+              - column: { name: crdescripcion, value: 'Familia D - No conveniente (Alerta)' }
+              - column: { name: crjustificacion, value: 'Cliente no cumple requisitos para familia D' }
+              - column: { name: crmensaje, value: 'Alerta: Familia D no conveniente' }
+              - column: { name: crfecalta, valueDate: 'now()' }
+              - column: { name: crusualta, value: 'SYSTEM' }
+
+        # Familia E - No conveniente
+        - insert:
+            tableName: mktmcombinacionesrespuestas
+            columns:
+              - column: { name: crid, valueNumeric: 35 }
+              - column: { name: crresultado, value: 'NC' }
+              - column: { name: crdescripcion, value: 'Familia E - No conveniente (Alerta)' }
+              - column: { name: crjustificacion, value: 'Cliente no cumple requisitos para familia E' }
+              - column: { name: crmensaje, value: 'Alerta: Familia E no conveniente' }
+              - column: { name: crfecalta, valueDate: 'now()' }
+              - column: { name: crusualta, value: 'SYSTEM' }
+
+        # Familia F - No conveniente
+        - insert:
+            tableName: mktmcombinacionesrespuestas
+            columns:
+              - column: { name: crid, valueNumeric: 36 }
+              - column: { name: crresultado, value: 'NC' }
+              - column: { name: crdescripcion, value: 'Familia F - No conveniente (Alerta)' }
+              - column: { name: crjustificacion, value: 'Cliente no cumple requisitos para familia F' }
+              - column: { name: crmensaje, value: 'Alerta: Familia F no conveniente' }
+              - column: { name: crfecalta, valueDate: 'now()' }
+              - column: { name: crusualta, value: 'SYSTEM' }
+
+        # Familia G - No conveniente
+        - insert:
+            tableName: mktmcombinacionesrespuestas
+            columns:
+              - column: { name: crid, valueNumeric: 37 }
+              - column: { name: crresultado, value: 'NC' }
+              - column: { name: crdescripcion, value: 'Familia G - No conveniente (Alerta)' }
+              - column: { name: crjustificacion, value: 'Cliente no cumple requisitos para familia G' }
+              - column: { name: crmensaje, value: 'Alerta: Familia G no conveniente' }
+              - column: { name: crfecalta, valueDate: 'now()' }
+              - column: { name: crusualta, value: 'SYSTEM' }
+
+        # Familia H - No conveniente
+        - insert:
+            tableName: mktmcombinacionesrespuestas
+            columns:
+              - column: { name: crid, valueNumeric: 38 }
+              - column: { name: crresultado, value: 'NC' }
+              - column: { name: crdescripcion, value: 'Familia H - No conveniente (Alerta)' }
+              - column: { name: crjustificacion, value: 'Cliente no cumple requisitos para familia H' }
+              - column: { name: crmensaje, value: 'Alerta: Familia H no conveniente' }
+              - column: { name: crfecalta, valueDate: 'now()' }
+              - column: { name: crusualta, value: 'SYSTEM' }
+
+        # Familia I - No conveniente
+        - insert:
+            tableName: mktmcombinacionesrespuestas
+            columns:
+              - column: { name: crid, valueNumeric: 39 }
+              - column: { name: crresultado, value: 'NC' }
+              - column: { name: crdescripcion, value: 'Familia I - No conveniente (Alerta)' }
+              - column: { name: crjustificacion, value: 'Cliente no cumple requisitos para familia I' }
+              - column: { name: crmensaje, value: 'Alerta: Familia I no conveniente' }
+              - column: { name: crfecalta, valueDate: 'now()' }
+              - column: { name: crusualta, value: 'SYSTEM' }
+
+        # Familia J - No conveniente
+        - insert:
+            tableName: mktmcombinacionesrespuestas
+            columns:
+              - column: { name: crid, valueNumeric: 40 }
+              - column: { name: crresultado, value: 'NC' }
+              - column: { name: crdescripcion, value: 'Familia J - No conveniente (Alerta)' }
+              - column: { name: crjustificacion, value: 'Cliente no cumple requisitos para familia J' }
+              - column: { name: crmensaje, value: 'Alerta: Familia J no conveniente' }
+              - column: { name: crfecalta, valueDate: 'now()' }
+              - column: { name: crusualta, value: 'SYSTEM' }
+
+        # Familia K - No conveniente
+        - insert:
+            tableName: mktmcombinacionesrespuestas
+            columns:
+              - column: { name: crid, valueNumeric: 41 }
+              - column: { name: crresultado, value: 'NC' }
+              - column: { name: crdescripcion, value: 'Familia K - No conveniente (Alerta)' }
+              - column: { name: crjustificacion, value: 'Cliente no cumple requisitos para familia K' }
+              - column: { name: crmensaje, value: 'Alerta: Familia K no conveniente' }
+              - column: { name: crfecalta, valueDate: 'now()' }
+              - column: { name: crusualta, value: 'SYSTEM' }
+
+        # Sincronización de secuencia
+        - sql:
+            comment: "Sincronizar secuencia después de inserciones explícitas"
+            sql: "SELECT setval('mktmcombinacionesrespuestas_crid_seq', (SELECT MAX(crid) FROM mktmcombinacionesrespuestas));"
+
+      rollback:
+        - delete:
+            tableName: mktmcombinacionesrespuestas
+            where: "crid IN (1,2,3,4,5,10,11,12,13,14,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41)"

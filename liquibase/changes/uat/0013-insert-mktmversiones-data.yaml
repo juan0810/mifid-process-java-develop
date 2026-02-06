@@ -1,0 +1,27 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0013
+      author: System Admin <admin@singularbank.com>
+      context: dev
+      changes:
+        - insert:
+            tableName: MKTMVERSIONES
+            columns:
+              - column:
+                  name: VEID
+                  value: 1
+              - column:
+                  name: VESERVICIOID
+                  value: 1
+              - column:
+                  name: VEDESCRIPCION
+                  value: "Versión inicial de los tests MIFID"
+              - column:
+                  name: VEFECINICIO
+                  valueDate: "2025-01-01"
+              - column:
+                  name: VEACTIVA
+                  value: 1
+              - column:
+                  name: VEUSUALTA
+                  value: "SISTEMA"

@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0043-drop-mktmrespuestacliente-and-mktmrespuestaclientedetalle-test-data
+      author: system
+      comment: "Eliminación de tablas DATOS mktmrespuestacliente y mktmrespuestaclientedetalle después de migración al modelo unificado"
+      preConditions:
+        onFail: MARK_RAN
+        tableExists:
+          tableName: mktmrespuestacliente
+      changes:
+        # Eliminar las tablas mktmrespuestacliente y mktmrespuestaclientedetalle
+        - sql:
+            sql: "TRUNCATE TABLE mktmrespuestaclientedetalle CASCADE;"
+        - sql:
+            sql: "TRUNCATE TABLE mktmrespuestacliente CASCADE;"
+
+
+      rollback:
+        - sql:
+            comment: "ROLLBACK NO DISPONIBLE: Las tablas mktmrespuestacliente y mktmrespuestacliente han sido eliminadas. Se requiere restauración desde backup."
+            sql: "-- Rollback requires database restore from backup"
+
+
+
