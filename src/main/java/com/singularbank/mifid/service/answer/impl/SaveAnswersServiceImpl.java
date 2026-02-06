@@ -233,7 +233,7 @@ public class SaveAnswersServiceImpl implements SaveAnswersService {
           suitabilityCombinationId = result.combinationId();
         }
         case SUSTAINABILITY -> {
-          Map<Integer, String> responsesByOrder = extractResponsesByOrder(test, answersMap);
+          Map<Integer, String> responsesByOrder = extractResponses(test, answersMap);
           sustainabilityData = calculateSustainability(responsesByOrder);
         }
         default -> throw new IllegalStateException("Unexpected test type: " + test.type());

@@ -40,6 +40,7 @@ class AnswerClienteDetalleRepositoryIT extends AbstractRepositoryTest {
 
   private static final Short VERSION_ID = 1;
   private static final Short ESTADO_ACTIVO = 1;
+  private static final Short ESTADO_FIRMADO = 2;
   private static final Short ESTADO_INACTIVO = 0;
 
   private Integer sustainabilityRespId1;
@@ -376,7 +377,7 @@ class AnswerClienteDetalleRepositoryIT extends AbstractRepositoryTest {
   }
 
   @Nested
-  @DisplayName("findAnswersByTestIdAndTestType Tests")
+  @DisplayName("findAnswersByTestId Tests")
   class FindAnswersByTestIdAndTypeTestTests {
 
     @Test
@@ -395,7 +396,7 @@ class AnswerClienteDetalleRepositoryIT extends AbstractRepositoryTest {
       entityManager.clear();
 
       // When
-      AnswersTest result = repository.findAnswersByTestIdAndTestType(
+      AnswersTest result = repository.findAnswersByTestId(
           respuestaCliente.getId(), typeTest);
 
       // Then
@@ -421,7 +422,7 @@ class AnswerClienteDetalleRepositoryIT extends AbstractRepositoryTest {
       entityManager.clear();
 
       // When
-      AnswersTest result = repository.findAnswersByTestIdAndTestType(
+      AnswersTest result = repository.findAnswersByTestId(
           respuestaCliente.getId(), typeTest);
 
       // Then
@@ -444,7 +445,7 @@ class AnswerClienteDetalleRepositoryIT extends AbstractRepositoryTest {
       entityManager.clear();
 
       // When
-      AnswersTest result = repository.findAnswersByTestIdAndTestType(
+      AnswersTest result = repository.findAnswersByTestId(
           respuestaCliente.getId(), typeTest);
 
       // Then
@@ -461,9 +462,9 @@ class AnswerClienteDetalleRepositoryIT extends AbstractRepositoryTest {
 
       // When & Then
       assertThatThrownBy(
-          () -> repository.findAnswersByTestIdAndTestType(nonExistentTestId, typeTest))
+          () -> repository.findAnswersByTestId(nonExistentTestId, typeTest))
           .isInstanceOf(ResourceNotFoundException.class)
-          .hasMessageContaining("No " + typeTest.getCode() + " answers found for test");
+          .hasMessageContaining("No answers found for id: " + nonExistentTestId);
     }
 
     @Test
@@ -482,9 +483,9 @@ class AnswerClienteDetalleRepositoryIT extends AbstractRepositoryTest {
       TypeTest typeTest = TypeTest.SUSTAINABILITY;
 
       // When & Then
-      assertThatThrownBy(() -> repository.findAnswersByTestIdAndTestType(testId, typeTest))
+      assertThatThrownBy(() -> repository.findAnswersByTestId(testId, typeTest))
           .isInstanceOf(ResourceNotFoundException.class)
-          .hasMessageContaining("No " + typeTest.getCode() + " answers found for test");
+          .hasMessageContaining("No answers found for id: " + testId);
     }
 
     @Test
@@ -503,7 +504,7 @@ class AnswerClienteDetalleRepositoryIT extends AbstractRepositoryTest {
       entityManager.clear();
 
       // When
-      AnswersTest result = repository.findAnswersByTestIdAndTestType(
+      AnswersTest result = repository.findAnswersByTestId(
           respuestaCliente.getId(), typeTest);
 
       // Then
@@ -525,8 +526,7 @@ class AnswerClienteDetalleRepositoryIT extends AbstractRepositoryTest {
       entityManager.clear();
 
       // When
-      AnswersTest result = repository.findAnswersByTestIdAndTestType(
-          respuestaCliente.getId(), typeTest);
+      AnswersTest result = repository.findAnswersByTestId(respuestaCliente.getId(), typeTest);
 
       // Then
       assertThat(result).isNotNull();
@@ -549,7 +549,7 @@ class AnswerClienteDetalleRepositoryIT extends AbstractRepositoryTest {
       entityManager.clear();
 
       // When
-      AnswersTest result = repository.findAnswersByTestIdAndTestType(
+      AnswersTest result = repository.findAnswersByTestId(
           respuestaCliente.getId(), typeTest);
 
       // Then
@@ -575,7 +575,7 @@ class AnswerClienteDetalleRepositoryIT extends AbstractRepositoryTest {
     RespuestaClienteEntity entity = RespuestaClienteEntity.builder()
         .identity(identity)
         .version(createVersionEntity())
-        .estado(ESTADO_ACTIVO)
+        .estado(ESTADO_FIRMADO)
         .fechaAlta(fechaAlta)
         .build();
     return entityManager.persistAndFlush(entity);

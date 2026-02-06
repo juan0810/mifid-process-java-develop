@@ -23,7 +23,7 @@ class RespuestaClienteRepositoryIT extends AbstractRepositoryTest {
 
   private static final String EXISTING_IDENTITY = "09775525L";
   private static final String NON_EXISTING_IDENTITY = "99999999Z";
-  private static final Integer EXISTING_TEST_ID = 135;//creo que 243?
+  private static final Integer EXISTING_TEST_ID = 243;
   private static final Integer NON_EXISTING_TEST_ID = 99999;
 
   @Nested

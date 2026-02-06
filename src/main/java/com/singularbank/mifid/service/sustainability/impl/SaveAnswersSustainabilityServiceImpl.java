@@ -29,19 +29,16 @@ public class SaveAnswersSustainabilityServiceImpl implements SaveAnswersSustaina
   private final RespuestaClienteRepository respuestaClienteRepository;
   private final RespuestaClienteDetalleRepository respuestaClienteDetalleRepository;
   private final SustainabilityCalculatorService sustainabilityCalculator;
-  private final ResultTestDescriptionBuilder descriptionBuilder;
 
   public SaveAnswersSustainabilityServiceImpl(
       AnswersTestLoader answersTestLoader,
       RespuestaClienteRepository respuestaClienteRepository,
       RespuestaClienteDetalleRepository respuestaClienteDetalleRepository,
-      SustainabilityCalculatorService sustainabilityCalculator,
-      ResultTestDescriptionBuilder descriptionBuilder) {
+      SustainabilityCalculatorService sustainabilityCalculator) {
     this.answersTestLoader = answersTestLoader;
     this.respuestaClienteRepository = respuestaClienteRepository;
     this.respuestaClienteDetalleRepository = respuestaClienteDetalleRepository;
     this.sustainabilityCalculator = sustainabilityCalculator;
-    this.descriptionBuilder = descriptionBuilder;
   }
 
   @Override
@@ -135,24 +132,18 @@ public class SaveAnswersSustainabilityServiceImpl implements SaveAnswersSustaina
       List<StoreTestAnswers.QuestionResponse> questionResponses,
       Map<Integer, Answer> answersMap) {
 
-    Map<Integer, String> responsesByOrder = extractResponsesByOrder(questionResponses, answersMap);
-    SustainabilityResultData sustainabilityData = calculateSustainability(responsesByOrder);
+    Map<Integer, String> responses = extractResponses(questionResponses, answersMap);
+    SustainabilityResultData sustainabilityData = calculateSustainability(responses);
 
     return new CalculatedResults(sustainabilityData);
   }
 
-  private Map<Integer, String> extractResponsesByOrder(List<StoreTestAnswers.QuestionResponse> questionResponses, Map<Integer, Answer> answersMap) {
+  private Map<Integer, String> extractResponses(List<StoreTestAnswers.QuestionResponse> questionResponses, Map<Integer, Answer> answersMap) {
     return questionResponses.stream()
-        .collect(Collectors.toMap(
-            qr -> {
-              Answer answer = answersMap.get(qr.getSelectedOptionId());
-              if (answer == null || answer.getQuestion() == null) {
-                throw new BadRequestException("Data integrity error: Answer/Question not found for ID " + qr.getSelectedOptionId());
-              }
-              return answer.getQuestion().getOrder().intValue();
-            },
-            qr -> answersMap.get(qr.getSelectedOptionId()).getValue()
-        ));
+            .collect(Collectors.toMap(
+                    qr -> answersMap.get(qr.getSelectedOptionId()).getQuestion().getId(),
+                    qr -> answersMap.get(qr.getSelectedOptionId()).getValue()
+            ));
   }
 
   private SustainabilityResultData calculateSustainability(Map<Integer, String> responses) {
@@ -209,33 +200,6 @@ public class SaveAnswersSustainabilityServiceImpl implements SaveAnswersSustaina
     TestResults testResults = new TestResults(null, null, sustainabilityDto);
 
     return new TestResponseCreatedDTO(responseId, testResults);
-  }
-
-  private TestResponseCreatedDTO.ConvenienceResult buildConvenienceResult(
-      String convenienceResult) {
-    if (convenienceResult == null) {
-      return null;
-    }
-
-    String description = descriptionBuilder.buildConvenienceDescription(convenienceResult);
-    List<ProductFamily> families = descriptionBuilder.parseConvenienceFamilies(convenienceResult);
-
-    List<FamilyDTO> familyDTOs = families.stream()
-        .map(family -> new FamilyDTO(family.name(), family.getDescription()))
-        .toList();
-
-    return new TestResponseCreatedDTO.ConvenienceResult(convenienceResult, description, familyDTOs);
-  }
-
-  private TestResponseCreatedDTO.SuitabilityResult buildSuitabilityResult(
-      String suitabilityResult) {
-    if (suitabilityResult == null) {
-      return null;
-    }
-
-    String description = descriptionBuilder.buildSuitabilityDescription(suitabilityResult);
-
-    return new TestResponseCreatedDTO.SuitabilityResult(suitabilityResult, description);
   }
 
   private TestResponseCreatedDTO.SustainabilityResult buildSustainabilityResult(
